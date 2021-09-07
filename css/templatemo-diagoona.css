@@ -343,6 +343,7 @@ textarea {
   display: flex;
   justify-content: center;
   background-color: DodgerBlue;
+  padding: 17px;
 }
 
 .flex-container > div {
