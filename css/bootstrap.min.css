@@ -28,9 +28,11 @@
   margin-top: 27px;
 }
 
+
+
 .video_1{
-    width: 100% !important;;
-  height: auto  !important;;
+    width: 100% !important;
+    height: auto  !important;
 }
 video,
 iframe {
@@ -41,7 +43,8 @@ iframe {
 main {
   background: white;
   height: 100vh;
-  max-width: 400px;
+  max-width: 100%;
   margin: 0 auto;
   padding: 1rem;
 }
+
