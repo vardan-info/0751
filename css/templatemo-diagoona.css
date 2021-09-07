@@ -401,9 +401,9 @@ main {
 }
 
 .text-main{
-    
+    border:1px solid red;
 }
 
 .text_some{
-
+border:1px solid red;
 }
