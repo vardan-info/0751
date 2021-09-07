@@ -401,4 +401,6 @@ main {
     font-family: emoji;
 }
 
-.text_sometext-align: center;}
+.text_some{
+    text-align:center;
+}
