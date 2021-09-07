@@ -365,11 +365,12 @@ iframe {
 }
 
 main {
-  /* background: white; */
-  height: 100vh;
-  max-width: 100%;
-  margin: 0 auto;
-  padding: 1rem;
+ background: white; */
+    height: 100vh;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 1rem;
+
 }
 
 
