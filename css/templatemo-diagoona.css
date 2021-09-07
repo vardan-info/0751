@@ -382,9 +382,20 @@ main {
 
 
 .container-section-item{
-    
+        border: 1px solid red;
+    padding: 2px 2px 2px 2px;
+    margin: auto;
+    display: flex;
+    justify-content: flex-start;
 }
 
 .tex-top-section{
-   
+   width: 62%;
+    margin: 9px auto;
+    background: #ff0000a6;
+    color: black;
+    line-height: 4px;
+    font-size: medium;
+    font-family: fantasy;
+
 }
