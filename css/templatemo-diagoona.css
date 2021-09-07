@@ -387,20 +387,18 @@ main {
 }
 
 .tex-top-section{
-  width: 62%;
-    margin: 9px auto;
-    background: #2c4d6d;
-    
-    line-height: 27px;
-    font-size: medium;
-    font-family: sans-serif;
-
+  width: 80%;
+  margin: 9px auto;
+  background: #2c4d6d;
+  line-height: 27px;
+  font-size: medium;
+  font-family: sans-serif;
 }
 
 .text-main{
     border:1px solid red;
+    padding: 10px;
+    font-family: emoji;
 }
 
-.text_some{
-border:1px solid red;
-}
+.text_some{border:1px solid red;text-align: center;}
