@@ -116,12 +116,12 @@ p { line-height: 1.9; }
     justify-content: space-between;  
 }
 
-.tm-row {/* display: flex; */}
+.tm-row {display: flex;}
 
 .tm-col-left {
     width: 50%;
     height: 100%;
-    padding-left: 40px;  
+    padding-left: 68px;
     padding-right: 40px;
 }
 
