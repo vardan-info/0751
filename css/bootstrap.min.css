@@ -19,3 +19,7 @@
   line-height: 75px;
   font-size: 30px;
 }
+
+.container-section{
+  margin:0 auto;
+  border:1px solid red;
