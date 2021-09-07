@@ -355,6 +355,6 @@ textarea {
   font-size: 30px;
 }
 .video_1{
-    width: 100%;
-  height: auto;
+    width: 100% !important;;
+  height: auto  !important;;
 }
