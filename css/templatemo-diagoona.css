@@ -116,7 +116,7 @@ p { line-height: 1.9; }
     justify-content: space-between;  
 }
 
-.tm-row { display: flex; }
+.tm-row {/* display: flex; */}
 
 .tm-col-left {
     width: 50%;
@@ -133,7 +133,7 @@ p { line-height: 1.9; }
 }
 
 .tm-content {
-    max-width: 660px;
+    /* max-width: 660px; */
     margin-top: 50px;
     padding-right: 20px;
 }
