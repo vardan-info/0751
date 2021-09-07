@@ -358,3 +358,19 @@ textarea {
     width: 100% !important;;
   height: auto  !important;;
 }
+video,
+iframe {
+  width: 100% !important;
+  height: auto !important;
+}
+
+main {
+  background: white;
+  height: 100vh;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+
+
