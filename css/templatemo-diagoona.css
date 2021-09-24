@@ -9,7 +9,7 @@ body {
     font-weight: 300;
     overflow-x: hidden;
     color: white;
-    background-color: #2C353C;
+    background-color: #2f2f2f;
 }
 
 a { 
@@ -132,7 +132,11 @@ p { line-height: 1.9; }
 .tm-content {
     /* max-width: 660px; */
     margin-top: 50px;
-    padding-right: 20px;
+    /* border: 1px solid red; */
+    /* background: #ff000073; */
+    padding: 9px 4px 4px;
+    margin: 9px;
+    line-height: 30px;
 }
 
 .tm-about { max-width: 525px; }
@@ -148,7 +152,7 @@ p { line-height: 1.9; }
     box-shadow: 0 0 1px rgba(255,255,255,.8);
 }
 
-.tm-content-title { font-size: 1.5rem; }
+.tm-content-title {font-size: 1.5rem;text-align: center;padding: 5px;margin: 9px;}
 hr { border-top: 1px solid white; }
 
 .btn {
@@ -421,4 +425,67 @@ main {
 }
 
 h5{
+}
+
+.footer-top{
+
+width: 100%;
+
+padding: 5px;
+
+margin: 0 auto;
+}
+
+.link_footer{
+
+padding: 35px 4px 4px 5px;
+}
+
+.link_1{
+    
+text-align: center;
+}
+
+.link_2{
+    
+text-align: center;
+    
+color: white;
+    
+background: black;
+    
+padding: 7px;
+    
+text-decoration: none;
+}
+
+.link_3{
+    
+text-align: center;
+    
+text-decoration: unset;
+    
+list-style-type: none;
+}
+
+.link_4{
+
+padding: 8px;
+}
+
+.link_5{
+    
+padding: 5px;
+    
+font-size: 19px;
+    
+color: black;
+}
+
+.link_6{
+    padding: 5px;
+    
+font-size: 19px;
+    
+color: black;
 }
