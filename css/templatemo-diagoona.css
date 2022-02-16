@@ -3,6 +3,18 @@ TemplateMo 550 Diagoona
 https://templatemo.com/tm-550-diagoona
 */
 
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rebeccapurple;
+  color: white;
+  font-size: 4rem;
+  min-height: 100vh;
+}
+
+
 body {
     font-family: 'Open Sans', Arial, sans-serif;
     font-size: 17px;
