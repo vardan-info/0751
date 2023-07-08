@@ -10,16 +10,160 @@
     <link href="bootstrap.min.css" rel="stylesheet" /> <!-- https://getbootstrap.com/ -->
     <link href="fontawesome/css/all.min.css" rel="stylesheet" /> <!-- https://fontawesome.com/ -->
     <link href="css/templatemo-diagoona.css" rel="stylesheet" />
-<!--
+
+<style>
+/* project-section */
+
+.project-section{
+    width: 100%;
+    min-height: 100vh;
+    padding: 150px 100px 100px;
+    position: fixed;
+    top: 0;
+    transition: 1s;
+    opacity: 0;
+}
+
+.project-heading{
+    font-size: 100px;
+    background: #252525;
+    text-transform: capitalize;
+    text-align: center;
+    margin-bottom: 50px;
+    color: #1a1a1a;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-stroke: 8px transparent;
+}
+
+<<<<<<< HEAD
+.project-container{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 100px;
+}
+
+.project-card{
+    height: 400px;
+    position: relative;
+}
+
+.project-img{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+    transition: .5s;
+}
+
+.project-content{
+    position: relative;
+    padding: 40px;
+    color: #fff;
+    transition: .5s;
+    opacity: 0;
+}
+
+.project-title{
+    font-size: 50px;
+    text-transform: capitalize;
+    text-align: center;
+    font-weight: 300;
+}
+
+.project-info{
+    margin: 40px;
+    font-size: 20px;
+    line-height: 30px;
+    text-align: center;
+}
+
+.project-btn-grp{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+}
+
+.project-btn{
+    height: 40px;
+    text-transform: capitalize;
+    font-size: 18px;
+    border: none;
+    background: #000;
+    color: #fff;
+    cursor: pointer;
+}
+
+.project-btn.live{
+    background: none;
+    border: 2px solid #fff;
+}
+
+.project-card:hover .project-img{
+    filter: blur(20px);
+}
+
+.project-card:hover .project-content{
+    opacity: 1;
+}
+</style>
 
 
 
--->
-</head>
-
+ 
+<section class="project-section">
+    <h1 class="project-heading">some of my projects</h1>
+    <div class="project-container">
+        <div class="project-card">
+            <img src="img/project-1.png" class="project-img" alt="">
+            <div class="project-content">
+                <h1 class="project-title">project 01</h1>
+                <p class="project-info">
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Impedit vitae delectus cumque repudiandae aliquam optio accusamus natus nobis! Nam, sunt?
+                </p>
+                <div class="project-btn-grp">
+                    <button class="project-btn github">github repo</button>
+                    <button class="project-btn live">see live</button>
+                </div>
+            </div>
+        </div>
+        // +3 more cards
+    </div>
+</section>
+=======
 <body>
     
+>>>>>>> 98834a3e16d0d9b54b006a0e536ec25060fb3924
 
+<<<<<<< HEAD
+
+
+    <script>
+    const links = document.querySelectorAll('.link');
+const sections = document.querySelectorAll('section');
+
+let activeLink = 0;
+
+links.forEach((link, i) => {
+    link.addEventListener('click', () => {
+        if(activeLink != i){
+            links[activeLink].classList.remove('active');
+            link.classList.add('active');
+            sections[activeLink].classList.remove('active');
+
+            setTimeout(() => {
+                activeLink = i;
+                sections[i].classList.add('active');
+            }, 1000);
+        }
+    })
+})
+    </script>
+
+=======
+>>>>>>> 98834a3e16d0d9b54b006a0e536ec25060fb3924
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.backstretch.min.js"></script>
