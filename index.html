@@ -1,160 +1,189 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Tumanyan</title>
-   <body>
-<style>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" 
+  "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+ <head>
+   <title>!DOCTYPE</title>
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+ </head>
+ <body>
+  <style>
+    canvas { background: #eee; }
+  </style>
+ 	<div>barev2
+ 	  <button id="btn1">barev</button>
+ 	  <button id="btn2">hajox</button>
+       </div>
+       <canvas id="myCanvas" width="480" height="320"></canvas>
+ 	      <script>
+ 	      var canvas = document.getElementById("myCanvas");
+var ctx = canvas.getContext("2d");
+var ballRadius = 10;
+var x = canvas.width/2;
+var y = canvas.height-30;
+var dx = 2;
+var dy = -2;
+var paddleHeight = 10;
+var paddleWidth = 75;
+var paddleX = (canvas.width-paddleWidth)/2;
+var rightPressed = false;
+var leftPressed = false;
+var brickRowCount = 5;
+var brickColumnCount = 3;
+var brickWidth = 75;
+var brickHeight = 20;
+var brickPadding = 10;
+var brickOffsetTop = 30;
+var brickOffsetLeft = 30;
+var score = 0;
+var lives = 3;
 
-
-.project-section{
-    width: 100%;
-    min-height: 100vh;
-    padding: 150px 100px 100px;
-    position: fixed;
-    top: 0;
-    transition: 1s;
-    opacity: 0;
+var bricks = [];
+for(var c=0; c<brickColumnCount; c++) {
+  bricks[c] = [];
+  for(var r=0; r<brickRowCount; r++) {
+    bricks[c][r] = { x: 0, y: 0, status: 1 };
+  }
 }
 
-.project-heading{
-    font-size: 100px;
-    background: #252525;
-    text-transform: capitalize;
-    text-align: center;
-    margin-bottom: 50px;
-    color: #1a1a1a;
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-stroke: 8px transparent;
+document.addEventListener("keydown", keyDownHandler, false);
+document.addEventListener("keyup", keyUpHandler, false);
+document.addEventListener("mousemove", mouseMoveHandler, false);
+
+function keyDownHandler(e) {
+    if(e.key == "Right" || e.key == "ArrowRight") {
+        rightPressed = true;
+    }
+    else if(e.key == "Left" || e.key == "ArrowLeft") {
+        leftPressed = true;
+    }
 }
 
-<<<<<<< HEAD
-.project-container{
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 100px;
+function keyUpHandler(e) {
+    if(e.key == "Right" || e.key == "ArrowRight") {
+        rightPressed = false;
+    }
+    else if(e.key == "Left" || e.key == "ArrowLeft") {
+        leftPressed = false;
+    }
 }
 
-.project-card{
-    height: 400px;
-    position: relative;
+function mouseMoveHandler(e) {
+  var relativeX = e.clientX - canvas.offsetLeft;
+  if(relativeX > 0 && relativeX < canvas.width) {
+    paddleX = relativeX - paddleWidth/2;
+  }
 }
-
-.project-img{
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    object-fit: cover;
-    transition: .5s;
-}
-
-.project-content{
-    position: relative;
-    padding: 40px;
-    color: #fff;
-    transition: .5s;
-    opacity: 0;
-}
-
-.project-title{
-    font-size: 50px;
-    text-transform: capitalize;
-    text-align: center;
-    font-weight: 300;
-}
-
-.project-info{
-    margin: 40px;
-    font-size: 20px;
-    line-height: 30px;
-    text-align: center;
-}
-
-.project-btn-grp{
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 20px;
-}
-
-.project-btn{
-    height: 40px;
-    text-transform: capitalize;
-    font-size: 18px;
-    border: none;
-    background: #000;
-    color: #fff;
-    cursor: pointer;
-}
-
-.project-btn.live{
-    background: none;
-    border: 2px solid #fff;
-}
-
-.project-card:hover .project-img{
-    filter: blur(20px);
-}
-
-.project-card:hover .project-content{
-    opacity: 1;
-}
-</style>
-
-
-
- 
-<section class="project-section">
-    <h1 class="project-heading">some of my projects</h1>
-    <div class="project-container">
-        <div class="project-card">
-            <img src="img/project-1.png" class="project-img" alt="">
-            <div class="project-content">
-                <h1 class="project-title">project 01</h1>
-                <p class="project-info">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Impedit vitae delectus cumque repudiandae aliquam optio accusamus natus nobis! Nam, sunt?
-                </p>
-                <div class="project-btn-grp">
-                    <button class="project-btn github">github repo</button>
-                    <button class="project-btn live">see live</button>
-                </div>
-            </div>
-        </div>
-      
-    </div>
-</section>
-
-
-
-
-    <script>
-    const links = document.querySelectorAll('.link');
-const sections = document.querySelectorAll('section');
-
-let activeLink = 0;
-
-links.forEach((link, i) => {
-    link.addEventListener('click', () => {
-        if(activeLink != i){
-            links[activeLink].classList.remove('active');
-            link.classList.add('active');
-            sections[activeLink].classList.remove('active');
-
-            setTimeout(() => {
-                activeLink = i;
-                sections[i].classList.add('active');
-            }, 1000);
+function collisionDetection() {
+  for(var c=0; c<brickColumnCount; c++) {
+    for(var r=0; r<brickRowCount; r++) {
+      var b = bricks[c][r];
+      if(b.status == 1) {
+        if(x > b.x && x < b.x+brickWidth && y > b.y && y < b.y+brickHeight) {
+          dy = -dy;
+          b.status = 0;
+          score++;
+          if(score == brickRowCount*brickColumnCount) {
+            alert("YOU WIN, CONGRATS!");
+            document.location.reload();
+          }
         }
-    })
-})
-    </script>
+      }
+    }
+  }
+}
 
+function drawBall() {
+  ctx.beginPath();
+  ctx.arc(x, y, ballRadius, 0, Math.PI*2);
+  ctx.fillStyle = "#0095DD";
+  ctx.fill();
+  ctx.closePath();
+}
+function drawPaddle() {
+  ctx.beginPath();
+  ctx.rect(paddleX, canvas.height-paddleHeight, paddleWidth, paddleHeight);
+  ctx.fillStyle = "#0095DD";
+  ctx.fill();
+  ctx.closePath();
+}
+function drawBricks() {
+  for(var c=0; c<brickColumnCount; c++) {
+    for(var r=0; r<brickRowCount; r++) {
+      if(bricks[c][r].status == 1) {
+        var brickX = (r*(brickWidth+brickPadding))+brickOffsetLeft;
+        var brickY = (c*(brickHeight+brickPadding))+brickOffsetTop;
+        bricks[c][r].x = brickX;
+        bricks[c][r].y = brickY;
+        ctx.beginPath();
+        ctx.rect(brickX, brickY, brickWidth, brickHeight);
+        ctx.fillStyle = "#0095DD";
+        ctx.fill();
+        ctx.closePath();
+      }
+    }
+  }
+}
+function drawScore() {
+  ctx.font = "16px Arial";
+  ctx.fillStyle = "#0095DD";
+  ctx.fillText("Score: "+score, 8, 20);
+}
+function drawLives() {
+  ctx.font = "16px Arial";
+  ctx.fillStyle = "#0095DD";
+  ctx.fillText("Lives: "+lives, canvas.width-65, 20);
+}
 
-  
-</body>
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  drawBricks();
+  drawBall();
+  drawPaddle();
+  drawScore();
+  drawLives();
+  collisionDetection();
+
+  if(x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
+    dx = -dx;
+  }
+  if(y + dy < ballRadius) {
+    dy = -dy;
+  }
+  else if(y + dy > canvas.height-ballRadius) {
+    if(x > paddleX && x < paddleX + paddleWidth) {
+      dy = -dy;
+    }
+    else {
+      lives--;
+      if(!lives) {
+        alert("GAME OVER");
+        document.location.reload();
+      }
+      else {
+        x = canvas.width/2;
+        y = canvas.height-30;
+        dx = 3;
+        dy = -3;
+        paddleX = (canvas.width-paddleWidth)/2;
+      }
+    }
+  }
+
+  if(rightPressed && paddleX < canvas.width-paddleWidth) {
+    paddleX += 7;
+  }
+  else if(leftPressed && paddleX > 0) {
+    paddleX -= 7;
+  }
+
+  x += dx;
+  y += dy;
+  requestAnimationFrame(draw);
+}
+
+draw();
+ 		 	</script>
+   </body> 
 </html>
+
