@@ -4,1216 +4,833 @@
 <head>
   <title>Змейка</title>
   <style>
-    * {
-  margin: 0;
-  padding: 0;
-  transition: 0.2s ease;
-}
-
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100vw;
-  height: 100vh;
-}
-
-#board{
-  outline: 4px solid black;
-}
-
-.box {
-  display: inline-flex;
-  width: 8vh;
-  height: 8vh;
-  border: 1px solid black;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-}
-
-
-#blackkill p,
-#whitekill p {
-  font-size: 3em;
-  letter-spacing: -40px;
-  text-shadow: -1px -1px 0px black;
-}
-
-#blackkill,
-#whitekill {
-  width: 16vh;
-  height: 65vh;
-  color: goldenrod;
-}
-
-#blackkill {
-  color: darkgoldenrod;
-}
-
-.row {
-  margin-bottom: -4px;
-}
-
-.row:nth-child(odd) .box:nth-child(odd),
-.row:nth-child(even) .box:nth-child(even) {
-  background-color: darkslategrey;
-  filter: brightness(1.3);
-}
-
-.row:nth-child(odd) .box:nth-child(even),
-.row:nth-child(even) .box:nth-child(odd) {
-  background-color: #C2C2C2;
-  filter: brightness(1.3);
-}
-
-p.p {
-  font-size: 9.5vh;
-  color: goldenrod;
-  text-shadow: 1px 1px 1px black;
-}
-
-.black p {
-  color: darkgoldenrod;
-}
-
-#winner {
-  width: 100vw;
-  height: 100vh;
-  position: absolute;
-  background-color: rgba(0, 0, 0, 0.8);
-  display: none;
-  justify-content: center;
-  align-items: center;
-}
-
-#winner p {
-  font-size: 3em;
-  color: whitesmoke;
-}
-
+    
       
   </style>
 </head>
 
 <body>
- <div id="blackkill">
-    <p id="bpawn"></p>
-    <p id="brook"></p>
-    <p id="bhorse"></p>
-    <p id="bbiship"></p>
-    <p id="bqueen"></p>
-    <p id="bking"></p>
-  </div>
-  <div id="board"></div>
-  <div id="whitekill">
-    <p id="wpawn"></p>
-    <p id="wrook"></p>
-    <p id="whorse"></p>
-    <p id="wbiship"></p>
-    <p id="wqueen"></p>
-    <p id="wking"></p>
-  </div>
-  <div id="winner"></div>
-  <script>
-    window.onload = function () {
-  board();
-  spices();
+ <div id="gameboard"> </div>
+ <script>
+   /*******Some inital configurations *****/
+var msRows = 10;
+var msColumns = 10;
+var mineCount = 20;
+var targetDiv = null;
+var counterInterval = null;
+var homeFolder = "https://raw.githubusercontent.com/strahlistvan/minesweeper/devjs/";
+
+/*********** ****************/
+
+var ScoreCounter = 
+{
+  targetDiv  : null,
+  currentScore : 0,
+  self     : this,
+  
+  getScoreDivElement : function(scoreParam)
+  {
+    var counterDiv = document.createElement("div");
+    counterDiv.id = "counter";
+    
+    var num1 = Math.floor(scoreParam%1000/100);
+    var num1Img = document.createElement("img");
+    num1Img.src = homeFolder+"Images/score/"+num1+".bmp";
+    num1Img.style.width = "30px";
+    num1Img.style.height = "30px";
+    
+    var num2 = Math.floor(scoreParam%100/10);
+    var num2Img = document.createElement("img");
+    num2Img.src = homeFolder+"Images/score/"+num2+".bmp";
+    num2Img.style.width = "30px";
+    num2Img.style.height = "30px";
+    
+    var num3 = scoreParam%10;
+    var num3Img = document.createElement("img");
+    num3Img.src = homeFolder+"/Images/score/"+num3+".bmp";
+    num3Img.style.width = "30px";
+    num3Img.style.height = "30px";    
+    
+    counterDiv.appendChild(num1Img);
+    counterDiv.appendChild(num2Img);
+    counterDiv.appendChild(num3Img);
+    
+    return counterDiv;  
+  }
+  
 }
-var html = "",
-  a = "its alive!!!",
-  bs = Math.min(window.innerHeight - 20, window.innerWidth - 20),
-  block = bs / 8,
-  wp = 9817,
-  wk = 9812,
-  wq = 9813,
-  wr = 9814,
-  wb = 9815,
-  wh = 9816,
-  bk = 9818,
-  bq = 9819,
-  br = 9820,
-  bb = 9821,
-  bh = 9822,
-  bp = 9823,
-  id = "",
-  place = 0,
-  pcolor = "",
-  pname = "",
-  pturn = "",
-  lpcolor = "",
-  lpname = "",
-  lpturn = "",
-  j = 0,
-  p = "",
-  arry = [],
-  cls = "",
-  lastval = 0,
-  turn = ["turn", "nturn"],
-  turnval = 0,
-  lastp = "";
+/**** timecounter.js ******/
+var TimeCounter = 
+{
+  targetDiv   : null,
+  currentSeconds  : 0,
+  currentMinutes  : 0,
+  isCounting    : false,
+  
+  /**  Returns a HTML DOM element which contains the current time in a div which ID is 'timer'. */
+  getTimerDivElement : function()
+  {   
+    this.isCounting = false;
+    
+    var counterDiv = document.createElement("div");
+    counterDiv.id = "timer";
+    
+    var min1 = Math.floor(this.currentMinutes / 10) % 100;
+    var min1Img = document.createElement("img");
+    min1Img.src = homeFolder+"Images/score/"+min1+".bmp";
+    min1Img.style.height = "30px";
+    min1Img.id = "min1Img";
+    
+    var min2 = this.currentMinutes % 10;
+    var min2Img = document.createElement("img");
+    min2Img.src = homeFolder+"Images/score/"+min2+".bmp";
+    min2Img.style.height = "30px";
+    min2Img.id = "min2Img";
 
-function spices() {
-  //  black pawn
-  for (var i = 9; i <= 16; i++) {
-    document.getElementById("b" + i).innerHTML = "<p class='p'>&#" + bp + ";</p>";
-    document.getElementById("b" + i).className = "box black pawn nturn";
+    
+    var dotsImg = document.createElement("img");
+    dotsImg.src = homeFolder+"Images/score/dots.bmp";
+    dotsImg.style.height = "30px";
+    
+    var sec1 = Math.floor(this.currentSeconds / 10);
+    var sec1Img = document.createElement("img");
+    sec1Img.src = homeFolder+"Images/score/"+sec1+".bmp";
+    sec1Img.style.height = "30px";
+    sec1Img.id = "sec1Img";   
+    
+    var sec2 = this.currentSeconds % 10;
+    var sec2Img = document.createElement("img");
+    sec2Img.src = homeFolder+"Images/score/"+sec2+".bmp";
+    sec2Img.style.height = "30px";
+    sec2Img.id = "sec2Img";   
+    
+    counterDiv.appendChild(min1Img);
+    counterDiv.appendChild(min2Img);
+    counterDiv.appendChild(dotsImg);
+    counterDiv.appendChild(sec1Img);
+    counterDiv.appendChild(sec2Img);    
+        
+    return counterDiv;  
+  },
+  
+  /** Starts an interval what is refershing the timer div element secondly. */
+  startClock : function()
+  { 
+    this.isCounting = true;
+    var self = this;
+    self.isCounting = true;
+    counterInterval = setInterval(function() 
+    { 
+      //Refresh timer HTML element
+      var timerElement = document.getElementById("timer").parentElement;
+      timerElement.innerHTML = "";
+      timerElement.appendChild(self.getTimerDivElement());
+      
+      self.currentSeconds = (self.currentSeconds + 1) % 60;
+      self.currentMinutes = (self.currentSeconds == 0) ? self.currentMinutes + 1 : self.currentMinutes;
+    }, 1000);
+  },
+  
+  /** Clear the timer interval, stops the clock*/
+  stopClock : function()
+  {
+    this.isCounting = false;
+    clearInterval(counterInterval);
+  },
+  
+   /** Set the timer to 00:00 */
+  resetClock : function()
+  {
+    this.currentMinutes = this.currentSeconds = 0;
   }
-  //  black rook
-  for (var i = 1; i <= 8; i += 7) {
-    document.getElementById("b" + i).innerHTML = "<p class='p'>&#" + br + ";</p>";
-    document.getElementById("b" + i).className = "box black rook nturn";
-  }
-  //  black horse
-  for (var i = 2; i <= 7; i += 5) {
-    document.getElementById("b" + i).innerHTML = "<p class='p'>&#" + bh + ";</p>";
-    document.getElementById("b" + i).className = "box black horse nturn";
-  }
-  //  black biship
-  for (var i = 3; i <= 6; i += 3) {
-    document.getElementById("b" + i).innerHTML = "<p class='p'>&#" + bb + ";</p>";
-    document.getElementById("b" + i).className = "box black biship nturn";
-  }
-  //  black queen
-  for (var i = 5; i <= 5; i++) {
-    document.getElementById("b" + i).innerHTML = "<p class='p'>&#" + bq + ";</p>";
-    document.getElementById("b" + i).className = "box black queen nturn";
-  }
-  //  black king
-  for (var i = 4; i <= 4; i++) {
-    document.getElementById("b" + i).innerHTML = "<p class='p'>&#" + bk + ";</p>";
-    document.getElementById("b" + i).className = "box black king nturn";
-  }
-  //  white rook
-  for (var i = 8 * 7; i > 8 * 6; i--) {
-    document.getElementById("b" + i).innerHTML = "<p class='p'>&#" + wp + ";</p>";
-    document.getElementById("b" + i).className = "box white pawn turn";
-  }
-  //  white rook
-  for (var i = 8 * 8; i > 8 * 7; i -= 7) {
-    document.getElementById("b" + i).innerHTML = "<p class='p'>&#" + wr + ";</p>";
-    document.getElementById("b" + i).className = "box white rook turn";
-  }
-  //  white horse
-  for (var i = 63; i > 56; i -= 5) {
-    document.getElementById("b" + i).innerHTML = "<p class='p'>&#" + wh + ";</p>";
-    document.getElementById("b" + i).className = "box white horse turn";
-  }
-  //  white biship
-  for (var i = 62; i > 56; i -= 3) {
-    document.getElementById("b" + i).innerHTML = "<p class='p'>&#" + wb + ";</p>";
-    document.getElementById("b" + i).className = "box white biship turn";
-  }
-  //  white queen
-  for (var i = 61; i >= 61; i--) {
-    document.getElementById("b" + i).innerHTML = "<p class='p'>&#" + wq + ";</p>";
-    document.getElementById("b" + i).className = "box white queen turn";
-  }
-  //  white king
-  for (var i = 60; i >= 60; i--) {
-    document.getElementById("b" + i).innerHTML = "<p class='p'>&#" + wk + ";</p>";
-    document.getElementById("b" + i).className = "box white king turn";
-  }
+  
 }
 
-function board() {
-  for (var i = 0; i < 8; i++) {
-    html += "<div class='row'>";
-    for (var j = 1; j <= 8; j++) {
-      html += "<div class='box pcolor none nturn' id='b" + (i * 8 + j) + "' onclick=pice(" + (i * 8 + j) + ")></div>";
-    }
-    html += "</div>";
-  }
-  document.getElementById("board").innerHTML = html;
-}
+/********* minesweeperfield.js *********/
+function MineSweeperField(rowIndex, columnIndex, hasMinePar) 
+{
+  this.flagged = false;
+  this.opened = false;
+  this.hasMine = hasMinePar;
+  
+  var self = this;
+  
+  this.msbtn = document.createElement("div");
+  
+  this.appendTo = function(parentElement) 
+  { 
+    self.msbtn.style.width = "40px";
+    self.msbtn.style.height = "40px";
+    self.msbtn.style.backgroundColor = "lightgrey";
+    self.msbtn.class = "self.msbtn";
+    self.msbtn.onmousedown = function(evt) 
+    {
+      if (MineSweeper.isPlayerDied)
+        return;
+      
+      var isRight = false;
+      var isLeft = false;
+          
+      if ("which" in evt)
+      {
+        isRight = (evt.which == 3);
+        isLeft  = (evt.which == 1);
+      }
+      else if ("button" in evt)
+      {
+        isRight = (evt.button == 3);
+        isLeft = (evt.button == 1);
+      }
+      
+      /** Handling click actions **/
+            if (isRight && !MineSweeper.isGameRunning)
+      {
+        alert("Press left click in a field to start game");
+        return;
 
-function pice(val) {
-  id = document.getElementById("b" + val);
-  var j = 0; //for cell styling
-  //clearing other paths
-  for (var i = 1; i <= 8 * 8; i++) {
-    document.getElementById("b" + i).style.filter = "brightness(1.3) sepia(0)"
-  }
-  //cheching empty cells
-  if (id.innerHTML != "") {
-    pcolor = id.classList[1];
-    pname = id.classList[2];
-    pturn = id.classList[3];
-    p = id.innerHTML;
-    //checking black pice
-    if (pcolor == "black" && turn[turnval] == pturn) {
-      arry = [];
-      //  black pawn move
-      if (pname == "pawn") {
-        lastp = p;
-        //for starting position
-        if (val > 8 && val <= 16) {
-          //looping to get all three cells at once
-          for (var i = 0; i < 2; i++) {
-            j += 8;
-            document.getElementById("b" + val).style.filter = "brightness(1)";
-            //checking next cell is empty
-            if (document.getElementById("b" + (val + j)).classList[2] == "none") {
-              document.getElementById("b" + (val + j)).style.filter = "brightness(1)";
-              arry.push(val + j);
-            }
-          } //end of for loop
-        } else {
-          j += 8
-          document.getElementById("b" + val).style.filter = "brightness(1)";
-          //checking next cell
-          if (document.getElementById("b" + (val + j)).classList[2] == "none") {
-            document.getElementById("b" + (val + j)).style.filter = "brightness(1)";
-            arry.push(val + j);
-          }
-        }
-        //checking none last pawn
-        if (val % 8 != 0 && document.getElementById("b" + (val + 9)).classList[1] == "white") {
-          document.getElementById("b" + (val + 9)).style.filter = "sepia(1)";
-          arry.push(val + 9);
-        }
-        //checking none fist pawn
-        if ((val - 1) % 8 != 0 && document.getElementById("b" + (val + 7)).classList[1] == "white") {
-          document.getElementById("b" + (val + 7)).style.filter = "sepia(1)";
-          arry.push(val + 7);
-        }
-        lpcolor = pcolor;
-        lpname = pname;
-        lpturn = pturn;
-        lastval = val;
-      } //end of pawn if
-      //black rook move
-      if (pname == "rook" || pname == "queen") {
-        lastp = p;
-        lpcolor = pcolor;
-        lpname = pname;
-        lpturn = pturn;
-        lastval = val;
-        //bottom move
-        j = 8;
-        var bottommove = 0;
-        var test = val;
-        for (var i = 0; i < 8; i++) {
-          test += 8
-          if (test < 65) {
-            bottommove += 1;
-          }
-        }
-        for (var i = 0; i < bottommove; i++) {
-          document.getElementById("b" + val).style.filter = "brightness(1)";
-          if (document.getElementById("b" + (val + j)).classList[1] == "white") {
-            document.getElementById("b" + (val + j)).style.filter = "sepia(1)";
-            arry.push(val + j);
-          }
-          //checking for empty cell
-          if (document.getElementById("b" + (val + j)).classList[2] == "none" && (val + j) < 65) {
-            document.getElementById("b" + (val + j)).style.filter = "brightness(1)";
-            arry.push(val + j);
-            j += 8;
-          }
-        } //end of bottom move
-        //top move
-        j = -8;
-        var topmove = 0;
-        test = val
-        for (var i = 0; i < 8; i++) {
-          test -= 8
-          if (test > 0) {
-            topmove += 1;
-          }
-        }
-        for (var i = 0; i < topmove; i++) {
-          if (document.getElementById("b" + (val + j)).classList[1] == "white") {
-            document.getElementById("b" + (val + j)).style.filter = "sepia(1)";
-            arry.push(val + j);
-          }
-          //checking for empty cells
-          if ((val + j) > 0 && document.getElementById("b" + (val + j)).classList[2] == "none") {
-            document.getElementById("b" + (val + j)).style.filter = "brightness(1)";
-            arry.push(val + j);
-            j -= 8;
-          }
-        } //end of top move
-        //right move
-        j = 1;
-        var moveright = 0;
-        //checking not at right edge
-        if (val % 8 == 0) {
-          moveright = 0
-        } else {
-          moveright = 8 - (val % 8);
-        }
-        for (var i = 0; i < moveright; i++) {
-          if (document.getElementById("b" + (val + j)).classList[1] == "white") {
-            document.getElementById("b" + (val + j)).style.filter = "sepia(1)";
-            arry.push(val + j);
-          }
-          if (document.getElementById("b" + (val + j)).classList[2] == "none") {
-            document.getElementById("b" + (val + j)).style.filter = "brightness(1)";
-            arry.push(val + j);
-            j += 1;
-          }
+      } 
+ 
+      if (self.flagged)
+      {
+        self.flagged = false;
+        ++MineSweeper.remainingMines;
+      }
+      else if (isRight && !self.flagged && !self.opened) 
+      {       
+        --MineSweeper.remainingMines;
+        self.flagged = true;
+        MineSweeper.repaintGrid(MineSweeper.getTargetDiv());
 
-        } //end of right move
-        //left move{
-        j = -1;
-        //checking not at left edge
-        var moveleft = 0;
-        if (val % 8 == 0) {
-          moveleft = 7;
-        } else {
-          moveleft = (val - 1) % 8;
+        console.log("Mines left: " + MineSweeper.remainingMines);
+        
+      }
+      else if (isLeft) 
+      {       
+        if (!MineSweeper.isGameRunning)
+        {
+          var cycle = 0; //to avoid infinite loops
+          do 
+          {
+            MineSweeper.clearField(rowIndex, columnIndex);
+            MineSweeper.placeMines();
+
+            console.log("cycle = "+cycle++);
+          } 
+          while ( ( MineSweeper.isMineField(rowIndex, columnIndex) 
+                  || MineSweeper.countNeigbourMines(rowIndex, columnIndex) > 0 )
+                && cycle < 10000 );
+          //Start clock ticking...
+          TimeCounter.startClock();
+          MineSweeper.isGameRunning = true;
+
         }
-        for (var i = 0; i < moveleft; i++) {
-          if (document.getElementById("b" + (val + j)).classList[1] == "white") {
-            document.getElementById("b" + (val + j)).style.filter = "sepia(1)";
-            arry.push(val + j);
+        
+        if (!self.flagged)
+        {
+          if (MineSweeper.grid[rowIndex][columnIndex].hasMine)
+          { //explode!
+
+            var bangSound = new Audio(homeFolder+"explosion.wav");
+            bangSound.play();
+            
+              MineSweeper.grid[rowIndex][columnIndex].getButton().style.backgroundColor = "red";
+            //stop timer
+            TimeCounter.stopClock();
+            
+            MineSweeper.isPlayerDied = true;
+            MineSweeper.openAllFields();
+            MineSweeper.isGameRunning = false;
+
           }
-          if (document.getElementById("b" + (val + j)).classList[2] == "none") {
-            document.getElementById("b" + (val + j)).style.filter = "brightness(1)";
-            arry.push(val + j);
-            j -= 1;
-          }
-        }
-      } //end of rook
-      //black horse
-      if (pname == "horse") {
-        lastp = p;
-        lpcolor = pcolor;
-        lpname = pname;
-        lpturn = pturn;
-        lastval = val;
-        var leftbottom = val + 8 + 7;
-        var rightbottom = val + 8 + 9;
-        var bottomright = val + 10;
-        var bottomleft = val + 6;
-        var righttop = val - 8 - 7;
-        var lefttop = val - 8 - 9;
-        var topright = val - 6;
-        var topleft = val - 10;
-        document.getElementById("b" + val).style.filter = "brightness(1)";
-        if (leftbottom < 65 && leftbottom % 8 != 0) {
-          if (document.getElementById("b" + leftbottom).classList[2] == "none") {
-            document.getElementById("b" + leftbottom).style.filter = "brightness(1)";
-            arry.push(leftbottom);
-          }
-          if (document.getElementById("b" + leftbottom).classList[1] == "white") {
-            document.getElementById("b" + leftbottom).style.filter = "sepia(1)";
-            arry.push(leftbottom);
+          else //open field (no mine)
+          {
+            MineSweeper.openField(self.getRowIndex(), self.getColumnIndex());
           }
         }
-        if (rightbottom < 65 && val % 8 != 0) {
-          if (document.getElementById("b" + rightbottom).classList[2] == "none") {
-            document.getElementById("b" + rightbottom).style.filter = "brightness(1)";
-            arry.push(rightbottom);
-          }
-          if (document.getElementById("b" + rightbottom).classList[1] == "white") {
-            document.getElementById("b" + rightbottom).style.filter = "sepia(1)";
-            arry.push(rightbottom);
-          }
-        }
-        if (bottomleft < 65 && (val - 1) % 8 != 0 && (val - 2) % 8 != 0) {
-          if (document.getElementById("b" + bottomleft).classList[2] == "none") {
-            document.getElementById("b" + bottomleft).style.filter = "brightness(1)";
-            arry.push(bottomleft);
-          }
-          if (document.getElementById("b" + bottomleft).classList[1] == "white") {
-            document.getElementById("b" + bottomleft).style.filter = "sepia(1)";
-            arry.push(bottomleft);
-          }
-        }
-        if (bottomright < 65 && val % 8 != 0 && (val + 1) % 8 != 0) {
-          if (document.getElementById("b" + bottomright).classList[2] == "none") {
-            document.getElementById("b" + bottomright).style.filter = "brightness(1)";
-            arry.push(bottomright);
-          }
-          if (document.getElementById("b" + bottomright).classList[1] == "white") {
-            document.getElementById("b" + bottomright).style.filter = "sepia(1)";
-            arry.push(bottomright);
-          }
-        }
-        if (righttop > 0 && (righttop - 1) % 8 != 0) {
-          if (document.getElementById("b" + righttop).classList[2] == "none") {
-            document.getElementById("b" + righttop).style.filter = "brightness(1)";
-            arry.push(righttop);
-          }
-          if (document.getElementById("b" + righttop).classList[1] == "white") {
-            document.getElementById("b" + righttop).style.filter = "sepia(1)";
-            arry.push(righttop);
-          }
-        }
-        if (lefttop > 0 && lefttop % 8 != 0) {
-          if (document.getElementById("b" + lefttop).classList[2] == "none") {
-            document.getElementById("b" + lefttop).style.filter = "brightness(1)";
-            arry.push(lefttop);
-          }
-          if (document.getElementById("b" + lefttop).classList[1] == "white") {
-            document.getElementById("b" + lefttop).style.filter = "sepia(1)";
-            arry.push(lefttop);
-          }
-        }
-        if (topright > 0 && (val + 1) % 8 != 0 && val % 8 != 0) {
-          if (document.getElementById("b" + topright).classList[2] == "none") {
-            document.getElementById("b" + topright).style.filter = "brightness(1)";
-            arry.push(topright);
-          }
-          if (document.getElementById("b" + topright).classList[1] == "white") {
-            document.getElementById("b" + topright).style.filter = "sepia(1)";
-            arry.push(topright);
-          }
-        }
-        if (topleft > 0 && topleft % 8 != 0 && (topleft + 1) % 8 != 0) {
-          if (document.getElementById("b" + topleft).classList[2] == "none") {
-            document.getElementById("b" + topleft).style.filter = "brightness(1)";
-            arry.push(topleft);
-          }
-          if (document.getElementById("b" + topleft).classList[1] == "white") {
-            document.getElementById("b" + topleft).style.filter = "sepia(1)";
-            arry.push(topleft);
-          }
-        }
-      } //end of horse 
-      //black biship
-      if (pname == "biship" || pname == "queen") {
-        lastp = p;
-        lpcolor = pcolor;
-        lpname = pname;
-        lpturn = pturn;
-        lastval = val;
-        document.getElementById("b" + val).style.filter = "brightness(1)";
-        //moving bottom right
-        var bottomright = 0;
-        if (val % 8 == 0) {
-          bottomright = 0;
-        } else {
-          bottomright = 8 - val % 8;
-        }
-        j = val + 9;
-        for (var i = 0; i < bottomright; i++) {
-          if (j < 65) {
-            if (document.getElementById("b" + j).classList[1] == "white") {
-              document.getElementById("b" + j).style.filter = "sepia(1)";
-              arry.push(j);
-            }
-            if (document.getElementById("b" + j).classList[2] == "none") {
-              document.getElementById("b" + j).style.filter = "brightness(1)";
-              arry.push(j);
-              j += 9;
-            }
-          }
-        }
-        //bottom left
-        var bottomleft = 0;
-        if ((val - 1) % 8 == 0) {
-          bottomleft = 0;
-        } else if (val % 8 == 0) {
-          bottomleft = 8
-        } else {
-          bottomleft = val % 8;
-        }
-        j = val + 7;
-        for (var i = 1; i < bottomleft; i++) {
-          if (j < 65) {
-            if (document.getElementById("b" + j).classList[1] == "white") {
-              document.getElementById("b" + j).style.filter = "sepia(1)";
-              arry.push(j);
-            }
-            if (document.getElementById("b" + j).classList[2] == "none") {
-              document.getElementById("b" + j).style.filter = "brightness(1)";
-              arry.push(j);
-              j += 7;
-            }
-          }
-        }
-        //top right
-        var topright = 0;
-        if (val % 8 == 0) {
-          topright = 0;
-        } else {
-          topright = 8 - (val % 8);
-        }
-        j = val - 7;
-        for (var i = 0; i < topright; i++) {
-          if (j > 0) {
-            if (document.getElementById("b" + j).classList[1] == "white") {
-              document.getElementById("b" + j).style.filter = "sepia(1)";
-              arry.push(j);
-            }
-            if (document.getElementById("b" + j).classList[2] == "none") {
-              document.getElementById("b" + j).style.filter = "brightness(1)";
-              arry.push(j);
-              j -= 7;
-            }
-          }
-        }
-        // top left
-        var topleft = 0;
-        if ((val - 1) % 8 == 0) {
-          topleft = 0;
-        } else if (val % 8 == 0) {
-          topleft = 8
-        } else {
-          topleft = val % 8;
-        }
-        j = val - 9;
-        for (var i = 1; i < topleft; i++) {
-          if (j > 0) {
-            if (document.getElementById("b" + j).classList[1] == "white") {
-              document.getElementById("b" + j).style.filter = "sepia(1)";
-              arry.push(j);
-            }
-            if (document.getElementById("b" + j).classList[2] == "none") {
-              document.getElementById("b" + j).style.filter = "brightness(1)";
-              arry.push(j);
-              j -= 9;
-            }
-          }
-        }
-      } //end of biship
-      //black king
-      if (pname == "king") {
-        lastp = p;
-        lpcolor = pcolor;
-        lpname = pname;
-        lpturn = pturn;
-        lastval = val;
-        //right
-        if (val % 8 != 0) {
-          //right right
-          if (val + 1 < 65 && document.getElementById("b" + (val + 1)).classList[2] == "none") {
-            document.getElementById("b" + (val + 1)).style.filter = "brightness(1)";
-            arry.push(val + 1);
-          }
-          if (val + 1 < 65 && document.getElementById("b" + (val + 1)).classList[1] == "white") {
-            document.getElementById("b" + (val + 1)).style.filter = "sepia(1)";
-            arry.push(val + 1);
-          }
-          if (val + 9 < 65 && document.getElementById("b" + (val + 9)).classList[2] == "none") {
-            document.getElementById("b" + (val + 9)).style.filter = "brightness(1)";
-            arry.push(val + 9);
-          }
-          if (val + 9 < 65 && document.getElementById("b" + (val + 9)).classList[1] == "white") {
-            document.getElementById("b" + (val + 9)).style.filter = "sepia(1)";
-            arry.push(val + 9);
-          }
-          if (val - 7 > 0 && document.getElementById("b" + (val - 7)).classList[2] == "none") {
-            document.getElementById("b" + (val - 7)).style.filter = "brightness(1)";
-            arry.push(val - 7);
-          }
-          if (val - 7 > 0 && document.getElementById("b" + (val - 7)).classList[1] == "white") {
-            document.getElementById("b" + (val - 7)).style.filter = "sepia(1)";
-            arry.push(val - 7);
-          }
-        }
-        //left
-        if ((val - 1) % 8 != 0) {
-          if (val - 1 > 0 && document.getElementById("b" + (val - 1)).classList[2] == "none") {
-            document.getElementById("b" + (val - 1)).style.filter = "brightness(1)";
-            arry.push(val - 1);
-          }
-          if (val - 1 > 0 && document.getElementById("b" + (val - 1)).classList[1] == "white") {
-            document.getElementById("b" + (val - 1)).style.filter = "sepia(1)";
-            arry.push(val - 1);
-          }
-          if (val - 9 > 0 && document.getElementById("b" + (val - 9)).classList[2] == "none") {
-            document.getElementById("b" + (val - 9)).style.filter = "brightness(1)";
-            arry.push(val - 9);
-          }
-          if (val - 9 > 0 && document.getElementById("b" + (val - 9)).classList[1] == "white") {
-            document.getElementById("b" + (val - 9)).style.filter = "sepia(1)";
-            arry.push(val - 9);
-          }
-          if (val + 7 < 65 && document.getElementById("b" + (val + 7)).classList[2] == "none") {
-            document.getElementById("b" + (val + 7)).style.filter = "brightness(1)";
-            arry.push(val + 7);
-          }
-          if (val + 7 < 65 && document.getElementById("b" + (val + 7)).classList[1] == "white") {
-            document.getElementById("b" + (val + 7)).style.filter = "sepia(1)";
-            arry.push(val + 7);
-          }
-        }
-        //bottom
-        if (val + 8 < 65) {
-          if (document.getElementById("b" + (val + 8)).classList[2] == "none") {
-            document.getElementById("b" + (val + 8)).style.filter = "brightness(1)";
-            arry.push(val + 8);
-          }
-          if (document.getElementById("b" + (val + 8)).classList[1] == "white") {
-            document.getElementById("b" + (val + 8)).style.filter = "sepia(1)";
-            arry.push(val + 8);
-          }
-        }
-        //top
-        if (val - 8 > 0) {
-          if (document.getElementById("b" + (val - 8)).classList[2] == "none") {
-            document.getElementById("b" + (val - 8)).style.filter = "brightness(1)";
-            arry.push(val - 8);
-          }
-          if (document.getElementById("b" + (val - 8)).classList[1] == "white") {
-            document.getElementById("b" + (val - 8)).style.filter = "sepia(1)";
-            arry.push(val - 8);
-          }
+        else //remove flag
+        {
+          self.msbtn.style.backgroundImage = "none";
+          ++MineSweeper.remainingMines;
+          flagged = false;
+          
+          console.log("Mines left: " + MineSweeper.remainingMines);
+
         }
       }
-    } //end of black pice check
-    //checking white pice
-    if (pcolor == "white" && turn[turnval] == pturn) {
-      arry = [];
-      //white pawn move
-      if (pname == "pawn") {
-        lastp = p;
-        //for starting position
-        if (val < 57 && val > 48) {
-          //looping to get all three cells at once
-          for (var i = 0; i < 2; i++) {
-            j -= 8;
-            document.getElementById("b" + val).style.filter = "brightness(1)";
-            //checking next cell is empty
-            if (document.getElementById("b" + (val + j)).classList[2] == "none") {
-              document.getElementById("b" + (val + j)).style.filter = "brightness(1)";
-              arry.push(val + j);
-            }
-          } //end of for loop
-        } else {
-          j -= 8
-          document.getElementById("b" + val).style.filter = "brightness(1)";
-          //checking next cell
-          if (document.getElementById("b" + (val + j)).classList[2] == "none") {
-            document.getElementById("b" + (val + j)).style.filter = "brightness(1)";
-            arry.push(val + j);
-          }
-        }
-        //checking none last pawn
-        if ((val - 1) % 8 != 0 && document.getElementById("b" + (val - 9)).classList[1] == "black") {
-          document.getElementById("b" + (val - 9)).style.filter = "sepia(1)";
-          arry.push(val - 9);
-        }
-        //checking none fist pawn
-        if (val % 8 != 0 && document.getElementById("b" + (val - 7)).classList[1] == "black") {
-          document.getElementById("b" + (val - 7)).style.filter = "sepia(1)";
-          arry.push(val - 7);
-        }
-        lpcolor = pcolor;
-        lpname = pname;
-        lpturn = pturn;
-        lastval = val;
-      } //end of pawn if
-      //white rook move
-      if (pname == "rook" || pname == "queen") {
-        lastp = p;
-        lpcolor = pcolor;
-        lpname = pname;
-        lpturn = pturn;
-        lastval = val;
-        //bottom move
-        j = 8;
-        var bottommove = 0;
-        var test = val;
-        for (var i = 0; i < 8; i++) {
-          test += 8
-          if (test < 65) {
-            bottommove += 1;
-          }
-        }
-        for (var i = 0; i < bottommove; i++) {
-          document.getElementById("b" + val).style.filter = "brightness(1)";
-          if (document.getElementById("b" + (val + j)).classList[1] == "black") {
-            document.getElementById("b" + (val + j)).style.filter = "sepia(1)";
-            arry.push(val + j);
-          }
-          //checking for empty cell
-          if (document.getElementById("b" + (val + j)).classList[2] == "none" && (val + j) < 65) {
-            document.getElementById("b" + (val + j)).style.filter = "brightness(1)";
-            arry.push(val + j);
-            j += 8;
-          }
-        } //end of bottom move
-        //top move
-        j = -8;
-        var topmove = 0;
-        test = val
-        for (var i = 0; i < 8; i++) {
-          test -= 8
-          if (test > 0) {
-            topmove += 1;
-          }
-        }
-        for (var i = 0; i < topmove; i++) {
-          if (document.getElementById("b" + (val + j)).classList[1] == "black") {
-            document.getElementById("b" + (val + j)).style.filter = "sepia(1)";
-            arry.push(val + j);
-          }
-          //checking for empty cells
-          if ((val + j) > 0 && document.getElementById("b" + (val + j)).classList[2] == "none") {
-            document.getElementById("b" + (val + j)).style.filter = "brightness(1)";
-            arry.push(val + j);
-            j -= 8;
-          }
-        } //end of top move
-        //right move
-        j = 1;
-        var moveright = 0;
-        //checking not at right edge
-        if (val % 8 == 0) {
-          moveright = 0
-        } else {
-          moveright = 8 - (val % 8);
-        }
-        for (var i = 0; i < moveright; i++) {
-          if (document.getElementById("b" + (val + j)).classList[1] == "black") {
-            document.getElementById("b" + (val + j)).style.filter = "sepia(1)";
-            arry.push(val + j);
-          }
-          if (document.getElementById("b" + (val + j)).classList[2] == "none") {
-            document.getElementById("b" + (val + j)).style.filter = "brightness(1)";
-            arry.push(val + j);
-            j += 1;
-          }
-
-        } //end of right move
-        //left move{
-        j = -1;
-        //checking not at left edge
-        var moveleft = 0;
-        if (val % 8 == 0) {
-          moveleft = 7;
-        } else {
-          moveleft = (val - 1) % 8;
-        }
-        for (var i = 0; i < moveleft; i++) {
-          if (document.getElementById("b" + (val + j)).classList[1] == "black") {
-            document.getElementById("b" + (val + j)).style.filter = "sepia(1)";
-            arry.push(val + j);
-          }
-          if (document.getElementById("b" + (val + j)).classList[2] == "none") {
-            document.getElementById("b" + (val + j)).style.filter = "brightness(1)";
-            arry.push(val + j);
-            j -= 1;
-          }
-        }
-      } //end of rook
-      //white horse
-      if (pname == "horse") {
-        lastp = p;
-        lpcolor = pcolor;
-        lpname = pname;
-        lpturn = pturn;
-        lastval = val;
-        var leftbottom = val + 8 + 7;
-        var rightbottom = val + 8 + 9;
-        var bottomright = val + 10;
-        var bottomleft = val + 6;
-        var righttop = val - 8 - 7;
-        var lefttop = val - 8 - 9;
-        var topright = val - 6;
-        var topleft = val - 10;
-        document.getElementById("b" + val).style.filter = "brightness(1)";
-        if (leftbottom < 65 && leftbottom % 8 != 0) {
-          if (document.getElementById("b" + leftbottom).classList[2] == "none") {
-            document.getElementById("b" + leftbottom).style.filter = "brightness(1)";
-            arry.push(leftbottom);
-          }
-          if (document.getElementById("b" + leftbottom).classList[1] == "black") {
-            document.getElementById("b" + leftbottom).style.filter = "sepia(1)";
-            arry.push(leftbottom);
-          }
-        }
-        if (rightbottom < 65 && val % 8 != 0) {
-          if (document.getElementById("b" + rightbottom).classList[2] == "none") {
-            document.getElementById("b" + rightbottom).style.filter = "brightness(1)";
-            arry.push(rightbottom);
-          }
-          if (document.getElementById("b" + rightbottom).classList[1] == "black") {
-            document.getElementById("b" + rightbottom).style.filter = "sepia(1)";
-            arry.push(rightbottom);
-          }
-        }
-        if (bottomleft < 65 && (val - 1) % 8 != 0 && (val - 2) % 8 != 0) {
-          if (document.getElementById("b" + bottomleft).classList[2] == "none") {
-            document.getElementById("b" + bottomleft).style.filter = "brightness(1)";
-            arry.push(bottomleft);
-          }
-          if (document.getElementById("b" + bottomleft).classList[1] == "black") {
-            document.getElementById("b" + bottomleft).style.filter = "sepia(1)";
-            arry.push(bottomleft);
-          }
-        }
-        if (bottomright < 65 && val % 8 != 0 && (val + 1) % 8 != 0) {
-          if (document.getElementById("b" + bottomright).classList[2] == "none") {
-            document.getElementById("b" + bottomright).style.filter = "brightness(1)";
-            arry.push(bottomright);
-          }
-          if (document.getElementById("b" + bottomright).classList[1] == "white") {
-            document.getElementById("b" + bottomright).style.filter = "sepia(1)";
-            arry.push(bottomright);
-          }
-        }
-        if (righttop > 0 && (righttop - 1) % 8 != 0) {
-          if (document.getElementById("b" + righttop).classList[2] == "none") {
-            document.getElementById("b" + righttop).style.filter = "brightness(1)";
-            arry.push(righttop);
-          }
-          if (document.getElementById("b" + righttop).classList[1] == "black") {
-            document.getElementById("b" + righttop).style.filter = "sepia(1)";
-            arry.push(righttop);
-          }
-        }
-        if (lefttop > 0 && lefttop % 8 != 0) {
-          if (document.getElementById("b" + lefttop).classList[2] == "none") {
-            document.getElementById("b" + lefttop).style.filter = "brightness(1)";
-            arry.push(lefttop);
-          }
-          if (document.getElementById("b" + lefttop).classList[1] == "black") {
-            document.getElementById("b" + lefttop).style.filter = "sepia(1)";
-            arry.push(lefttop);
-          }
-        }
-        if (topright > 0 && (val + 1) % 8 != 0 && val % 8 != 0) {
-          if (document.getElementById("b" + topright).classList[2] == "none") {
-            document.getElementById("b" + topright).style.filter = "brightness(1)";
-            arry.push(topright);
-          }
-          if (document.getElementById("b" + topright).classList[1] == "black") {
-            document.getElementById("b" + topright).style.filter = "sepia(1)";
-            arry.push(topright);
-          }
-        }
-        if (topleft > 0 && topleft % 8 != 0 && (topleft + 1) % 8 != 0) {
-          if (document.getElementById("b" + topleft).classList[2] == "none") {
-            document.getElementById("b" + topleft).style.filter = "brightness(1)";
-            arry.push(topleft);
-          }
-          if (document.getElementById("b" + topleft).classList[1] == "black") {
-            document.getElementById("b" + topleft).style.filter = "sepia(1)";
-            arry.push(topleft);
-          }
-        }
-      } //end of horse 
-      //white biship
-      if (pname == "biship" || pname == "queen") {
-        lastp = p;
-        lpcolor = pcolor;
-        lpname = pname;
-        lpturn = pturn;
-        lastval = val;
-        document.getElementById("b" + val).style.filter = "brightness(1)";
-        //moving bottom right
-        var bottomright = 0;
-        if (val % 8 == 0) {
-          bottomright = 0;
-        } else {
-          bottomright = 8 - val % 8;
-        }
-        j = val + 9;
-        for (var i = 0; i < bottomright; i++) {
-          if (j < 65) {
-            if (document.getElementById("b" + j).classList[1] == "black") {
-              document.getElementById("b" + j).style.filter = "sepia(1)";
-              arry.push(j);
-            }
-            if (document.getElementById("b" + j).classList[2] == "none") {
-              document.getElementById("b" + j).style.filter = "brightness(1)";
-              arry.push(j);
-              j += 9;
-            }
-          }
-        }
-        //bottom left
-        var bottomleft = 0;
-        if ((val - 1) % 8 == 0) {
-          bottomleft = 0;
-        } else if (val % 8 == 0) {
-          bottomleft = 8
-        } else {
-          bottomleft = val % 8;
-        }
-        j = val + 7;
-        for (var i = 1; i < bottomleft; i++) {
-          if (j < 65) {
-            if (document.getElementById("b" + j).classList[1] == "black") {
-              document.getElementById("b" + j).style.filter = "sepia(1)";
-              arry.push(j);
-            }
-            if (document.getElementById("b" + j).classList[2] == "none") {
-              document.getElementById("b" + j).style.filter = "brightness(1)";
-              arry.push(j);
-              j += 7;
-            }
-          }
-        }
-        //top right
-        var topright = 0;
-        if (val % 8 == 0) {
-          topright = 0;
-        } else {
-          topright = 8 - (val % 8);
-        }
-        j = val - 7;
-        for (var i = 0; i < topright; i++) {
-          if (j > 0) {
-            if (document.getElementById("b" + j).classList[1] == "black") {
-              document.getElementById("b" + j).style.filter = "sepia(1)";
-              arry.push(j);
-            }
-            if (document.getElementById("b" + j).classList[2] == "none") {
-              document.getElementById("b" + j).style.filter = "brightness(1)";
-              arry.push(j);
-              j -= 7;
-            }
-          }
-        }
-        // top left
-        var topleft = 0;
-        if ((val - 1) % 8 == 0) {
-          topleft = 0;
-        } else if (val % 8 == 0) {
-          topleft = 8
-        } else {
-          topleft = val % 8;
-        }
-        j = val - 9;
-        for (var i = 1; i < topleft; i++) {
-          if (j > 0) {
-            if (document.getElementById("b" + j).classList[1] == "black") {
-              document.getElementById("b" + j).style.filter = "sepia(1)";
-              arry.push(j);
-            }
-            if (document.getElementById("b" + j).classList[2] == "none") {
-              document.getElementById("b" + j).style.filter = "brightness(1)";
-              arry.push(j);
-              j -= 9;
-            }
-          }
-        }
-      } //end of biship
-      //white king
-      if (pname == "king") {
-        lastp = p;
-        lpcolor = pcolor;
-        lpname = pname;
-        lpturn = pturn;
-        lastval = val;
-        //right
-        if (val % 8 != 0) {
-          //right right
-          if (val + 1 < 65 && document.getElementById("b" + (val + 1)).classList[2] == "none") {
-            document.getElementById("b" + (val + 1)).style.filter = "brightness(1)";
-            arry.push(val + 1);
-          }
-          if (val + 1 < 65 && document.getElementById("b" + (val + 1)).classList[1] == "black") {
-            document.getElementById("b" + (val + 1)).style.filter = "sepia(1)";
-            arry.push(val + 1);
-          }
-          if (val + 9 < 65 && document.getElementById("b" + (val + 9)).classList[2] == "none") {
-            document.getElementById("b" + (val + 9)).style.filter = "brightness(1)";
-            arry.push(val + 9);
-          }
-          if (val + 9 < 65 && document.getElementById("b" + (val + 9)).classList[1] == "black") {
-            document.getElementById("b" + (val + 9)).style.filter = "sepia(1)";
-            arry.push(val + 9);
-          }
-          if (val - 7 > 0 && document.getElementById("b" + (val - 7)).classList[2] == "none") {
-            document.getElementById("b" + (val - 7)).style.filter = "brightness(1)";
-            arry.push(val - 7);
-          }
-          if (val - 7 > 0 && document.getElementById("b" + (val - 7)).classList[1] == "black") {
-            document.getElementById("b" + (val - 7)).style.filter = "sepia(1)";
-            arry.push(val - 7);
-          }
-        }
-        //left
-        if ((val - 1) % 8 != 0) {
-          if (val - 1 > 0 && document.getElementById("b" + (val - 1)).classList[2] == "none") {
-            document.getElementById("b" + (val - 1)).style.filter = "brightness(1)";
-            arry.push(val - 1);
-          }
-          if (val - 1 > 0 && document.getElementById("b" + (val - 1)).classList[1] == "black") {
-            document.getElementById("b" + (val - 1)).style.filter = "sepia(1)";
-            arry.push(val - 1);
-          }
-          if (val - 9 > 0 && document.getElementById("b" + (val - 9)).classList[2] == "none") {
-            document.getElementById("b" + (val - 9)).style.filter = "brightness(1)";
-            arry.push(val - 9);
-          }
-          if (val - 9 > 0 && document.getElementById("b" + (val - 9)).classList[1] == "black") {
-            document.getElementById("b" + (val - 9)).style.filter = "sepia(1)";
-            arry.push(val - 9);
-          }
-          if (val + 7 < 65 && document.getElementById("b" + (val + 7)).classList[2] == "none") {
-            document.getElementById("b" + (val + 7)).style.filter = "brightness(1)";
-            arry.push(val + 7);
-          }
-          if (val + 7 < 65 && document.getElementById("b" + (val + 7)).classList[1] == "black") {
-            document.getElementById("b" + (val + 7)).style.filter = "sepia(1)";
-            arry.push(val + 7);
-          }
-        }
-        //bottom
-        if (val + 8 < 65) {
-          if (document.getElementById("b" + (val + 8)).classList[2] == "none") {
-            document.getElementById("b" + (val + 8)).style.filter = "brightness(1)";
-            arry.push(val + 8);
-          }
-          if (document.getElementById("b" + (val + 8)).classList[1] == "black") {
-            document.getElementById("b" + (val + 8)).style.filter = "sepia(1)";
-            arry.push(val + 8);
-          }
-        }
-        //top
-        if (val - 8 > 0) {
-          if (document.getElementById("b" + (val - 8)).classList[2] == "none") {
-            document.getElementById("b" + (val - 8)).style.filter = "brightness(1)";
-            arry.push(val - 8);
-          }
-          if (document.getElementById("b" + (val - 8)).classList[1] == "black") {
-            document.getElementById("b" + (val - 8)).style.filter = "sepia(1)";
-            arry.push(val - 8);
-          }
-        }
+      // you win!
+      if (!MineSweeper.hasOpenableField() && MineSweeper.isGameRunning)
+      {
+        var winSound = new Audio(homeFolder+"winner.wav");
+        winSound.play();
+        TimeCounter.stopClock();
+        
+        MineSweeper.remainingMines = 0;
+        MineSweeper.isPlayerWin = true;
+        MineSweeper.openAllFields();
+        MineSweeper.isGameRunning = false;
       }
-    } //end of white pice check
-  } //end of cheching empty cells
-  move(val);
-}
-
-function move(val) {
-  for (i = 0; i < arry.length; i++) {
-    if (val == arry[i]) {
-      //black pawn queen
-      if (arry[i] > 56 && arry[i] <= 64 && lpname == "pawn") {
-        lpname = "queen"
-        lastp = "<p class='p'>&#" + bq + ";</p>";
-      }
-      //white pawn queen
-      if (arry[i] > 0 && arry[i] <= 8 && lpname == "pawn") {
-        lpname = "queen"
-        lastp = "<p class='p'>&#" + wq + ";</p>";
-      }
-      cls = "box " + lpcolor + " " + lpname + " " + lpturn;
-      id.innerHTML = lastp;
-      id.className = cls;
-      document.getElementById("b" + lastval).innerHTML = "";
-      document.getElementById("b" + lastval).classList = "box pcolor none nturn";
-      arry = [];
-      if (turnval == 1) {
-        turnval = 0;
-      } else {
-        turnval = 1;
-      }
+            MineSweeper.repaintGrid(MineSweeper.getTargetDiv());
     }
+    
+    parentElement.appendChild(self.msbtn);
   }
-  check();
-}
-
-function check() {
-  var bpawn = document.getElementsByClassName("black pawn").length;
-  var brook = document.getElementsByClassName("black rook").length;
-  var bhorse = document.getElementsByClassName("black horse").length;
-  var bbiship = document.getElementsByClassName("black biship").length;
-  var bqueen = document.getElementsByClassName("black queen").length;
-  var bking = document.getElementsByClassName("black king").length;
-  var wpawn = document.getElementsByClassName("white pawn").length;
-  var wrook = document.getElementsByClassName("white rook").length;
-  var whorse = document.getElementsByClassName("white horse").length;
-  var wbiship = document.getElementsByClassName("white biship").length;
-  var wqueen = document.getElementsByClassName("white queen").length;
-  var wking = document.getElementsByClassName("white king").length;
-  if (bpawn < 8) {
-    html = "";
-    for (var i = 0; i < (8 - bpawn); i++) {
-      html += "&#" + bp + ";"
-    }
-    document.getElementById("bpawn").innerHTML = html;
+  
+  this.getButton = function()
+  {
+    return self.msbtn;
   }
-  if (brook < 2) {
-    html = "";
-    for (var i = 0; i < (2 - brook); i++) {
-      html += "&#" + br + ";"
-    }
-    document.getElementById("brook").innerHTML = html;
+  
+  this.isOpened = function()
+  {
+    return self.opened;
   }
-  if (bhorse < 2) {
-    html = "";
-    for (var i = 0; i < (2 - bhorse); i++) {
-      html += "&#" + bh + ";"
-    }
-    document.getElementById("bhorse").innerHTML = html;
+  
+  this.setOpened = function(isOpened)
+  {
+    self.opened = isOpened;
   }
-  if (bbiship < 2) {
-    html = "";
-    for (var i = 0; i < (2 - bbiship); i++) {
-      html += "&#" + bb + ";"
-    }
-    document.getElementById("bbiship").innerHTML = html;
+  
+  this.isFlagged = function()
+  {
+    return self.flagged;
   }
-  if (bqueen < 1) {
-    html = "";
-    for (var i = 0; i < (1 - bqueen); i++) {
-      html += "&#" + bq + ";"
-    }
-    document.getElementById("bqueen").innerHTML = html;
+  
+  this.setFlagged = function(isFlagged)
+  {
+    self.flagged = isFlagged;
   }
-  if (wpawn < 8) {
-    html = "";
-    for (var i = 0; i < (8 - wpawn); i++) {
-      html += "&#" + wp + ";"
-    }
-    document.getElementById("wpawn").innerHTML = html;
+  
+  this.getRowIndex = function()
+  {
+    return rowIndex;
   }
-  if (wrook < 2) {
-    html = "";
-    for (var i = 0; i < (2 - wrook); i++) {
-      html += "&#" + wr + ";"
-    }
-    document.getElementById("wrook").innerHTML = html;
+  
+  this.getColumnIndex = function()
+  {
+    return columnIndex;
   }
-  if (whorse < 2) {
-    html = "";
-    for (var i = 0; i < (2 - whorse); i++) {
-      html += "&#" + wh + ";"
-    }
-    document.getElementById("whorse").innerHTML = html;
+  
+  this.getNeighbourMinesCount = function()
+  {
+    return MineSweeper.countNeigbourMines(rowIndex, columnIndex);
   }
-  if (wbiship < 2) {
-    html = "";
-    for (var i = 0; i < (2 - wbiship); i++) {
-      html += "&#" + wb + ";"
-    }
-    document.getElementById("wbiship").innerHTML = html;
-  }
-  if (wqueen < 1) {
-    html = "";
-    for (var i = 0; i < (1 - wqueen); i++) {
-      html += "&#" + wq + ";"
-    }
-    document.getElementById("wqueen").innerHTML = html;
-  }
-  if (bking < 1) {
-    document.getElementById("winner").style.display = "flex";
-    document.getElementById("winner").innerHTML = "<p>White has won the game</p>";
-  }
-  if (wking < 1) {
-    document.getElementById("winner").style.display = "flex";
-    document.getElementById("winner").innerHTML = "<p>Black has won the game</p>";
-  }
-  if (turnval == 1) {
-    for (var i = 0; i < document.getElementsByClassName("box").length; i++) {
-      document.getElementsByClassName("box")[i].style.boxShadow = "0 0 0px 0px red";
-    }
-    for (var i = 0; i < document.getElementsByClassName("black").length; i++) {
-      document.getElementsByClassName("black")[i].style.boxShadow = "0 0 2px 1px red";
-    }
-  } else {
-    for (var i = 0; i < document.getElementsByClassName("box").length; i++) {
-      document.getElementsByClassName("box")[i].style.boxShadow = "0 0 0px 0px red";
-    }
-    for (var i = 0; i < document.getElementsByClassName("white").length; i++) {
-      document.getElementsByClassName("white")[i].style.boxShadow = "0 0 2px 1px red";
-    }
+  
+  this.isMineField = function()
+  {
+     return this.hasMine;
+     return MineSweeper.isMineField(rowIndex, columnIndex);
   }
 }
 
-  </script>
+/************* minesweeper.js ****************/
+window.oncontextmenu = function() { 
+  return false; 
+}
+
+var MineSweeper = {
+  
+  remainingMines : mineCount,
+  isPlayerWin : false,
+  isPlayerDied : false,
+  isGameRunning : false,
+  grid : [],
+  
+  generateGrid : function(rows, columns)
+  {   
+    this.grid = new Array(rows);
+    for (var i=0; i<rows; ++i)
+    {
+      this.grid[i] = new Array(columns);
+      for (var j=0; j<columns; ++j) 
+      {
+        this.grid[i][j] = new MineSweeperField(i, j, false);
+        this.grid[i][j].hasMine = false;
+      }
+    }
+    //this.placeMines();
+  },
+
+  //generating mines into random places
+  placeMines : function()
+  {
+    var rows = MineSweeper.grid.length;
+    var columns = MineSweeper.grid[0].length;
+    
+    //clear all mines
+    for (var i=0; i<rows; ++i)
+    {
+      for (var j=0; j<columns; ++j)
+      {
+        this.grid[i][j].hasMine = false;
+      }
+    }
+      
+    var index = mineCount;
+    while (index != 0)
+    {
+      var rand = Math.floor(Math.round(Math.random()*(rows*columns))) ;
+      var rowIndex = Math.floor(rand/rows) -1 ; 
+      var colIndex = rand%rows - 1;
+      
+      rowIndex = (rowIndex < 0) ? 0 : rowIndex;
+      colIndex = (colIndex < 0) ? 0 : colIndex;
+      
+//      console.log("row: "+rowIndex + " column: " + colIndex);
+      
+      if (!this.grid[colIndex][rowIndex].hasMine)
+      {
+        this.grid[colIndex][rowIndex].hasMine = true;
+      //  console.log('('+colIndex+', '+rowIndex+') has Mine');
+        --index;
+      }
+    }
+//    console.log(this.grid);
+  },
+  
+  clearField : function (selectedRow, selectedCol)
+  {
+    if ( selectedRow < 0 || selectedRow >= this.grid.length
+         || selectedCol < 0 || selectedCol >= this.grid[0].length )
+      return;
+    
+    
+    if (!this.grid[selectedRow][selectedCol].isMineField())
+      return;
+      
+    var findPlace = false;
+    
+    for (var i=0; i<this.grid.length && !findPlace; ++i)
+    {
+      for (var j=0; j<this.grid[i].length && !findPlace; ++j)
+      {
+        if (i!=selectedRow && j!=selectedCol && !this.grid[i][j].hasMine)
+        {         
+          this.grid[i][j].hasMine = true;
+          findPlace = true;
+        }
+      }
+    }
+      
+    if (findPlace)
+      this.grid[selectedRow][selectedCol].hasMine = false;
+  },
+  
+  errorMessage : function(errorText)
+  {
+    alert(errorText);
+    console.log(errorText);
+  },
+  
+  create: function(parentId)
+  {
+    this.isPlayerDied = false;
+    this.isPlayerWin = false;
+    this.isGameRunning = false;
+    this.remainingMines = mineCount;
+    
+    this.generateGrid(msRows, msColumns);
+    
+    targetDiv = null;
+    targetDiv = document.getElementById(parentId);
+    
+    if (!targetDiv) 
+      this.errorMessage("Failed to create MineSweeper. Element not found with ID "+parentId);
+    
+    targetDiv.innerHTML = '';
+  
+    var table = document.createElement("table");
+    
+    var thead = this.createHeader();
+    table.appendChild(thead);
+    
+    var tbody = document.createElement("tbody");
+    
+    for (var i=0; i<msRows; ++i)
+    {
+      var row = document.createElement("tr");
+      for (var j=0; j<msColumns; ++j)
+      {
+        var column = document.createElement("td");
+        row.appendChild(column);
+        
+        var msField = new MineSweeperField(i, j, false);
+        msField.appendTo(column);
+      }
+      
+      tbody.appendChild(row);
+    }
+    
+    table.appendChild(tbody);
+    targetDiv.appendChild(table);       
+  },
+  
+  repaintGrid: function(parentId) {
+    
+    targetDiv = null;
+    targetDiv = document.getElementById(parentId);
+    
+    if (!targetDiv) 
+      this.errorMessage("Failed to create MineSweeper. Element not found with ID "+parentId);
+    
+    targetDiv.innerHTML = '';
+  
+    var table = document.createElement("table");
+    
+    var thead = this.createHeader();
+    table.appendChild(thead);
+    
+    var tbody = document.createElement("tbody");
+    
+    for (var i=0; i<msRows; ++i)
+    {
+      var row = document.createElement("tr");
+      for (var j=0; j<msColumns; ++j)
+      {
+        var column = document.createElement("td");
+        row.appendChild(column);
+        
+        
+        if (this.grid[i][j].flagged)
+        {
+          if (!this.grid[i][j].hasMine && +!this.isGameRunning)
+            this.grid[i][j].getButton().style.backgroundImage = "url('https://raw.githubusercontent.com/strahlistvan/minesweeper/devjs/Images/flagged_false.png')";         
+          else
+            this.grid[i][j].getButton().style.backgroundImage = "url('https://raw.githubusercontent.com/strahlistvan/minesweeper/devjs/Images/flagged.png')";
+          this.grid[i][j].getButton().style.backgroundSize = "cover";         
+        }
+        else if (this.grid[i][j].opened)
+        {
+          
+          if (this.grid[i][j].hasMine)
+          {
+            this.grid[i][j].getButton().style.backgroundImage = "url('https://raw.githubusercontent.com/strahlistvan/minesweeper/devjs/Images/bomb.png')";
+            this.grid[i][j].getButton().style.backgroundSize = "cover";   
+          }
+          else 
+          {
+            this.grid[i][j].getButton().style.backgroundImage = "url('https://raw.githubusercontent.com/strahlistvan/minesweeper/devjs/Images/"+this.grid[i][j].getNeighbourMinesCount()+".png')";
+            this.grid[i][j].getButton().style.backgroundSize = "cover"; 
+          }
+
+        }
+        else
+        {
+          this.grid[i][j].getButton().style.backgroundImage = "none";
+        }
+  
+        //var msField = this.grid[i][j];
+        this.grid[i][j].appendTo(column);
+      }
+      
+      tbody.appendChild(row);
+    }
+    
+    table.appendChild(tbody);
+    targetDiv.appendChild(table);       
+    
+  },
+  
+  countNeigbourMines: function(i, j)
+  {
+    var count = 0;
+    
+    //If the position is not valid
+    if (i<0 || j<0 || i>=this.grid.length || j>=this.grid[i].length)
+      return 0;
+    
+    //Top neighbour
+    if (i > 0 && this.grid[i-1][j].hasMine)
+    {
+//      console.log(i+' row '+j+' column Top neighbour');
+      ++count;
+    }
+      
+    //Top right neighbour
+    if (i > 0 && j < this.grid[i-1].length - 1
+        && this.grid[i-1][j+1].hasMine)
+    {
+//      console.log(i+' row '+j+' column Top Right neighbour');
+      ++count;
+    }
+    
+    //Right neighbour
+    if (j < this.grid[i].length - 1 
+      && this.grid[i][j+1].hasMine)
+    {
+//      console.log(i+' row '+j+' column Right neighbour');
+      ++count;
+    }
+    
+    //Bottom right neighbour
+    if (i < this.grid.length - 1 && j < this.grid[i+1].length - 1  
+      && this.grid[i+1][j+1].hasMine)
+      {
+//        console.log(i+' row '+j+' column Bottom Right neighbour');
+        ++count;
+      }
+    
+    //Bottom neighbour
+    if (i < this.grid.length - 1
+      && this.grid[i+1][j].hasMine)
+      {
+//        console.log(i+' row '+j+' column Bottom neighbour');
+        ++count;
+      }
+  
+    //Bottom left neighbour
+    if (i < this.grid.length - 1 && j > 0
+      && this.grid[i+1][j-1].hasMine)
+    {
+//      console.log(i+' row '+j+' column Bottom Left neighbour');
+      ++count;
+    }
+      
+    //Left neighbour
+    if (j > 0 && this.grid[i][j-1].hasMine) 
+    {
+//      console.log(i+' row '+j+' column Left neighbour');
+      ++count;
+    }
+    
+    //Top left neighbour
+    if (i > 0 && j > 0 && this.grid[i-1][j-1].hasMine) 
+    {
+//      console.log(i+' row '+j+' column Top Left neighbour');
+      ++count;
+    }
+    
+    return count;
+  },
+  
+  isMineField : function(i, j)
+  {
+    //If the position is not valid
+    if (i<0 || j<0 || i>=this.grid.length || j>=this.grid[i].length)
+      return 0;
+    
+    return this.grid[i][j].hasMine;
+    
+  },
+  
+  countOpenedFileds : function()
+  {
+    var count = 0;
+    for (var i=0; i<this.grid.length; ++i)
+    {
+      for (var j=0; j<this.grid[i].length; ++j)
+      {
+        if (this.grid[i][j].isOpened())
+          ++count;
+      }
+    }
+    console.log("opened fields = " + count);
+    return count;
+  },
+  
+  createHeader: function()
+  {
+    var thead = document.createElement("thead");
+    
+    var row = document.createElement("tr");
+    row.style.backgroundColor = 'lightgrey';
+    row.style.height = "50px";
+    
+    var thScore = document.createElement("th");
+    thScore.id = "scoreboard";
+    thScore.colSpan = Math.floor(msColumns/3);
+    var mineDiv = ScoreCounter.getScoreDivElement(MineSweeper.remainingMines); 
+    thScore.appendChild(mineDiv);   
+    
+    var thSun = document.createElement("th");
+    thSun.id = "sunhead";
+    thSun.colSpan = Math.floor(msColumns - 2*Math.floor(msColumns/3));
+    
+    var smileyDiv = document.createElement("div");
+    if (this.isPlayerDied) {
+      smileyDiv.style.backgroundImage = "url('https://raw.githubusercontent.com/strahlistvan/minesweeper/devjs/Images/sad.png')";
+      TimeCounter.stopClock();
+    }
+    else if (this.isPlayerWin) {
+      smileyDiv.style.backgroundImage = "url('https://raw.githubusercontent.com/strahlistvan/minesweeper/devjs/Images/win.jpg')";T
+    }
+    else {
+      smileyDiv.style.backgroundImage = "url('https://raw.githubusercontent.com/strahlistvan/minesweeper/devjs/Images/smile.png')"; 
+}
+    
+    smileyDiv.style.backgroundSize = "cover";
+    smileyDiv.style.height = "50px";
+    smileyDiv.style.width = "50px";
+    smileyDiv.style.margin = "0 auto 0";
+    
+      smileyDiv.onclick = function() 
+    { 
+      TimeCounter.stopClock();
+      TimeCounter.resetClock();
+      MineSweeper.create(targetDiv.id); 
+    }
+    
+    thSun.appendChild(smileyDiv);
+    
+    var thTime = document.createElement("th");
+    thTime.id = "timeboard";
+    thTime.colSpan = Math.floor(msColumns/3);
+    
+    thTime.appendChild(TimeCounter.getTimerDivElement());
+      
+    row.appendChild(thScore);
+    row.appendChild(thSun);
+    row.appendChild(thTime);
+    
+    thead.appendChild(row);
+    
+    return thead;
+  },
+  
+  openField: function(row,  col)
+  {
+    var neighbourCount = MineSweeper.countNeigbourMines(row, col);
+    
+    //msField.opened = true;
+    this.grid[row][col].opened = true;    
+
+    this.grid[row][col].getButton().style.backgroundImage = "url('https://raw.githubusercontent.com/strahlistvan/minesweeper/devjs/Images/"+neighbourCount+".png')";
+    this.grid[row][col].getButton().style.backgroundSize = "cover";
+
+    //if it's not empty, we don't need to flood fill
+    if (neighbourCount > 0)
+      return;
+    
+    var queue = [];
+    queue.push({x: row, y: col});
+    
+    
+    while (queue.length > 0)
+    {
+      var nextFieldCoord = queue.pop();
+      
+      var x = nextFieldCoord.x;
+      var y = nextFieldCoord.y;
+            
+      //left neighbour 
+      if (x > 0 && !this.grid[x-1][y].opened )
+      {
+        this.grid[x-1][y].opened = true;    
+        neighbourCount = MineSweeper.countNeigbourMines(x-1, y);
+        
+        if (MineSweeper.countNeigbourMines(x-1, y) === 0)
+          queue.push({x: x-1, y: y});
+      }
+      //right neighbour       
+      if (x < this.grid.length-1 && !this.grid[x+1][y].opened )
+      {
+        this.grid[x+1][y].opened = true;    
+        neighbourCount = MineSweeper.countNeigbourMines(x+1, y);
+        
+        if (MineSweeper.countNeigbourMines(x+1, y) === 0)
+          queue.push({x: x+1, y: y});
+
+      }
+      //top neighbour       
+      if (y > 0 && !this.grid[x][y-1].opened )
+      {
+        this.grid[x][y-1].opened = true;    
+        neighbourCount = MineSweeper.countNeigbourMines(x, y-1);
+                
+        if (MineSweeper.countNeigbourMines(x, y-1) === 0)
+          queue.push({x: x, y: y-1});
+      }
+      //bottom neighbour      
+      if (y < this.grid[x].length-1 && !this.grid[x][y+1].opened )
+      {
+        this.grid[x][y+1].opened = true;    
+        neighbourCount = MineSweeper.countNeigbourMines(x, y+1);
+        
+        if (MineSweeper.countNeigbourMines(x, y+1) === 0)
+          queue.push({x: x, y: y+1});
+
+      }
+      //top left neighbour 
+      if (x > 0 && y > 0 && !this.grid[x-1][y-1].opened )
+      {
+        this.grid[x-1][y-1].opened = true;    
+        neighbourCount = MineSweeper.countNeigbourMines(x-1, y-1);
+        
+        if (MineSweeper.countNeigbourMines(x-1, y-1) === 0)
+          queue.push({x: x-1, y: y-1});
+      }
+      //top right neighbour       
+      if (x < this.grid.length-1 && y > 0 && !this.grid[x+1][y-1].opened )
+      {
+        this.grid[x+1][y-1].opened = true;    
+        neighbourCount = MineSweeper.countNeigbourMines(x+1, y-1);
+        
+        if (MineSweeper.countNeigbourMines(x+1, y-1) === 0)
+          queue.push({x: x+1, y: y-1});
+
+      }
+      //bottom left neighbour 
+      if (x > 0 && y < this.grid[x].length-1 && !this.grid[x-1][y+1].opened )
+      {
+        this.grid[x-1][y+1].opened = true;    
+        neighbourCount = MineSweeper.countNeigbourMines(x-1, y+1);
+        
+        if (MineSweeper.countNeigbourMines(x-1, y+1) === 0)
+          queue.push({x: x-1, y: y+1});
+      }
+      //bottom right neighbour      
+      if (x < this.grid.length-1 && y < this.grid[x].length-1 && !this.grid[x+1][y+1].opened )
+      {
+        this.grid[x+1][y+1].opened = true;    
+        neighbourCount = MineSweeper.countNeigbourMines(x+1, y+1);
+        
+        if (MineSweeper.countNeigbourMines(x+1, y+1) === 0)
+          queue.push({x: x+1, y: y+1});
+      }     
+
+     // console.log(JSON.stringify(queue));
+    } 
+  },
+  
+  openAllFields: function() 
+  {
+    for (var i=0; i<this.grid.length; ++i)
+    {
+      for (var j=0; j<this.grid[i].length; ++j) 
+      {
+        this.grid[i][j].opened = true;
+      //  console.log("("+i+", "+j+").is_opened="+this.grid[i][j].isOpened());
+      }
+    } 
+  },
+  
+
+  getTargetDiv : function()
+  {
+    return targetDiv.id;
+  },
+  
+  hasOpenableField : function()
+  {
+    for (var i=0; i<this.grid.length; ++i)
+    {
+      for (var j=0; j<this.grid[i].length; ++j) 
+      {
+        if (!this.grid[i][j].opened && !this.grid[i][j].hasMine)
+        {
+        
+          console.log('('+i+','+j+')'+ 'is openable')
+          return true;
+
+        }
+      }
+    }
+    console.log("No more openable field...");
+    return false;
+  }
+}
+
+window.onload = MineSweeper.create('gameboard');
+ </script>
 </body>
 
 </html>
