@@ -9,46 +9,74 @@
  <body>
   <style>
    /* image gallery */
-   .container-gallery{
-    border:1px solid red;
-    padding:4px 4px 4px 4px;
-   }
-   custheader { 
-  font-size: 0;
-  display: -ms-flexbox;
-  -ms-flex-wrap: wrap;
-  -ms-flex-direction: column;
-  -webkit-flex-flow: row wrap; 
-  flex-flow: row wrap; 
-  display: -webkit-box;
-  display: flex;
+   .img-list {
+list-style: none;
+padding: 0;
+margin: 0;
 }
-custheader div { 
-  -webkit-box-flex: auto;
-  -ms-flex: auto;
-  flex: auto; 
-  width: 230px; 
-  margin: .5vw; 
-    position:relative;
-  overflow:hidden;
+.img-list li {
+border: 5px solid transparent;
+box-sizing: border-box;
+width: 33.33%;
+float: left;
+position: relative;
+cursor: pointer;
 }
-custheader div img { 
-  position:relative;
-  height:100%;
-  width:100%;
-  transform: scale(1);
-  transition: transform;
-  transition-duration:0.2s;
+.img-list img {
+max-width: 100%;
+vertical-align: middle;
 }
-  custheader div:hover img{
-  transform: scale(1.05);
-  transition: transform;
-  transition-duration:0.2s;
+
+/* Image Placeholder Styles
+-------------------------------------------------------------- */
+.img-placeholder:before,
+.img-placeholder:after {
+padding-top: 33.33%;
+content: "";
+display: block;
+}  
+.img-placeholder {
+background: #222;
+box-shadow: 0 0 0 8px #222 inset, 0 0 0 9px #333 inset;
+color: #444;
+line-height: 0;
+text-align: center;
+display: block;
 }
-@media screen and (max-width: 400px) {
-  custheader div { margin: 0; }
-  custheader { padding: 0; }
-  
+
+/* The hover effect
+-------------------------------------------------------------- */
+.img-list li:before {
+transition: all .5s ease;
+content: "";
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background: #333;
+transform: scale(0);
+}
+.img-list li:hover:before {
+opacity: .5;
+transform: scale(1);
+}
+.img-list li:after {
+transition: all .6s ease .2s;
+content: "";
+position: absolute;
+top: 8px;
+left: 8px;
+right: 8px;
+bottom: 8px;
+border: 1px solid #aaa;
+background: #000;
+opacity: 0;
+transform: scale(0);
+}
+.img-list li:hover:after {
+opacity: .35;
+transform: scale(1);
 }
     /* image gallery end */
    .container_clock{
@@ -273,19 +301,18 @@ width: 100%;
   </div>
    <!image gallery-->
   <div class="container-gallery">
-   <custheader>
-<div><img alt="Beurer FT-65" src="img/Luyser.jpg" /></a></div>
-
-<div><img alt="Kursi Roda Jepang Kawamura Type AY" src="img/gorciqner.jpg" /></a></div>
-
-<div><img alt="Timbangan Omron" src="img/Nerker.jpg"/></a></div>
-
-<div><img alt="Nebulizer Philips" src="img/wolf.jpg" /></a></div>
-
-<div><img alt="Beurer MG 55" src="img/unitaz.jpg"/></div>
-  <div><img alt="Beurer MG 55" src="img/krant.jpg"/></div>     
+<ul class="img-list">
+  <li><span class="img-placeholder">- placeholder -</span></li>
+  <li><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/451895/009.jpg"></li>
+  <li><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/451895/010.jpg"></li>
+  <li><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/451895/012.jpg"></li>
+  <li><span class="img-placeholder">- placeholder -</span></li>
+  <li><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/451895/015.jpg"></li>
+  <li><span class="img-placeholder">- placeholder -</span></li>
+  <li><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/451895/038.jpg"></li>
+  <li><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/451895/044.jpg"></li>
+</ul>
    
-</custheader>
    </container-gallery>
   </div>
  </body>
