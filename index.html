@@ -8,6 +8,14 @@
  </head>
  <body>
   <style>
+   #currentTime {
+  font-size: 10em;
+  text-align: center;
+  font-family: sans-serif;
+  font-weight: 600;
+  color: #CE1141;
+  margin: 10px auto;
+}
    .main-nav {
   display: -webkit-flex;
   display: flex;
@@ -141,6 +149,38 @@ width: 100%;
 }
   </style>
   <script type='text/javascript' src="js/main.js">
+   window.onload = function() {
+  clock();  
+    function clock() {
+    var now = new Date();
+    var TwentyFourHour = now.getHours();
+    var hour = now.getHours();
+    var min = now.getMinutes();
+    var sec = now.getSeconds();
+    var mid = 'pm';
+    if(sec < 10) { 
+      sec = "0" + sec; 
+    }
+    if (min < 10) {
+      min = "0" + min;
+    }
+    if (hour > 12) {
+      hour = hour - 12;
+    }   
+    if (hour < 10 ) {
+      hour = "0" + hour;
+    }   
+    if(hour==0){ 
+      hour=12;
+    }
+    if(TwentyFourHour < 12) {
+       mid = 'am';
+    }
+  document.getElementById('currentTime').innerHTML =     hour+':'+min+':'+sec +' '+mid ;
+    setTimeout(clock, 1000);
+    }
+}
+
   </script> 
      <div class="container">
   
@@ -177,5 +217,7 @@ width: 100%;
 </div>
       </div>
     </div>
+  <!clock---->
+  <h1 id="currentTime"></h1>
  </body>
 </html>
