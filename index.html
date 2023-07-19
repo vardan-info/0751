@@ -8,6 +8,45 @@
  </head>
  <body>
   <style>
+   /* image gallery */
+   custheader { 
+  font-size: 0;
+  display: -ms-flexbox;
+  -ms-flex-wrap: wrap;
+  -ms-flex-direction: column;
+  -webkit-flex-flow: row wrap; 
+  flex-flow: row wrap; 
+  display: -webkit-box;
+  display: flex;
+}
+custheader div { 
+  -webkit-box-flex: auto;
+  -ms-flex: auto;
+  flex: auto; 
+  width: 230px; 
+  margin: .5vw; 
+    position:relative;
+  overflow:hidden;
+}
+custheader div img { 
+  position:relative;
+  height:100%;
+  width:100%;
+  transform: scale(1);
+  transition: transform;
+  transition-duration:0.2s;
+}
+  custheader div:hover img{
+  transform: scale(1.05);
+  transition: transform;
+  transition-duration:0.2s;
+}
+@media screen and (max-width: 400px) {
+  custheader div { margin: 0; }
+  custheader { padding: 0; }
+  
+}
+    /* image gallery end */
    .container_clock{
    
     padding: 1px 1px 1px 1px;
@@ -227,6 +266,18 @@ width: 100%;
   <!clock---->
   <div class="container_clock">
   <h1 id="currentTime"></h1>
+   <!image gallery-->
+   <custheader>
+<div><a href="http://www.galerimedika.com/Termometer-Alat-Ukur-Suhu-Tubuh/Termometer-Instan-Beurer-FT65"><img alt="Beurer FT-65" src="https://www.galerimedika.com/image/data/ImgCategory/products-category-beurer-ft65.png" /></a></div>
+
+<div><a href="http://www.galerimedika.com/Alat-Bantu-Jalan/Kawamura-Type-AY-Kursi-Roda-Jepang-Rollator-Wheelchair-Convertible"><img alt="Kursi Roda Jepang Kawamura Type AY" src="https://www.galerimedika.com/image/data/ImgCategory/products-category-portrait-kursi-roda-jepang-kawamura-AY.png" /></a></div>
+
+<div><a href="http://www.galerimedika.com/Timbangan"><img alt="Timbangan Omron" src="https://www.galerimedika.com/image/data/ImgCategory/products-category-Timbangan-Omron.png" /></a></div>
+
+<div><a href="http://www.galerimedika.com/Alat-Bantu-Pernapasan/Nebulizer-Philips-Innospire-Essense"><img alt="Nebulizer Philips" src="https://www.galerimedika.com/image/data/ImgCategory/products-category-Beurer-MG-510.png" /></a></div>
+
+<div><a href="http://www.galerimedika.com/Alat-Terapi/Alat-Pijat-Terapi-Beurer-MG-55-tapping-massager"><img alt="Beurer MG 55" src="https://www.galerimedika.com/image/data/ImgCategory/products-category-nebulizer-philips.png" /></a>&gt;</div>
+</custheader>
   </div>
  </body>
 </html>
