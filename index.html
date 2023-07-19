@@ -20,48 +20,40 @@
   overflow: hidden;
 }
 
-#flexbox {
+.header {
+  text-align: center;
+  padding: 32px;
+  background: #E0DDDD;
+}
+
+#gallery {
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
   padding: 0 4px;
 }
 
-.column {
-  flex: 25%;
-  max-width: 25%;
-  padding: 0 4px;
-}
-
-.column img {
-  vertical-align: middle;
+#gallery img {
+  width: 25%;
+  height: 300px;
+  object-fit: cover;
   margin-top: 8px;
-  filter: grayscale(70%);
+  padding: 0 4px;
+  border-radius: 10px;
 }
 
-.column:nth-child(even) {
-  display: flex;
-  flex-direction: column-reverse;
-}
-
-@media screen and (max-width: 800px) {
-  .column {
-    flex: 50%;
-    max-width: 50%;
+@media (max-width: 800px) {
+  #gallery img {
+    width: 50%;
   }
 }
 
-@media screen and (max-width: 600px) {
-  .column {
-    flex: 100%;
-    max-width: 100%;
+@media (max-width: 600px) {
+  #gallery img {
+    width: 100%;
   }
-}
-    /* image gallery end */
-   .container_clock{
-   
-    padding: 1px 1px 1px 1px;
-    margin: 1px 1px 1px 1px;
-    background: #0c060b;
 }
    
    #currentTime {
@@ -280,53 +272,20 @@ width: 100%;
    <!image gallery-->
   <div class="container-gallery">
 <h1>Image gallery with flexbox</h1>
-    <div id="flexbox">
-      <div class="column">
-            <img src="img/kalonka.jpg" alt="Image" width="100%" />
-      <img src="img/nerker_1.jpg" alt="Image" width="100%" />
-      <img src="img/lak.jpg" alt="Image" width="100%" />
-      <img src="img/krant_1.jpg" alt="Image" width="100%" />
-              <img src="img/kalonka.jpg" alt="Image" width="100%" />
-      <img src="img/nerker_1.jpg" alt="Image" width="100%" />
-      <img src="img/lak.jpg" alt="Image" width="100%" />
-      <img src="img/krant_1.jpg" alt="Image" width="100%" />
-             <img src="img/lvacaran.jpg" alt="Image" width="100%" />
-      <img src="img/krant.jpg" alt="Image" width="100%" />
-      <img src="img/koxpeq.jpg" alt="Image" width="100%" />
-      <img src="img/gorciqner.jpg" alt="Image" width="100%" />
-      <img src="img/Nerker.jpg" alt="Image" width="100%" />
-      <img src="img/Luyser.jpg" alt="Image" width="100%" />
-      </div>
-   
-      <div class="column">
-      <img src="img/silikoner.jpg" alt="Image" width="100%" />
-      <img src="img/kalonka.jpg" alt="Image" width="100%" />
-      <img src="img/nerker_1.jpg" alt="Image" width="100%" />
-      <img src="img/lak.jpg" alt="Image" width="100%" />
-      <img src="img/krant_1.jpg" alt="Image" width="100%" />
-       <img src="img/lak.jpg" alt="Image" width="100%" />
-      <img src="img/krant_1.jpg" alt="Image" width="100%" />
-      </div>
-      <div class="column">
-      <img src="img/raiber.jpg" alt="Image" width="100%" />
-      <img src="img/wolf.jpg" alt="Image" width="100%" />
-      <img src="img/unitaz.jpg" alt="Image" width="100%" />
-      <img src="img/silikoner.jpg" alt="Image" width="100%" />
-      <img src="img/raiber.jpg" alt="Image" width="100%" />
-      <img src="img/lvacaran.jpg" alt="Image" width="100%" />
-      <img src="img/krant.jpg" alt="Image" width="100%" />
-      <img src="img/koxpeq.jpg" alt="Image" width="100%" />
-      <img src="img/gorciqner.jpg" alt="Image" width="100%" />
-      <img src="img/Nerker.jpg" alt="Image" width="100%" />
-      <img src="img/Luyser.jpg" alt="Image" width="100%" />
-             <img src="img/lvacaran.jpg" alt="Image" width="100%" />
-      <img src="img/krant.jpg" alt="Image" width="100%" />
-      <img src="img/koxpeq.jpg" alt="Image" width="100%" />
-      <img src="img/gorciqner.jpg" alt="Image" width="100%" />
-      <img src="img/Nerker.jpg" alt="Image" width="100%" />
-      <img src="img/Luyser.jpg" alt="Image" width="100%" />
-      </div>     
-     
+     <div class="header">
+      <h1>CSS FLEXBOX PHOTO GALLERY</h1>
+    </div>
+    <div id="gallery">
+      <img src="https://cdn.freecodecamp.org/curriculum/css-photo-gallery/1.jpg"/>
+      <img src="https://cdn.freecodecamp.org/curriculum/css-photo-gallery/2.jpg"/>
+      <img src="https://cdn.freecodecamp.org/curriculum/css-photo-gallery/3.jpg"/>
+      <img src="https://cdn.freecodecamp.org/curriculum/css-photo-gallery/4.jpg"/>
+      <img src="https://cdn.freecodecamp.org/curriculum/css-photo-gallery/5.jpg"/>
+      <img src="https://cdn.freecodecamp.org/curriculum/css-photo-gallery/6.jpg"/>
+      <img src="https://cdn.freecodecamp.org/curriculum/css-photo-gallery/7.jpg"/>
+      <img src="https://cdn.freecodecamp.org/curriculum/css-photo-gallery/8.jpg"/>
+      <img src="https://cdn.freecodecamp.org/curriculum/css-photo-gallery/9.jpg"/>
+      <img src="https://cdn.freecodecamp.org/curriculum/css-photo-gallery/10.jpg"/>
     </div>
    </container-gallery>
   </div>
