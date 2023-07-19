@@ -9,74 +9,52 @@
  <body>
   <style>
    /* image gallery */
-   .img-list {
-list-style: none;
-padding: 0;
-margin: 0;
-}
-.img-list li {
-border: 5px solid transparent;
-box-sizing: border-box;
-width: 33.33%;
-float: left;
-position: relative;
-cursor: pointer;
-}
-.img-list img {
-max-width: 100%;
-vertical-align: middle;
+  h1 {
+  font-family: arial;
+  font-size: 3em;
+  text-align: center;
+  margin: 25px;
+  padding: 50px;
+  background-color: #1d2d50;
+  color: #fcdab7;
+  overflow: hidden;
 }
 
-/* Image Placeholder Styles
--------------------------------------------------------------- */
-.img-placeholder:before,
-.img-placeholder:after {
-padding-top: 33.33%;
-content: "";
-display: block;
-}  
-.img-placeholder {
-background: #222;
-box-shadow: 0 0 0 8px #222 inset, 0 0 0 9px #333 inset;
-color: #444;
-line-height: 0;
-text-align: center;
-display: block;
+#flexbox {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 4px;
 }
 
-/* The hover effect
--------------------------------------------------------------- */
-.img-list li:before {
-transition: all .5s ease;
-content: "";
-position: absolute;
-top: 0;
-left: 0;
-right: 0;
-bottom: 0;
-background: #333;
-transform: scale(0);
+.column {
+  flex: 25%;
+  max-width: 25%;
+  padding: 0 4px;
 }
-.img-list li:hover:before {
-opacity: .5;
-transform: scale(1);
+
+.column img {
+  vertical-align: middle;
+  margin-top: 8px;
+  filter: grayscale(70%);
 }
-.img-list li:after {
-transition: all .6s ease .2s;
-content: "";
-position: absolute;
-top: 8px;
-left: 8px;
-right: 8px;
-bottom: 8px;
-border: 1px solid #aaa;
-background: #000;
-opacity: 0;
-transform: scale(0);
+
+.column:nth-child(even) {
+  display: flex;
+  flex-direction: column-reverse;
 }
-.img-list li:hover:after {
-opacity: .35;
-transform: scale(1);
+
+@media screen and (max-width: 800px) {
+  .column {
+    flex: 50%;
+    max-width: 50%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .column {
+    flex: 100%;
+    max-width: 100%;
+  }
 }
     /* image gallery end */
    .container_clock{
@@ -301,18 +279,61 @@ width: 100%;
   </div>
    <!image gallery-->
   <div class="container-gallery">
-<ul class="img-list">
-  <li><span class="img-placeholder">- placeholder -</span></li>
-  <li><img src="img/koxpeq.jpg"></li>
-  <li><img src="img/krant.jpg"></li>
-  <li><img src="img/lvacaran.jpg"></li>
-  <li><span class="img-placeholder">- placeholder -</span></li>
-  <li><img src="img/wolf.jpg"></li>
-  <li><span class="img-placeholder">- placeholder -</span></li>
-  <li><img src="img/unitaz.jpg"></li>
-  <li><img src="img/Luyser.jpg"></li>
-</ul>
-   
+<h1>Image gallery with flexbox</h1>
+    <div id="flexbox">
+      <div class="column">
+      <img src="https://docs.google.com/uc?export=download&id=1U4Z-2GJcRDtIAmZt4ej0MOF_NvA0ntzS" alt="Image" width="100%" />
+      <img src="https://docs.google.com/uc?export=download&id=1cfqbl28ezKPikIXApzZQOEUPwKm2AKrr" alt="Image" width="100%" />
+      <img src="https://docs.google.com/uc?export=download&id=1I-bDFOoYZ-XUZkwDxRJmtiR_7DGVn_Eb" alt="Image" width="100%" />
+      <img src="https://docs.google.com/uc?export=download&id=1DU-S82guX9KooYyfDavkg1M_kpXAVrs1" alt="Image" width="100%" />
+      <img src="https://docs.google.com/uc?export=download&id=10PElUch6-oxpjga6Pe6PoHd2VUXZkUfu" alt="Image" width="100%" />
+      <img src="https://docs.google.com/uc?export=download&id=1U4Z-2GJcRDtIAmZt4ej0MOF_NvA0ntzS" alt="Image" width="100%" />
+      <img src="https://docs.google.com/uc?export=download&id=1HAh9siwne5Fa39G2qIppry-aHrrFRrzb" alt="Image" width="100%" />
+      <img src="https://docs.google.com/uc?export=download&id=1YBHz72VKXRNUPge-h8pQvuVotim7LUq5" alt="Image" width="100%" />
+      <img src="https://docs.google.com/uc?export=download&id=1TwVoVT9UxlmmQO125b-lD7kbswYqCdgy" alt="Image" width="100%" />
+      <img src="https://docs.google.com/uc?export=download&id=1DU-S82guX9KooYyfDavkg1M_kpXAVrs1" alt="Image" width="100%" />
+      <img src="https://docs.google.com/uc?export=download&id=1y9uOpY2Uwht88vdYBJV8BD1FenayFQpr" alt="Image" width="100%" />
+      </div>
+      <div class="column">
+      <img src="https://docs.google.com/uc?export=download&id=1U4Z-2GJcRDtIAmZt4ej0MOF_NvA0ntzS" alt="Image" width="100%" />
+      <img src="https://docs.google.com/uc?export=download&id=1cfqbl28ezKPikIXApzZQOEUPwKm2AKrr" alt="Image" width="100%" />
+      <img src="https://docs.google.com/uc?export=download&id=1I-bDFOoYZ-XUZkwDxRJmtiR_7DGVn_Eb" alt="Image" width="100%" />
+      <img src="https://docs.google.com/uc?export=download&id=1DU-S82guX9KooYyfDavkg1M_kpXAVrs1" alt="Image" width="100%" />
+      <img src="https://docs.google.com/uc?export=download&id=10PElUch6-oxpjga6Pe6PoHd2VUXZkUfu" alt="Image" width="100%" />
+      <img src="https://docs.google.com/uc?export=download&id=1U4Z-2GJcRDtIAmZt4ej0MOF_NvA0ntzS" alt="Image" width="100%" />
+      <img src="https://docs.google.com/uc?export=download&id=1HAh9siwne5Fa39G2qIppry-aHrrFRrzb" alt="Image" width="100%" />
+      <img src="https://docs.google.com/uc?export=download&id=1YBHz72VKXRNUPge-h8pQvuVotim7LUq5" alt="Image" width="100%" />
+      <img src="https://docs.google.com/uc?export=download&id=1TwVoVT9UxlmmQO125b-lD7kbswYqCdgy" alt="Image" width="100%" />
+      <img src="https://docs.google.com/uc?export=download&id=1DU-S82guX9KooYyfDavkg1M_kpXAVrs1" alt="Image" width="100%" />
+      <img src="https://docs.google.com/uc?export=download&id=1y9uOpY2Uwht88vdYBJV8BD1FenayFQpr" alt="Image" width="100%" />
+      </div>
+      <div class="column">
+      <img src="https://docs.google.com/uc?export=download&id=1U4Z-2GJcRDtIAmZt4ej0MOF_NvA0ntzS" alt="Image" width="100%" />
+      <img src="https://docs.google.com/uc?export=download&id=1cfqbl28ezKPikIXApzZQOEUPwKm2AKrr" alt="Image" width="100%" />
+      <img src="https://docs.google.com/uc?export=download&id=1I-bDFOoYZ-XUZkwDxRJmtiR_7DGVn_Eb" alt="Image" width="100%" />
+      <img src="https://docs.google.com/uc?export=download&id=1DU-S82guX9KooYyfDavkg1M_kpXAVrs1" alt="Image" width="100%" />
+      <img src="https://docs.google.com/uc?export=download&id=10PElUch6-oxpjga6Pe6PoHd2VUXZkUfu" alt="Image" width="100%" />
+      <img src="https://docs.google.com/uc?export=download&id=1U4Z-2GJcRDtIAmZt4ej0MOF_NvA0ntzS" alt="Image" width="100%" />
+      <img src="https://docs.google.com/uc?export=download&id=1HAh9siwne5Fa39G2qIppry-aHrrFRrzb" alt="Image" width="100%" />
+      <img src="https://docs.google.com/uc?export=download&id=1YBHz72VKXRNUPge-h8pQvuVotim7LUq5" alt="Image" width="100%" />
+      <img src="https://docs.google.com/uc?export=download&id=1TwVoVT9UxlmmQO125b-lD7kbswYqCdgy" alt="Image" width="100%" />
+      <img src="https://docs.google.com/uc?export=download&id=1DU-S82guX9KooYyfDavkg1M_kpXAVrs1" alt="Image" width="100%" />
+      <img src="https://docs.google.com/uc?export=download&id=1y9uOpY2Uwht88vdYBJV8BD1FenayFQpr" alt="Image" width="100%" />
+      </div>
+      <div class="column">
+      <img src="https://docs.google.com/uc?export=download&id=1U4Z-2GJcRDtIAmZt4ej0MOF_NvA0ntzS" alt="Image" width="100%" />
+      <img src="https://docs.google.com/uc?export=download&id=1cfqbl28ezKPikIXApzZQOEUPwKm2AKrr" alt="Image" width="100%" />
+      <img src="https://docs.google.com/uc?export=download&id=1I-bDFOoYZ-XUZkwDxRJmtiR_7DGVn_Eb" alt="Image" width="100%" />
+      <img src="https://docs.google.com/uc?export=download&id=1DU-S82guX9KooYyfDavkg1M_kpXAVrs1" alt="Image" width="100%" />
+      <img src="https://docs.google.com/uc?export=download&id=10PElUch6-oxpjga6Pe6PoHd2VUXZkUfu" alt="Image" width="100%" />
+      <img src="https://docs.google.com/uc?export=download&id=1U4Z-2GJcRDtIAmZt4ej0MOF_NvA0ntzS" alt="Image" width="100%" />
+      <img src="https://docs.google.com/uc?export=download&id=1HAh9siwne5Fa39G2qIppry-aHrrFRrzb" alt="Image" width="100%" />
+      <img src="https://docs.google.com/uc?export=download&id=1YBHz72VKXRNUPge-h8pQvuVotim7LUq5" alt="Image" width="100%" />
+      <img src="https://docs.google.com/uc?export=download&id=1TwVoVT9UxlmmQO125b-lD7kbswYqCdgy" alt="Image" width="100%" />
+      <img src="https://docs.google.com/uc?export=download&id=1DU-S82guX9KooYyfDavkg1M_kpXAVrs1" alt="Image" width="100%" />
+      <img src="https://docs.google.com/uc?export=download&id=1y9uOpY2Uwht88vdYBJV8BD1FenayFQpr" alt="Image" width="100%" />
+      </div>     
+    </div>
    </container-gallery>
   </div>
  </body>
