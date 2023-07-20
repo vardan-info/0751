@@ -9,397 +9,75 @@
  <body>
   <style>
   /*section*/
-.headline h2,
-.headline p {
-  text-align: center;
-  margin-block-start: 0;
-}
 
-h2 {
-  font-family: Helvetica Neue, "Arial";
-  font-style: normal;
-  font-weight: bold;
-  font-size: 6vw;
-  line-height: 110%;
-}
 
-.headline {
-  padding-top: 64px;
-}
 
-body {
-  font-weight: normal;
-  -webkit-font-smoothing: antialiased;
-  font-smoothing: antialiased;
-  text-align: center;
-  font-family: Helvetica Neue, "Arial";
-  font-size: 18px;
-  line-height: 26px;
-  font-weight: 400;
-  color: #000000;
-  transition: all 0.1s ease;
-  overflow-x: hidden;
-}
-
-//slider
-.slick-list,
-.slick-slider,
-.slick-track {
-  position: relative;
-  display: block;
-}
-
-.slider {
-  width: 100%;
-}
-
-.slick-list,
-.slick-slider,
-.slick-track {
-  position: relative;
-  display: block;
-}
-
-.slick-slider .slick-list,
-.slick-slider .slick-track {
-  -webkit-transform: translate3d(0, 0, 0);
-  transform: translate3d(0, 0, 0);
-}
-
-.slick-list {
-  margin: 0;
-  padding: 0;
-}
-
-.slick-slide {
-  display: none;
-  float: left;
-  height: 100%;
-  min-height: 1px;
-}
-
-.slick-slide {
+section {
+  padding: 10px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
   margin: 0 20px;
-  outline: 0;
 }
 
-.slick-initialized .slick-slide {
-  display: block;
-}
-
-.slider_card {
-  width: 480px;
-  background: #ffffff;
-  box-shadow: 10px 10px 50px 3px rgba(39, 92, 141, 0.1);
-  border-radius: 12px;
-}
-
-.slick-next,
-.slick-next:focus,
-.slick-next:hover,
-.slick-prev,
-.slick-prev:focus,
-.slick-prev:hover {
-  background: 0 0;
-  color: transparent;
-}
-
-.slider_text {
-  padding: 52px 64px;
-  text-align: left;
-}
-
-.slider_text h2 {
-  font-style: normal;
-  font-weight: 600;
-  font-size: 28px;
-  margin-block-start: 0em;
-}
-
-.slider_text p {
-  font-style: normal;
-  font-weight: 400;
-  font-size: 18px;
-}
-
-.slider_img {
-  margin-top: 8px;
-  position: relative;
-  bottom: 2px;
-  left: 0;
-}
-
-.slick-slider {
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  -webkit-touch-callout: none;
-  -khtml-user-select: none;
-  -ms-touch-action: pan-y;
-  touch-action: pan-y;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.slick-list {
-  margin: 0;
-  padding: 0;
-}
-
-.slick-list:focus {
-  outline: 0;
-}
-
-.slick-list.dragging {
-  cursor: pointer;
-  cursor: hand;
-  outline: 0;
-}
-
-.slick-dots li,
-.slick-dots li button {
-  cursor: pointer;
-  height: 20px;
-  width: 20px;
-}
-
-.slider_report {
-  margin-top: 14px;
-}
-
-.slick-slider .slick-list,
-.slick-slider .slick-track {
-  -webkit-transform: translate3d(0, 0, 0);
-  transform: translate3d(0, 0, 0);
-}
-
-.slick-track {
-  top: 0;
-  left: 0;
-}
-
-.slick-track:after,
-.slick-track:before {
-  display: table;
-  content: "";
-}
-
-.slick-track:after {
-  clear: both;
-}
-
-.slick-slide {
-  display: none;
-  float: left;
-  height: 100%;
-  min-height: 1px;
-}
-
-[dir="rtl"] .slick-slide {
-  float: right;
-}
-
-.slick-slide img {
-  display: block;
-}
-
-.slick-slide.slick-loading img {
-  display: none;
-}
-
-.slick-slide.dragging img {
-  pointer-events: none;
-}
-
-.slick-initialized .slick-slide {
-  display: block;
-}
-
-.slick-vertical .slick-slide {
-  display: block;
-  height: auto;
-  border: 1px solid transparent;
-}
-
-.slick-arrow.slick-hidden {
-  display: none;
-}
-
-.arrow {
-  margin-bottom: 80px;
-}
-.arrow li {
-  list-style: none;
-  display: inline-block !important;
-  float: left;
-}
-.arrow ul {
-  margin: 0;
-  padding: 0;
-  margin-top: 24px;
-  margin-bottom: 80px;
-}
-.slick-next:focus,
-.slick-prev:focus {
-  outline: 0;
-}
-.slick-next,
-.slick-prev {
-  font-size: 0;
-  line-height: 0;
-  position: relative;
-  display: inline-block;
-  width: 50px;
-  height: 50px;
-  padding: 0;
-  cursor: pointer;
-  border: none;
-}
-
-.slick-next.slick-disabled:before,
-.slick-prev.slick-disabled:before {
-  opacity: 0.25;
-}
-
-.slick-next:before,
-.slick-prev:before {
-  width: 60px;
-  height: 22px;
-  margin-top: 5px;
-  margin-left: -30px;
-  position: relative;
-  display: inline-block;
-  font-size: 20px;
-  line-height: 1;
-  -webkit-transition: all 0.1s ease-in-out;
-  transition: all 0.1s ease-in-out;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-.slick-next:hover,
-.slick-prev:hover {
-  opacity: 1;
-}
-
-.slick-prev {
-  opacity: 0.3;
-}
-
-.slick-next {
-  opacity: 0.3;
-}
-
-[dir="rtl"] .slick-prev {
-  right: -25px;
-  left: auto;
-}
-
-[dir="rtl"] .slick-prev:before {
-  content: "→";
-}
-
-[dir="rtl"] .slick-next {
-  right: auto;
-  left: -25px;
-}
-
-[dir="rtl"] .slick-next:before {
-  content: "←";
-}
-
-.slick-dotted.slick-slider {
-  margin-bottom: 30px;
-}
-
-.slick-dots {
-  position: absolute;
-  bottom: -25px;
-  display: block;
+.review-item-container {
   width: 100%;
-  padding: 0;
-  margin: 0;
-  list-style: none;
-  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+
+  background-color: rgb(243, 243, 243);
+  border-radius: 5px;
 }
 
-.slick-dots li {
+.review-item-image {
   position: relative;
-  display: inline-block;
+}
+
+.review-item-image img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.review-person-title {
+  background-color: rgb(252, 252, 252);
+  position: absolute;
+  bottom: 0;
+
   margin: 0 5px;
-  padding: 0;
 }
 
-.slick-dots li button {
-  font-size: 0;
-  line-height: 0;
-  display: block;
-  padding: 5px;
-  color: transparent;
-  border: 0;
-  background: 0 0;
-}
-
-.slick-dots li button:focus:before,
-.slick-dots li button:hover:before {
-  opacity: 1;
-}
-
-.slick-dots li button:before {
-  font-size: 6px;
-  line-height: 20px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 20px;
-  height: 20px;
-  content: "•";
+.review-person-title p {
+  margin: 0;
+  /* padding: 0; */
   text-align: center;
-  opacity: 0.25;
-  color: #000;
-  -moz-osx-font-smoothing: grayscale;
+  line-height: auto;
+  /* color: red; */
 }
 
-.slick-slide img,
-.slider {
-  width: 100%;
+#review-person-title p:nth-child(1) {
+  font-size: 1.3rem;
 }
 
-.slick-dots li.slick-active button:before {
-  opacity: 0.75;
-  color: #000;
+.star-and-review {
+  align-self: center;
+  padding: 5px;
 }
 
-.slider {
-  margin: 56px auto 0;
-  padding-right: 0;
-  padding-left: 2rem;
-  margin-top: 0;
+.review-text p {
+  font-size: 1.3rem;
 }
 
-.slick-slide {
-  margin: 0 20px;
-  outline: 0;
-}
-
-.slick-next:before,
-.slick-prev:before {
-  color: #000;
-}
-
-.slick-current {
-  font-size: initial;
-}
-@media screen and (max-width: 991px) {
-  .slider_card {
-    margin: 0 !important;
+@media screen and (max-width: 600px) and (min-width: 200px) {
+  section {
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
   }
-  .arrow li {
-  float: none;
 }
-}
+
 
     /** Main link */
 
@@ -695,149 +373,80 @@ width: 100%;
   
   <!--fsection-->
 
-<section>
-    <div class="container">
-      <div class="row headline">
-        <div class="col-xs-12 col-lg-12">
-          <h2>The best design<br> for your
-            studio website</h2>
+ <h1>Welcome card world!</h1>
+  <section>
+    <div class="review-item-container">
+
+      <div class="review-item-image">
+        <img src="https://i.dailymail.co.uk/i/pix/2013/08/29/article-2405475-1B8389EE000005DC-718_634x550.jpg" alt="">
+        <div class="review-person-title">
+          <p>Mark Henry</p>
+          <p>Chief executive on Google chrome</p>
         </div>
       </div>
-    </div>
-    <div class="slider_report">
-      <section class="variable slider">
+
+      <div class="star-and-review">
         <div>
-          <div class="item1 slider_card">
-
-            <div class="body_card">
-              <div class="slider_text">
-                <h2>Name</h2>
-                <p class="top8">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing Ac aliquam ac volutpat, viverra magna risus aliquam massa.
-                  Ac aliquam ac volutpat, viverra magna risus.
-                </p>
-              </div>
-            </div>
-
-          </div>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
         </div>
-        <div>
-          <div class="item2 slider_card">
-
-            <div class="body_card">
-              <div class="slider_text">
-                <h2>Name</h2>
-                <p class="top8">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing Ac aliquam ac volutpat, viverra magna risus aliquam massa.
-                  Ac aliquam ac volutpat, viverra magna risus.
-                </p>
-              </div>
-            </div>
-
-          </div>
-        </div>
-        <div>
-          <div class="item3 slider_card">
-
-            <div class="body_card">
-              <div class="slider_text">
-                <h2>Name</h2>
-                <p class="top8">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing Ac aliquam ac volutpat, viverra magna risus aliquam massa.
-                  Ac aliquam ac volutpat, viverra magna risus.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div>
-          <div class="item4 slider_card">
-
-            <div class="body_card">
-              <div class="slider_text">
-                <h2>Name</h2>
-                <p class="top8">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing Ac aliquam ac volutpat, viverra magna risus aliquam massa.
-                  Ac aliquam ac volutpat, viverra magna risus.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-    <div class="container arrow">
-      <div class="row">
-        <div class="col-xs-12 col-lg-12">
-          <ul>
-            <li class="prev">
-              <button class="slick-prev slick-arrow" aria-label="Previous" type="button"><svg width="51" height="52" viewBox="0 0 51 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <g opacity="0.6">
-                    <path d="M39.5251 23.8557V27.3974H18.2751L28.0147 37.137L25.5001 39.6516L11.4751 25.6266L25.5001 11.6016L28.0147 14.1161L18.2751 23.8557H39.5251Z" fill="#11131E" />
-                  </g>
-                </svg>
-              </button>
-            </li>
-            <li class="next">
-              <button class="slick-next slick-arrow" aria-label="Next" type="button"><svg width="51" height="52" viewBox="0 0 51 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <g opacity="0.6">
-                    <path d="M11.4751 23.8557V27.3974H32.7251L22.9855 37.137L25.5001 39.6516L39.5251 25.6266L25.5001 11.6016L22.9855 14.1161L32.7251 23.8557H11.4751Z" fill="#11131E" />
-                  </g>
-                </svg>
-              </button>
-            </li>
-          </ul>
+        <div class="review-text">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam nam molestias vitae. Voluptate, magni ea. Fugiat recusandae sapiente cupiditate ducimus!</p>
         </div>
       </div>
+
+    </div>
+    <div class="review-item-container">
+
+      <div class="review-item-image">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQznzb8h1HuAopooRY9fIDf_B_br6FLZvKEw&usqp=CAU" alt="">
+        <div class="review-person-title">
+          <p>Mark Henry</p>
+          <p>Chief executive on Google chrome</p>
+        </div>
+      </div>
+
+      <div class="star-and-review">
+        <div>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+        </div>
+        <div class="review-text">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam nam molestias vitae. Voluptate, magni ea. Fugiat recusandae sapiente cupiditate ducimus!</p>
+        </div>
+      </div>
+
+    </div>
+    <div class="review-item-container">
+
+      <div class="review-item-image">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSz6deRdLZckXPILhR9HCyvO9veoxK760LYsV3sRzWncDjt5CrB1tVO6ADdebz1VpXhVYM&usqp=CAU" alt="">
+        <div class="review-person-title">
+          <p>Mark Henry</p>
+          <p>Chief executive on Google chrome</p>
+        </div>
+      </div>
+
+      <div class="star-and-review">
+        <div>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+        </div>
+        <div class="review-text">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam nam molestias vitae. Voluptate, magni ea. Fugiat recusandae sapiente cupiditate ducimus!</p>
+        </div>
+      </div>
+
     </div>
   </section>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.0/jquery.min.js">
-  function initEmptySlide() {
-  const margin = $(".container")[0].getClientRects()[0].x;
-  $(".item1").css("margin-left", Math.floor(margin) - 15);
-}
-
-$(window).resize(function () {
-  initEmptySlide();
-});
-
-$(document).on("ready", function () {
-  initEmptySlide();
-
-  $(".variable").slick({
-    dots: false,
-    focusOnSelect: false,
-    infinite: false,
-    variableWidth: true,
-    slidesToShow: 2,
-    slidesToScroll: 1,
-    prevArrow: $(".prev"),
-    nextArrow: $(".next"),
-    centerPadding: "40px",
-    responsive: [
-      {
-        breakpoint: 991,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-          infinite: true
-        }
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-          dots: false,
-          infinite: true
-        }
-      }
-    ]
-  });
-});
-
- 
-    
-  </script>
 </body>
 </html>
