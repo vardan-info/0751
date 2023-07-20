@@ -9,46 +9,203 @@
  <body>
   <style>
   /*section*/
-.header {
-  display: flex;
-  width: 100%;
-  height: 10%;
-  gap: 10px;
-  background: #111;
+
+/* ==========================Font========================== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+@font-face {
+    font-family: 'robotoregular';
+    src: url(../fonts/roboto-regular-webfont.woff) format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
 
-.header-title {
-  font-size: 32px;
-  font-weight: bold;
-  color: white;
-  margin-right: auto;
-  
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
+
+
+.container {
+    position: relative;
+    width: 90%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    grid-template-rows: auto;
+    gap: 40px 40px;
 }
 
-.main {
-  margin: 15px;
-  gap: 10px;
-  padding: 15px;
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  
-  justify-content: space-around;
-  align-items: center;
+.card {
+    position: relative;
+    height: 400px;
+    background: #060c21;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #000;
+    cursor: pointer;
+
 }
 
-.article {
-  background: #888;
-  border-radius: 5px;
-  padding: 10px;
-  
-  text-align: center;
-  flex-basis: 240px;
-  flex-grow: 1;
+.card:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background: rgba(255, 255, 255, .05);
+    pointer-events: none;
 }
+
+.card.skew::before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: #fff;
+    transform: skew(2deg, 2deg);
+    z-index: -1;
+}
+
+.card.skew.glow:nth-child(1)::before {
+    background: linear-gradient(315deg, #ff0057, #e64a19);
+}
+
+.card.skew.glow:nth-child(2)::before {
+    background: linear-gradient(315deg, #89ff00, #00bcd4);
+}
+
+.card.skew.glow:nth-child(3)::before {
+    background: linear-gradient(315deg, #e91e63, #5d02ff);
+}
+
+.card.skew.glow:nth-child(4)::before {
+    background: linear-gradient(315deg, #ff0000, #ffc107);
+}
+
+.card .content {
+    position: relative;
+    padding: 20px;
+    transform: translateY(40px);
+}
+
+.card .content h2 {
+    position: absolute;
+    top: -60px;
+    right: 20px;
+    margin: 0;
+    padding: 0;
+    font-size: 10em;
+    color: rgba(255, 255, 255, .05);
+    transition: .5s;
+}
+
+.card:hover .content h2 {
+    top: -140px;
+}
+
+.card .content h3 {
+    margin: 0 0 10px;
+    padding: 0;
+    font-size: 24px;
+    font-weight: 500;
+    color: #fff;
+}
+
+.card .content p {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    color: #fff;
+}
+
+.card .content a {
+    margin: 20px 0 0;
+    position: relative;
+    padding: 10px 20px;
+    text-decoration: none;
+    border: 1px solid #fff;
+    display: inline-block;
+    color: #fff;
+    transition: .5s;
+    transform: translateY(-40px);
+    opacity: 0;
+    visibility: none;
+}
+
+.card:hover .content a {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+}
+
+.card .content a:hover {
+    background: #fff;
+    color: #000;
+}
+
+@keyframes colorChange {
+    0% {
+        color: #fff;
+    }
+
+    50% {
+        color: #b1b493;
+    }
+
+    80% {
+        color: #4f8a8b;
+    }
+
+    100% {
+        color: #fff;
+    }
+}
+
+/* =======================Responsive Breakpoint ========================== */
+
+@media only screen and (max-width:992px) {
+    .container {
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .container .card {
+        width: 450px;
+    }
+}
+
+@media only screen and (max-width:768px) {
+
+    .container .card {
+        max-width: 350px;
+        flex-direction: column;
+        height: auto;
+    }
+
+    .container .card .imgBox {
+        position: relative;
+    }
+
+    .container .card .imgBox,
+    .container .card:hover .imgBox {
+        width: 100%;
+        height: 210px;
+        left: 0;
+        border-radius: 0;
+    }
+
+    .container .card .imgBox img,
+    .container .card:hover .imgBox img {
+        max-width: 100px;
+    }
+
+    .container .card .content {
+        position: relative;
+        width: 100%;
+    }
+}
+
    /*section end*/
  
    /* image gallery */
@@ -335,50 +492,44 @@ width: 100%;
    </container-gallery>
   </div>
   <!--fsection-->
-<header class="header">
-  <span class="header-title">
-    news of today
-  </span>
-  
-  <button>
-    sign in
-  </button>
-  
-  <button>
-    got a story?
-  </button>
-</header>
 
-<main class="main">
-
-  <article class="article">
-    <h1>ԶԵՂՉԵՐ ՄՇՏԱԿԱՆ ՀԱՃԱԽՈՐԴՆԵՐԻՆ</h1>
-    <p>A local zunigimadmfiuwh sas triyng to go get raisin canes after his funertal.</p>
-  </article>
-  
-   
-    <article class="article">
-    <h1>ԱՐԱԳ ԱՌԱՔՈՒՄԵ ՐԵՎԱՆ ՔԱՂԱՔՈՒՄ</h1>
-    <p>A local zunigimadmfiuwh sas triyng to go get raisin canes after his funertal.</p>
-  </article>
-</main>
-<header class="header">
-  <span class="header-title">
-    news of today
-  </span>
-  
-  
-</header>
-
-<main class="main">
-
-  <article class="article">
-    <h1>100% ԱՊԱՀՈՎ ՎՃԱՐՈՒՄՆԵՐ</h1>
-    <p>A local zunigimadmfiuwh sas triyng to go get raisin canes after his funertal.</p>
-  </article>
-  
-
-   
-</main>
+  <div class="container">
+        <div class="card skew glow">
+            <div class="content">
+                <h2>01</h2>
+                <h3>Service One</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum adipisci pariatur ducimus voluptas
+                    officia molestias doloremque reiciendis . . .</p>
+                <a href="" type="#">Read More</a>
+            </div>
+        </div>
+        <div class="card skew glow">
+            <div class="content">
+                <h2>02</h2>
+                <h3>Service One</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum adipisci pariatur ducimus voluptas
+                    officia molestias doloremque reiciendis . . .</p>
+                <a href="" type="#">Read More</a>
+            </div>
+        </div>
+        <div class="card skew glow">
+            <div class="content">
+                <h2>03</h2>
+                <h3>Service One</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum adipisci pariatur ducimus voluptas
+                    officia molestias doloremque reiciendis . . .</p>
+                <a href="" type="#">Read More</a>
+            </div>
+        </div>
+        <div class="card skew glow">
+            <div class="content">
+                <h2>04</h2>
+                <h3>Service One</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum adipisci pariatur ducimus voluptas
+                    officia molestias doloremque reiciendis . . .</p>
+                <a href="" type="#">Read More</a>
+            </div>
+        </div>
+    </div>
  </body>
 </html>
