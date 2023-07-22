@@ -11,220 +11,61 @@
  </head>
  <body>
   <style>
-	  /*container*/
-	  .info {
-  font-family: "Poppins", sans-serif;
-  font-size: 18px;
-  text-align: center;
-  max-width: 70ch;
-  margin: 2em auto;
-  padding: 0 1.6rem;
+	  /*start cont*/
+	  .image-container {
+	display: grid;
+	place-items: center;
+	height: 100vh;
+}
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+.fade-animation-block {
+	width: 100%;
+	max-width: 1000px;
+}
+.fade-animation-block > ul {
+	display: grid;
+	grid-template-rows: 3;
+	column-gap: 14px;
+	row-gap: 14px;
+	grid-template-columns: 16.66% 16.66% 16.66% 16.66% 16.66% 16.66%;
+	grid-template-areas:
+		"large large . . . ."
+		"large large . . large-last large-last"
+		". . . . large-last large-last";
+}
+.fade-animation-block > ul > li:first-child {
+	grid-area: large;
+}
+.fade-animation-block > ul > li:last-child {
+	grid-area: large-last;
+}
+.fade-animation-block > ul > li:first-child .img,
+.fade-animation-block > ul > li:last-child .img {
+	padding-bottom: 89.42%;
+}
+.img {
+	position: relative;
+	padding-bottom: 88.81%;
+}
+.img img {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
 }
 
-.info a {
-  font-weight: 600;
-  color: rgb(0, 115, 119);
-}
-
-.container {
-  height: 100vh;
-  width: 100%;
-  display: grid;
-  grid-template-rows: 1fr auto;
-}
-
-.container wee-slider {
-  margin: auto;
-}
-
-wee-slider {
-  --wee-slide-align: start;
-  --wee-visible-slides-mobile: 1.5;
-  --wee-visible-slides-desktop: 3.5;
-  --wee-visible-slides: var(--wee-visible-slides-mobile);
-  --wee-slide-gap: 10px;
-  --wee-navdot-color: rgb(0,0,0);
-  --wee-transition: ease-in-out 200ms;
-  --wee-slide-width: calc(((100% - (var(--wee-slide-gap) * (var(--wee-visible-slides) - 1))) / var(--wee-visible-slides)));
-}
-
-@media screen and (min-width: 990px) {
-  wee-slider {
-    --wee-visible-slides: var(--wee-visible-slides-desktop);
-  }
-}
-
-wee-slider[data-align="start"] { --wee-slide-align: start; }
-wee-slider[data-align="center"] { --wee-slide-align: center; }
-wee-slider[data-align="end"] { --wee-slide-align: end; }
-
-wee-slider {
-  position: relative;
-  width: 100%;
-  display: block;
-}
-
-wee-slider:not(.loaded) .wee-slider__buttons,
-wee-slider:not(.loaded) .wee-slider__navdots {
-  display: none;
-}
-wee-slider.loaded .wee-slider ::-webkit-scrollbar {
-  display: none;
-}
-wee-slider.loaded .wee-slider {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-wee-slider .wee-slider {
-  position: relative;
-  overflow: hidden;
-}
-
-wee-slider .wee-slider__slides {
-  display: flex;
-  gap: var(--wee-slide-gap);
-  padding: 0;
-  overflow: auto;
-  scroll-behavior: smooth;
-  scroll-snap-type: x mandatory;
-}
-
-wee-slider .wee-slider__slide {
-  display: block;
-  min-width: var(--wee-slide-width);
-  background: pink;
-  scroll-snap-align: var(--wee-slide-align);
-  scroll-margin-left: 0;
-  scroll-margin-right: 0;
-}
-
-wee-slider .wee-slider__buttons button {
-  position: absolute;
-  top: 50%;
-  translate: 0 -50%;
-}
-
-wee-slider .wee-slider__buttons button:not([disabled]) {
-  cursor: pointer;
-}
-
-wee-slider[data-buttons-on-hover="true"] .wee-slider__buttons {
-  opacity: 0;
-  transition: opacity ease-in-out 200ms;
-}
-
-@media (hover: hover) {
-  wee-slider[data-buttons-on-hover="true"]:hover .wee-slider__buttons {
-    opacity: 1;
-  }
-}
-
-wee-slider .wee-slider__button-next {
-  right: 0;
-}
-
-wee-slider .wee-slider__navdots {
-  padding-left: 0;
-  margin: 0;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
-wee-slider .wee-slider__navdot {
-  position: relative;
-  display: block;
-  padding: 10px;
-}
-
-wee-slider .wee-slider__navdot:after {
-  content: '';
-  display: block;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  translate: -50% -50%;
-  height: 8px;
-  width: 8px;
-  background: var(--wee-navdot-color);
-  border-radius: 50%;
-}
-
-wee-slider .wee-slider__navdot:hover:after {
-  scale: 1.2;
-}
-
-wee-slider .wee-slider__navdot:not(.visible) {
-  opacity: 0.5;
-  cursor: pointer;
-}
-
-/* DEMO CSS */
-
-wee-slider .wee-slider__slide {
-  height: auto;
-  background: none;
-  opacity: 1;
-}
-
-wee-slider .slide-content {
-  position: relative;
-  height: 0;
-  padding-bottom: 80%;
-}
-
-wee-slider .slide-content > img {
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-  opacity: 1;
-  transition: opacity ease-in-out 80ms;
-}
-
-wee-slider.loaded .wee-slider__slide:not(.visible) img {
-  opacity: 0.5;
-}
-
-wee-slider .wee-slider__buttons button {
-  margin: 0 10px;
-  border: none;
-  font-size: 0;
-  background: rgba(0, 0, 0, 0.4);
-  padding: 24px;
-  border-radius: 50%;
-  transition: scale ease 100ms;
-}
-
-@media (hover: hover) {
-  wee-slider .wee-slider__buttons button:hover {
-    scale: 1.1;
-  }
-}
-
-wee-slider .wee-slider__buttons button:before {
-  content: url("data:image/svg+xml,%3Csvg style='color: white' xmlns='http://www.w3.org/2000/svg' fill='currentColor' class='bi bi-caret-down-fill' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z' fill='white'%3E%3C/path%3E%3C/svg%3E");
-  display: block;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 24px;
-  height: auto;
-}
-
-.wee-slider__button-prev:before {
-  translate: -60% -50%;
-  rotate: 90deg;
-}
-
-.wee-slider__button-next:before {
-  translate: -40% -50%;
-  rotate: 270deg;
-}
+	
 	  /*end container*/
    /*footer*/
 @import "font-awesome-sprockets";
@@ -1047,62 +888,264 @@ width: 100%;
 			</div>
 
 		</footer>
-  <--footer- end--->
- <wee-slider data-loop="true" data-align="center" data-buttons-on-hover="true">
-    <div class="wee-slider">
-      <ul class="wee-slider__slides">
-        <li class="wee-slider__slide">
-          <div class="slide-content">
-            <img src="https://picsum.photos/600/400?a">
-          </div> 
-        </li>
-        <li class="wee-slider__slide">
-          <div class="slide-content">
-            <img src="https://picsum.photos/600/400?b">
-          </div> 
-        </li>
-        <li class="wee-slider__slide">
-          <div class="slide-content">
-            <img src="https://picsum.photos/600/400?c">
-          </div> 
-        </li>
-        <li class="wee-slider__slide">
-          <div class="slide-content">
-            <img src="https://picsum.photos/600/400?d">
-          </div> 
-        </li>
-        <li class="wee-slider__slide">
-          <div class="slide-content">
-            <img src="https://picsum.photos/600/400?e">
-          </div> 
-        </li>
-        <li class="wee-slider__slide">
-          <div class="slide-content">
-            <img src="https://picsum.photos/600/400?f">
-          </div> 
-        </li>
-        <li class="wee-slider__slide">
-          <div class="slide-content">
-            <img src="https://picsum.photos/600/400?g">
-          </div> 
-        </li>
-      </ul>
-      <div class="wee-slider__buttons">
-        <button class="wee-slider__button-prev">Prev</button>
-        <button class="wee-slider__button-next">Next</button>
-      </div>
-    </div>
-    <ul class="wee-slider__navdots">
-      <li class="wee-slider__navdot"></li>
-      <li class="wee-slider__navdot"></li>
-      <li class="wee-slider__navdot"></li>
-      <li class="wee-slider__navdot"></li>
-      <li class="wee-slider__navdot"></li>
-      <li class="wee-slider__navdot"></li>
-      <li class="wee-slider__navdot"></li>
-    </ul>
-  </wee-slider>
-  <div class="info">Wee Slider is a lightweight, performant class-based web component that allows you to create sliders with ease. It focuses on performance and small file sizes, with the minified JavaScript file (wee-slider.min.js) being less than 2kb in size. <a href="https://github.com/BooleanWhale/wee-slider" target="blank">Learn more on Github</a></div>
+<div class="image-container">
+	<div class="fade-animation-block">
+		<ul>
+			<li>
+				<div class="carousel slide carousel-fade" data-bs-ride="carousel">
+					<div class="carousel-inner">
+						<div class="carousel-item active" data-bs-interval="5000">
+							<div class="img">
+								<img src="https://plus.unsplash.com/premium_photo-1664360971614-593e3a23d8df?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80" alt="">
+							</div>
+						</div>
+						<div class="carousel-item" data-bs-interval="7000">
+							<div class="img">
+								<img src="https://images.unsplash.com/photo-1542297180-c9b41fab5ee0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1168&q=80" alt="">
+							</div>
+						</div>
+						<div class="carousel-item" data-bs-interval="9000">
+							<div class="img">
+								<img src="https://images.unsplash.com/photo-1546587348-d12660c30c50?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1174&q=80" alt="">
+							</div>
+						</div>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="carousel slide carousel-fade" data-bs-ride="carousel">
+					<div class="carousel-inner">
+						<div class="carousel-item active" data-bs-interval="3000">
+							<div class="img">
+								<img src="https://images.unsplash.com/photo-1559348349-86f1f65817fe?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="">
+							</div>
+						</div>
+						<div class="carousel-item" data-bs-interval="9000">
+							<div class="img">
+								<img src="https://images.unsplash.com/photo-1485965120184-e220f721d03e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="">
+							</div>
+						</div>
+						<div class="carousel-item" data-bs-interval="6000">
+							<div class="img">
+								<img src="https://images.unsplash.com/photo-1532298229144-0ec0c57515c7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1122&q=80" alt="">
+							</div>
+						</div>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="carousel slide carousel-fade" data-bs-ride="carousel">
+					<div class="carousel-inner">
+						<div class="carousel-item active" data-bs-interval="4000">
+							<div class="img">
+								<img src="https://images.unsplash.com/photo-1464037866556-6812c9d1c72e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="">
+							</div>
+						</div>
+						<div class="carousel-item" data-bs-interval="7000">
+							<div class="img">
+								<img src="https://images.unsplash.com/photo-1520437358207-323b43b50729?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="">
+							</div>
+						</div>
+						<div class="carousel-item" data-bs-interval="10000">
+							<div class="img">
+								<img src="https://images.unsplash.com/photo-1541813709748-b6eb0147286b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="">
+							</div>
+						</div>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="carousel slide carousel-fade" data-bs-ride="carousel">
+					<div class="carousel-inner">
+						<div class="carousel-item active" data-bs-interval="6000">
+							<div class="img">
+								<img src="https://images.unsplash.com/photo-1470945780341-171b6da56841?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="">
+							</div>
+						</div>
+						<div class="carousel-item" data-bs-interval="3000">
+							<div class="img">
+								<img src="https://images.unsplash.com/photo-1473147437169-91ac8cebc017?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1166&q=80" alt="">
+							</div>
+						</div>
+						<div class="carousel-item" data-bs-interval="6000">
+							<div class="img">
+								<img src="https://images.unsplash.com/photo-1481567758055-3e8a6e89ca58?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="">
+							</div>
+						</div>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="carousel slide carousel-fade" data-bs-ride="carousel">
+					<div class="carousel-inner">
+						<div class="carousel-item active" data-bs-interval="9000">
+							<div class="img">
+								<img src="https://images.unsplash.com/photo-1680442700713-8fd6efe60eea?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=780&q=80" alt="">
+							</div>
+						</div>
+						<div class="carousel-item" data-bs-interval="6000">
+							<div class="img">
+								<img src="https://images.unsplash.com/photo-1680888275492-24dc8b7cf404?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" alt="">
+							</div>
+						</div>
+						<div class="carousel-item" data-bs-interval="3000">
+							<div class="img">
+								<img src="https://images.unsplash.com/photo-1680962202400-2702f6ac9603?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=755&q=80" alt="">
+							</div>
+						</div>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="carousel slide carousel-fade" data-bs-ride="carousel">
+					<div class="carousel-inner">
+						<div class="carousel-item active">
+							<div class="img">
+								<img src="https://images.unsplash.com/photo-1680862995857-5294d29c7e52?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1177&q=80" alt="">
+							</div>
+						</div>
+						<div class="carousel-item">
+							<div class="img">
+								<img src="https://images.unsplash.com/photo-1678845757279-47ad463ab39c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=627&q=80" alt="">
+							</div>
+						</div>
+						<div class="carousel-item">
+							<div class="img">
+								<img src="https://images.unsplash.com/photo-1679237526223-8a5cbe0ef7a5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1223&q=80" alt="">
+							</div>
+						</div>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="carousel slide carousel-fade" data-bs-ride="carousel">
+					<div class="carousel-inner">
+						<div class="carousel-item active">
+							<div class="img">
+								<img src="https://images.unsplash.com/photo-1678170630848-ed48c7e08cb5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" alt="">
+							</div>
+						</div>
+						<div class="carousel-item">
+							<div class="img">
+								<img src="https://images.unsplash.com/photo-1552508744-1696d4464960?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="">
+							</div>
+						</div>
+						<div class="carousel-item">
+							<div class="img">
+								<img src="https://plus.unsplash.com/premium_photo-1671512500103-2722139dbeb4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80" alt="">
+							</div>
+						</div>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="carousel slide carousel-fade" data-bs-ride="carousel">
+					<div class="carousel-inner">
+						<div class="carousel-item active">
+							<div class="img">
+								<img src="https://plus.unsplash.com/premium_photo-1673546739472-9275ec7dc599?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80" alt="">
+							</div>
+						</div>
+						<div class="carousel-item">
+							<div class="img">
+								<img src="https://images.unsplash.com/photo-1676313683415-5bcd3771a56c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80" alt="">
+							</div>
+						</div>
+						<div class="carousel-item">
+							<div class="img">
+								<img src="https://images.unsplash.com/photo-1671575163474-2820493e9845?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80" alt="">
+							</div>
+						</div>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="carousel slide carousel-fade" data-bs-ride="carousel">
+					<div class="carousel-inner">
+						<div class="carousel-item active" data-bs-interval="9000">
+							<div class="img">
+								<img src="https://plus.unsplash.com/premium_photo-1667860900553-07649c42a314?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" alt="">
+							</div>
+						</div>
+						<div class="carousel-item" data-bs-interval="6000">
+							<div class="img">
+								<img src="https://images.unsplash.com/photo-1597067135728-8c16ae71ff71?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80" alt="">
+							</div>
+						</div>
+						<div class="carousel-item" data-bs-interval="3000">
+							<div class="img">
+								<img src="https://images.unsplash.com/photo-1559190394-df5a28aab5c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80" alt="">
+							</div>
+						</div>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="carousel slide carousel-fade" data-bs-ride="carousel">
+					<div class="carousel-inner">
+						<div class="carousel-item active" data-bs-interval="6000">
+							<div class="img">
+								<img src="https://images.unsplash.com/photo-1627947063935-55577ec3c2e1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=686&q=80" alt="">
+							</div>
+						</div>
+						<div class="carousel-item" data-bs-interval="3000">
+							<div class="img">
+								<img src="https://images.unsplash.com/photo-1588182657969-777d766e31ab?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80" alt="">
+							</div>
+						</div>
+						<div class="carousel-item" data-bs-interval="6000">
+							<div class="img">
+								<img src="https://images.unsplash.com/photo-1517594422361-5eeb8ae275a9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="">
+							</div>
+						</div>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="carousel slide carousel-fade" data-bs-ride="carousel">
+					<div class="carousel-inner">
+						<div class="carousel-item active" data-bs-interval="4000">
+							<div class="img">
+								<img src="https://plus.unsplash.com/premium_photo-1675359772567-c09110eb33be?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=679&q=80" alt="">
+							</div>
+						</div>
+						<div class="carousel-item" data-bs-interval="7000">
+							<div class="img">
+								<img src="https://images.unsplash.com/photo-1545308562-050974fb9ac4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" alt="">
+							</div>
+						</div>
+						<div class="carousel-item" data-bs-interval="10000">
+							<div class="img">
+								<img src="https://images.unsplash.com/photo-1502311526760-ebc5d6cc0183?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=626&q=80" alt="">
+							</div>
+						</div>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="carousel slide carousel-fade" data-bs-ride="carousel">
+					<div class="carousel-inner">
+						<div class="carousel-item active" data-bs-interval="3000">
+							<div class="img">
+								<img src="https://images.unsplash.com/photo-1555037015-1498966bcd7c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" alt="">
+							</div>
+						</div>
+						<div class="carousel-item" data-bs-interval="9000">
+							<div class="img">
+								<img src="https://images.unsplash.com/photo-1537039557108-4a42c334fd5e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80" alt="">
+							</div>
+						</div>
+						<div class="carousel-item" data-bs-interval="6000">
+							<div class="img">
+								<img src="https://images.unsplash.com/photo-1545147986-a9d6f2ab03b5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=688&q=80" alt="">
+							</div>
+						</div>
+					</div>
+				</div>
+			</li>
+		</ul>
+
+	</div>
 </div>
 	
 </body>
