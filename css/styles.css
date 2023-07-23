@@ -449,31 +449,68 @@ width: 100%;
 
 
 /*slider*/
-.image-accordion {
+h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    text-align: center;
+    font-family: sans-serif;
+}
+
+.container {
+    width: 100%;
     display: flex;
-    max-width: 1100px;
-    background: #fff;
-    margin: 0 auto;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
 }
 
-.image-accordion img {
-    height: 500px;
-}
-
-figure {
-    flex: 1;
-    margin: 0px;
-    transition: 0.5s all;
+.container .box {
+    position: relative;
+    width: 280px;
+    height: 400px;
+    background-color: #fff;
+    transition: 0.5s;
     overflow: hidden;
-    opacity: 0.5;
 }
 
-figure:hover {
-    cursor: pointer;
+.container .box img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 1rem 0;
+    object-fit: cover;
 }
 
-.selected-image {
-    flex: 5;
-    opacity: 1;
+.container .box:after {
+    content: "";
+    opacity: 0.9;
+    position: absolute;
+    bottom: -100%;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    background: #fff;
+    z-index: 1;
+    transition: 0.5s;
+
+}
+
+.container:hover .box::before {
+    top: 0;
+}
+
+.container:hover .box::after {
+    bottom: 0;
+    transition-delay: 0.5s;
+}
+
+.container .box:hover:before {
+    top: -100%;
+}
+
+.container .box:hover::after {
+    bottom: -100%;
 }
 
