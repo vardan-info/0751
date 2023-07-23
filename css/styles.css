@@ -1,241 +1,5 @@
-	
-:root {
-	/* Base font size */
-	font-size: 10px;
-}
-
-*,
-*::before,
-*::after {
-	box-sizing: border-box;
-}
 
 
-
-.container_section {
-
-	margin: 0 auto;
-	padding: 0 2rem 2rem;
-}
-
-.heading {
-	font-family: "Montserrat", Arial, sans-serif;
-	font-size: 4rem;
-	font-weight: 500;
-	line-height: 1.5;
-	text-align: center;
-	padding: 3.5rem 0;
-	color: #1a1a1a;
-}
-
-.heading span {
-	display: block;
-}
-
-.gallery {
-	display: flex;
-	flex-wrap: wrap;
-	/* Compensate for excess margin on outer gallery flex items */
-	margin: -1rem -1rem;
-}
-
-.gallery-item {
-	/* Minimum width of 24rem and grow to fit available space */
-	flex: 1 0 24rem;
-	/* Margin value should be half of grid-gap value as margins on flex items don't collapse */
-	margin: 1rem;
-	box-shadow: 0.3rem 0.4rem 0.4rem rgba(0, 0, 0, 0.4);
-	overflow: hidden;
-}
-
-.gallery-image {
-	display: block;
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-	transition: transform 400ms ease-out;
-}
-
-.gallery-image:hover {
-	transform: scale(1.15);
-}
-
-/*
-
-The following rule will only run if your browser supports CSS grid.
-
-Remove or comment-out the code block below to see how the browser will fall-back to flexbox styling. 
-
-*/
-
-@supports (display: grid) {
-	.gallery {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));
-		grid-gap: 2rem;
-	}
-
-	.gallery,
-	.gallery-item {
-		margin: 0;
-	}
-}
-
-
-	  
-	
-	  /*end container*/
-
-
-/*************footer End*****************/
-
-
-   /*end footer*/
-   /*image gallery*/
-   .heading {
-    text-align: center;
-    font-size: 2.0em;
-    letter-spacing: 1px;
-    padding: 40px;
-    color: white;
-}
-
-.gallery-image {
-  padding: 20px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.gallery-image img {
-  height: 250px;
-  width: 350px;
-  transform: scale(1.0);
-  transition: transform 0.4s ease;
-}
-
-.img-box {
-  box-sizing: content-box;
-  margin: 10px;
-  height: 250px;
-  width: 350px;
-  overflow: hidden;
-  display: inline-block;
-  color: white;
-  position: relative;
-  background-color: white;
-}
-
-.caption {
-  position: absolute;
-  bottom: 5px;
-  left: 20px;
-  opacity: 0.0;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-.transparent-box {
-  height: 250px;
-  width: 350px;
-  background-color:rgba(0, 0, 0, 0);
-  position: absolute;
-  top: 0;
-  left: 0;
-  transition: background-color 0.3s ease;
-}
-
-.img-box:hover img { 
-  transform: scale(1.1);
-}
-
-.img-box:hover .transparent-box {
-  background-color:rgba(0, 0, 0, 0.5);
-}
-
-.img-box:hover .caption {
-  transform: translateY(-20px);
-  opacity: 1.0;
-}
-
-.img-box:hover {
-  cursor: pointer;
-}
-
-.caption > p:nth-child(2) {
-  font-size: 0.8em;
-}
-
-.opacity-low {
-  opacity: 0.5;
-}
-   /*end gallery*/
-  /*section*/
-section{
- display:flex;
-}
-
-
-
-
-
-section {
- display: flex;
-    padding: 13px 1px 1px 1px;
-    width: 99%;
-    display: flex;
-    justify-content: flex-end;
-    margin: 0 auto;
-}
-
-.review-item-container {
- 
-  display: flex;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-
-  background-color: rgb(243, 243, 243);
-  border-radius: 5px;
-}
-
-.review-item-image {
-  position: relative;
-}
-
-.review-item-image img {
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
-}
-
-.review-person-title {
-  background-color: rgb(252, 252, 252);
-  position: absolute;
-  bottom: 0;
-
-  margin: 0 5px;
-}
-
-.review-person-title p {
-  margin: 0;
-  /* padding: 0; */
-  text-align: center;
-  line-height: auto;
-  /* color: red; */
-}
-
-#review-person-title p:nth-child(1) {
-  font-size: 1.3rem;
-}
-
-.star-and-review {
-  align-self: center;
-  padding: 9px;
-}
-
-.review-text p {
-    font-size: 17px;
-
-}
 
 @media screen and (max-width: 600px) and (min-width: 200px) {
   section {
@@ -247,11 +11,6 @@ section {
 }
 
 
-    /** Main link */
-
-
-
-   /*section end*/
  
    /* image gallery */
   h1 {
@@ -271,23 +30,8 @@ section {
   background: #E0DDDD;
 }
 
-#gallery {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  padding: 0 4px;
-}
 
-#gallery img {
-  width: 25%;
-  height: 300px;
-  object-fit: cover;
-  margin-top: 8px;
-  padding: 0 4px;
-  border-radius: 10px;
-}
+
 
 @media (max-width: 800px) {
   #gallery img {
@@ -330,29 +74,9 @@ section {
   background: #4584b1;
 }
 /*slide-----------*/
-.frame {
-    width: 100%;
-    height: 300px;
-    /* margin-top: 50px; */
-}
-   .container-gallery{
 
-   }
    
-.boxes {
-  display: flex;
-  width: 100%;
-  height: 100%;
-}
-.box {
-  position: relative;
-  flex: 1 1 auto;
-  width: 20%;
-  background: grey;
-  transition: all 0.8s ease-in-out;
-  cursor: pointer;
-  overflow: hidden;
-}
+
 
 ul {
   list-style-type: none;
@@ -372,53 +96,8 @@ ul {
   transition-delay: 0.5s;
   transform:  translateX(-80px);
 }
-a.text{
-  color: #FFF;
-  opacity:0;
-  line-height: 300px;
-  text-decoration: none;
-}
-.box-1, .box-2, .box-3, .box-4 {
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-}
-.box-1:hover{
-  width: 100%;
-}
-.box-1:hover .text{
-  opacity:1;
-  transform:scale(1);
-}
-.box-2:hover{
-  width: 100%;
-}
-.box-2:hover .text{
-  opacity:1;
-  transform:scale(1);
-}
-.box-3:hover{
-  width: 100%;
-}
-.box-3:hover .text{
-  opacity:1;
-  transform:scale(1);
-}
-.box-4:hover{
-  width: 100%;
-}
-.box-4:hover .text{
-  opacity:1;
-  transition: 0.5s all ease;
-  transform:scale(1);
-}
-.box-1{background-image: url("img/silikoner.jpg")}
-.box-2{background-image: url("img/Nerker.jpg")}
-.box-3{background-image: url("img/Luyser.jpg")}
-.box-4{background-image: url("img/gorciqner.jpg")}
-.container_1{
 
-}
+
 * {
   margin: 0;
   padding: 0;
@@ -442,10 +121,6 @@ margin: 0;
   width: 33%;
 }
 
-.block-container{
-
-width: 100%;
-}
 
 
 /*slider*/
