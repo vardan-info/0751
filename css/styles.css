@@ -9,6 +9,11 @@
   
 }
 
+.img_1{
+  width: 47%;
+  border-radius: 50%;
+}
+
 
 @media screen and (max-width: 600px) and (min-width: 200px) {
   section {
@@ -138,6 +143,9 @@ nav {
   font-size: 28px;
   font-weight: bold;
   color: #333;
+  width: 18%;
+  border: 2px solid red;
+  padding: 13p;
 }
 
 .logo a {
