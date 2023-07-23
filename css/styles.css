@@ -124,9 +124,7 @@ margin: 0;
 
 
 /*slider*/
-/*   color variables */
-/*   border radius */
-*,
+
 *::before,
 *::after {
   -webkit-box-sizing: border-box;
