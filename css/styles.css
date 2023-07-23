@@ -144,7 +144,7 @@ nav {
   font-weight: bold;
   color: #333;
   width: 18%;
-  border: 2px solid red;
+  /* border: 2px solid red; */
   padding: 13p;
 }
 
@@ -185,10 +185,11 @@ nav li a:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 17vh;
+  height: 15vh;
   font-size: clamp(2rem, 2.8vw, 5rem);
   font-family: Raleway;
   font-weight: bold;
+  padding: 9px;
 }
 
 .typewriter {
