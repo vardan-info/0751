@@ -11,60 +11,24 @@
      <link rel="stylesheet" href="main/css/styles.css">
  </head>
  <body>
-  <
+  
   <script>
-var slideIndex = 1;
+const buttons = document.querySelectorAll('[data-carousel-btn]');
 
-function showImage(n) { // for Display the first Image
-    
-    'use strict';
-    
-    var slide = document.getElementsByClassName('slides'),
-        
-        dots = document.getElementsByClassName('dots'),
-        
-        i;
-    
-    if (n > slide.length) { // to prevent larger values than the slide length
-        
-        slideIndex = 1;
-    }
-    
-    if (n < 1) { // to avoide negative values
-        
-        slideIndex = slide.length;
-    }
-    
-    for (i = 0; i < slide.length; i++) { // to make other images dispaly: none
-        
-        slide[i].style.display = 'none';
-    }
-    slide[slideIndex - 1].style.display = 'block';
-    
-    for (i = 0; i < dots.length; i++) { // to remove the active class from other dots
-        
-        dots[i].className = dots[i].className.replace(' active', '');
-    }
-    
-    dots[slideIndex - 1].className += ' active';
-}
+buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const offset = btn.dataset.carouselButton === 'next' ? 1 : -1
+        const slides = btn.closest('[data-carousel]').querySelector('[data-slides]')
 
-showImage(slideIndex);
+        const activeSlide = slides.querySelector('[data-active]')
+        let newIndex = [...slides.children].indexOf(activeSlide) + offset
+        if (newIndex < 0) newIndex = slides.children.length - 1
+        if (newIndex >= slides.children.length) newIndex = 0
 
-function plusIndex(n) { // for Next & Prev Actions
-    
-    'use strict';
-    
-    showImage(slideIndex += n);
-}
-
-function currentSlide(n) { // for Slide Bullets Selection
-    
-    'use strict';
-    
-    showImage(slideIndex = n);
-}
-
+        slides.children[newIndex].dataset.active = true
+        delete activeSlide.dataset.active
+    });
+});
   </script> 
      <div class="container">
   
@@ -80,45 +44,38 @@ function currentSlide(n) { // for Slide Bullets Selection
      </div>
  </div>
 	  <!--slider-->
-	 <div class="slider-container">
-            
-            <div class="slides fade">
-                <div class="slider-numbers">1/4</div>
-                <div class="slider-image"><img src="https://image.ibb.co/kpmt3k/background_1.jpg" alt="background_1"></div>
-                <div class="slider-caption">Caption 1</div>
-            </div> <!-- slider -->
-            
-            <div class="slides fade">
-                <div class="slider-numbers">2/4</div>
-                <div class="slider-image"><img src="https://image.ibb.co/mGxNw5/background_2.jpg" alt="background_2"></div>
-                <div class="slider-caption">Caption 2</div>
-            </div> <!-- slider -->
-            
-            <div class="slides fade">
-                <div class="slider-numbers">3/4</div>
-                <div class="slider-image"><img src="https://image.ibb.co/gd5gpQ/background_3.jpg" alt="background_3"></div>
-                <div class="slider-caption">Caption 3</div>
-            </div> <!-- slider -->
-            
-            <div class="slides fade">
-                <div class="slider-numbers">4/4</div>
-                <div class="slider-image"><img src="https://image.ibb.co/jOgXw5/background_4.jpg" alt="background_4"></div>
-                <div class="slider-caption">Caption 4</div>
-            </div> <!-- slider -->
-            
-            <!-- Slider Next and Previous buttons -->
-            <a class="prev" onclick="plusIndex(-1)">&#10094;</a>
-            <a class="next" onclick="plusIndex(+1)">&#10095;</a>
-            
-            <!-- Slider Selection Bullets -->
-            <div class="slider-bullets" id="slider-bullets">
-                <span class="dots" onclick="currentSlide(1)"></span>
-                <span class="dots" onclick="currentSlide(2)"></span>
-                <span class="dots" onclick="currentSlide(3)"></span>
-                <span class="dots" onclick="currentSlide(4)"></span>
-            </div> <!-- Slider Bullets -->
-            
-        </div> <!-- slider container -->
+	  <section aria-label="Newest Photos">
+
+        <div class="carousel" data-carousel>
+
+            <button class="btn prev" data-carousel-btn="prev">◀</button>
+            <button class="btn next" data-carousel-btn="next">▶</button>
+
+            <ul data-slides>
+                <li class="slide" data-active>
+                    <img src="https://i.postimg.cc/qBWm8yNW/img-01.jpg">
+                </li>
+
+                <li class="slide">
+                    <img src="https://i.postimg.cc/t4N2QcBH/img-02.jpg">
+                </li>
+
+                <li class="slide">
+                    <img src="https://i.postimg.cc/9FTL10T0/img-03.jpg">
+                </li>
+
+                <li class="slide">
+                    <img src="https://i.postimg.cc/GmCqfRJQ/img-04.jpg">
+                </li>
+
+                <li class="slide">
+                    <img src="https://i.postimg.cc/9z3qrWFN/img-05.jpg">
+                </li>
+            </ul>
+
+        </div>
+
+    </section>
 	  <!--slider end-->
  </body>
 </html>
