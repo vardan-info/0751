@@ -178,3 +178,274 @@ section{
 }
 
 
+ <style>
+  /*section*/
+
+
+
+section {
+ display: flex;
+    padding: 13px 1px 1px 1px;
+    width: 99%;
+    display: flex;
+    justify-content: flex-end;
+    margin: 0 auto;
+}
+
+.review-item-container {
+ 
+  display: flex;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+
+  background-color: rgb(243, 243, 243);
+  border-radius: 5px;
+}
+
+.review-item-image {
+  position: relative;
+}
+
+.review-item-image img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.review-person-title {
+  background-color: rgb(252, 252, 252);
+  position: absolute;
+  bottom: 0;
+
+  margin: 0 5px;
+}
+
+.review-person-title p {
+  margin: 0;
+  /* padding: 0; */
+  text-align: center;
+  line-height: auto;
+  /* color: red; */
+}
+
+#review-person-title p:nth-child(1) {
+  font-size: 1.3rem;
+}
+
+.star-and-review {
+  align-self: center;
+  padding: 9px;
+}
+
+.review-text p {
+    font-size: 17px;
+
+}
+
+@media screen and (max-width: 600px) and (min-width: 200px) {
+  section {
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+
+    /** Main link */
+
+
+
+   /*section end*/
+ 
+   /* image gallery */
+  h1 {
+  font-family: arial;
+  font-size: 3em;
+  text-align: center;
+  margin: 25px;
+  padding: 50px;
+  background-color: #1d2d50;
+  color: #fcdab7;
+  overflow: hidden;
+}
+
+.header {
+  text-align: center;
+  padding: 32px;
+  background: #E0DDDD;
+}
+
+#gallery {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 0 4px;
+}
+
+#gallery img {
+  width: 25%;
+  height: 300px;
+  object-fit: cover;
+  margin-top: 8px;
+  padding: 0 4px;
+  border-radius: 10px;
+}
+
+@media (max-width: 800px) {
+  #gallery img {
+    width: 50%;
+  }
+}
+
+@media (max-width: 600px) {
+  #gallery img {
+    width: 100%;
+  }
+}
+   
+   #currentTime {
+  font-size: 3em;
+    text-align: center;
+    font-family: sans-serif;
+    font-weight: 600;
+    color: #fbfbfb;
+    margin: 10px auto;
+}
+   .main-nav {
+  display: -webkit-flex;
+  display: flex;
+  background: #362f2f;
+}
+.main-nav li:first-child {
+  margin-right: auto;
+}
+.main-nav a {
+  margin: 10px;
+  border-radius: 5px;
+  background: #92a199;
+  color: #fff;
+  display: block;
+  padding: 15px;
+  text-decoration: none;
+}
+.main-nav .logo {
+  background: #4584b1;
+}
+/*slide-----------*/
+.frame {
+    width: 100%;
+    height: 300px;
+    /* margin-top: 50px; */
+}
+   .container-gallery{
+
+   }
+   
+.boxes {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+.box {
+  position: relative;
+  flex: 1 1 auto;
+  width: 20%;
+  background: grey;
+  transition: all 0.8s ease-in-out;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.text {
+  position: absolute;
+  transform: scale(0.5);
+  font-weight: 700;
+  font-size: 30px;
+  text-transform: uppercase;
+  transition: all .5s ease-in-out;
+  width:100%;
+  height: 100%;
+  text-align:center;
+  transition-delay: 0.5s;
+  transform:  translateX(-80px);
+}
+a.text{
+  color: #FFF;
+  opacity:0;
+  line-height: 300px;
+  text-decoration: none;
+}
+.box-1, .box-2, .box-3, .box-4 {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.box-1:hover{
+  width: 100%;
+}
+.box-1:hover .text{
+  opacity:1;
+  transform:scale(1);
+}
+.box-2:hover{
+  width: 100%;
+}
+.box-2:hover .text{
+  opacity:1;
+  transform:scale(1);
+}
+.box-3:hover{
+  width: 100%;
+}
+.box-3:hover .text{
+  opacity:1;
+  transform:scale(1);
+}
+.box-4:hover{
+  width: 100%;
+}
+.box-4:hover .text{
+  opacity:1;
+  transition: 0.5s all ease;
+  transform:scale(1);
+}
+.box-1{background-image: url("img/silikoner.jpg")}
+.box-2{background-image: url("img/Nerker.jpg")}
+.box-3{background-image: url("img/Luyser.jpg")}
+.box-4{background-image: url("img/gorciqner.jpg")}
+.container_1{
+
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "ROBOTO", sans-serif;
+}
+
+.container{
+
+ 
+}
+
+.img_1{
+  margin: 21px 6px 6px 26px;
+  padding: 4px 4px 6px 17px;
+  width: 33%;
+}
+
+.block-container{
+
+width: 100%;
+}
