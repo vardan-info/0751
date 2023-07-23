@@ -185,7 +185,7 @@ nav li a:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 17vh;
   font-size: clamp(2rem, 2.8vw, 5rem);
   font-family: Raleway;
   font-weight: bold;
