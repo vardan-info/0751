@@ -12,27 +12,41 @@
  <body>
   <style>
 	  /*start cont*/
-	
-figure.zoom {
-  background-position: 50% 50%;
-  position: relative;
-  width: 500px;
-  overflow: hidden;
-  cursor: zoom-in;
-  display:flex;
+	.header {
+  text-align: center;
+  padding: 32px;
+  background: rgb(224, 221, 221);
 }
-.image{
-    display: flex;
-  justify-content: center;
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 4px;
 }
-figure.zoom img:hover {
-  opacity: 0;
+
+/* Style images to display in a four column layout */
+.gallery img {
+  width: 25%;
+  margin-top: 8px;
+  padding: 0 4px;
+  border-radius: 10px;
+  object-fit:cover;
 }
-figure.zoom img {
-  transition: opacity .5s;
-  display: block;
-  width: 100%;
+
+/* Style images to display in a two column layout */
+@media (max-width: 800px) {
+  .gallery img {
+    width: 50%;
+  }
 }
+
+/* Style images to display in a one column layout */
+@media (max-width: 600px) {
+  .gallery img {
+    width: 100%;
+  }
+}
+
 
 	
 	  /*end container*/
@@ -784,7 +798,45 @@ width: 100%;
           <p class="opacity-low">Cityscape</p>
         </div>
       </div> 
+    <   <div class="header">
+      <h1>CSS FLEXBOX PHOTO GALLERY</h1>
+      <p>Resize the browser window to see the responsive effect.</p>
     </div>
+
+    <!-- Photo Grid -->
+    <div class="gallery">
+      <img src="https://source.unsplash.com/random?sig=1/300x180" />
+      <img src="https://source.unsplash.com/random?sig=2/300x180" />
+      <img src="https://source.unsplash.com/random?sig=3/300x180" />
+      <img src="https://source.unsplash.com/random?sig=4/300x180" />
+      <img src="https://source.unsplash.com/random?sig=5/300x180" />
+      <img src="https://source.unsplash.com/random?sig=6/300x180" />
+      <img src="https://source.unsplash.com/random?sig=7/300x180" />
+
+      <img src="https://source.unsplash.com/random?sig=8/300x180" />
+      <img src="https://source.unsplash.com/random?sig=9/300x180" />
+      <img src="https://source.unsplash.com/random?sig=10/300x180" />
+      <img src="https://source.unsplash.com/random?sig=1/300x180" />
+      <img src="https://source.unsplash.com/random?sig=2/300x180" />
+      <img src="https://source.unsplash.com/random?sig=3/300x180" />
+      <img src="https://source.unsplash.com/random?sig=4/300x180" />
+
+      <img src="https://source.unsplash.com/random?sig=5/300x180" />
+      <img src="https://source.unsplash.com/random?sig=6/300x180" />
+      <img src="https://source.unsplash.com/random?sig=7/300x180" />
+      <img src="https://source.unsplash.com/random?sig=1/300x180" />
+      <img src="https://source.unsplash.com/random?sig=2/300x180" />
+      <img src="https://source.unsplash.com/random?sig=3/300x180" />
+      <img src="https://source.unsplash.com/random?sig=4/300x180" />
+
+      <img src="https://source.unsplash.com/random?sig=22/300x180" />
+      <img src="https://source.unsplash.com/random?sig=23/300x180" />
+      <img src="https://source.unsplash.com/random?sig=24/300x180" />
+      <img src="https://source.unsplash.com/random?sig=25/300x180" />
+      <img src="https://source.unsplash.com/random?sig=5/300x180" />
+      <img src="https://source.unsplash.com/random?sig=6/300x180" />
+      <img src="https://source.unsplash.com/random?sig=7/300x180" />
+    </div>/div>
     <div class="img-box">
       <img src="img/sosinz.jpg" alt="" />
       <div class="transparent-box">
@@ -796,24 +848,6 @@ width: 100%;
     </div>
   </div>
   <!--foter----------------->
-<div class="image">
-<figure class="zoom" onmousemove="zoom(event)" style="background-image: url(//res.cloudinary.com/active-bridge/image/upload/slide1.jpg)">
-  <img src="//res.cloudinary.com/active-bridge/image/upload/slide1.jpg" />
-</figure><figure class="zoom" onmousemove="zoom(event)" style="background-image: url(//res.cloudinary.com/active-bridge/image/upload/slide1.jpg)">
-  <img src="//res.cloudinary.com/active-bridge/image/upload/slide1.jpg" />
-</figure><figure class="zoom" onmousemove="zoom(event)" style="background-image: url(//res.cloudinary.com/active-bridge/image/upload/slide1.jpg)">
-  <img src="//res.cloudinary.com/active-bridge/image/upload/slide1.jpg" />
-</figure>
-</div>
-	 <script>
-	function zoom(e){
-  var zoomer = e.currentTarget;
-  e.offsetX ? offsetX = e.offsetX : offsetX = e.touches[0].pageX
-  e.offsetY ? offsetY = e.offsetY : offsetX = e.touches[0].pageX
-  x = offsetX/zoomer.offsetWidth*100
-  y = offsetY/zoomer.offsetHeight*100
-  zoomer.style.backgroundPosition = x + '% ' + y + '%';
-}	 
-	 </script>
+
 </body>
 </html>
