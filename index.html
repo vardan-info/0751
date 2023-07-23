@@ -13,16 +13,24 @@
  <body>
   
   <script>
-const images = document.querySelectorAll(".image-accordion img");
+window.addEventListener('DOMContentLoaded', () => {
 
-images.forEach(function (image) {
-    image.onclick = function (event) {
-        document.querySelector(".selected-image").classList.remove("selected-image");
-        const clickParent = event.target.parentNode;
-        clickParent.classList.add("selected-image");
-    }
-
-})
+  const slides = document.querySelectorAll('.slide');
+  
+  for (let slide of slides) {
+    console.log(slides);
+    slide.addEventListener('click', () => {
+      clearActiveClasses();
+      slide.classList.add('active');
+    });
+  }
+  
+  function clearActiveClasses() { 
+    slides.forEach((slide) => {
+      slide.classList.remove('active');
+    });
+  }
+});
   </script> 
      <div class="container">
   
