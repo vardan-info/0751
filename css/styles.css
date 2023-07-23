@@ -217,19 +217,27 @@ nav li a:hover {
 }
 /*end text*/
 /*text-section*/
-.flex-container {
+.content {
+  width: 100%;
   display: flex;
   justify-content: center;
-  background-color: DodgerBlue;
 }
 
-.flex-container > div {
-  background-color: #f1f1f1;
-  width: 100px;
+.wrapper {
+  border: 2px solid black;
+  padding: 40px;
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background-color: white;
+}
+
+.box {
+  border: 1px solid black;
+  text-align: justify;
+  padding: 15px;
   margin: 10px;
-  text-align: center;
-  line-height: 75px;
-  font-size: 30px;
 }
 
 .section{
