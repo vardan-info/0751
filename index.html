@@ -13,36 +13,56 @@
  <body>
   <
   <script>
-   window.onload = function() {
-  clock();  
-    function clock() {
-    var now = new Date();
-    var TwentyFourHour = now.getHours();
-    var hour = now.getHours();
-    var min = now.getMinutes();
-    var sec = now.getSeconds();
-    var mid = 'pm';
-    if(sec < 10) { 
-      sec = "0" + sec; 
+var slideIndex = 1;
+
+function showImage(n) { // for Display the first Image
+    
+    'use strict';
+    
+    var slide = document.getElementsByClassName('slides'),
+        
+        dots = document.getElementsByClassName('dots'),
+        
+        i;
+    
+    if (n > slide.length) { // to prevent larger values than the slide length
+        
+        slideIndex = 1;
     }
-    if (min < 10) {
-      min = "0" + min;
+    
+    if (n < 1) { // to avoide negative values
+        
+        slideIndex = slide.length;
     }
-    if (hour > 12) {
-      hour = hour - 12;
-    }   
-    if (hour < 10 ) {
-      hour = "0" + hour;
-    }   
-    if(hour==0){ 
-      hour=12;
+    
+    for (i = 0; i < slide.length; i++) { // to make other images dispaly: none
+        
+        slide[i].style.display = 'none';
     }
-    if(TwentyFourHour < 12) {
-       mid = 'am';
+    slide[slideIndex - 1].style.display = 'block';
+    
+    for (i = 0; i < dots.length; i++) { // to remove the active class from other dots
+        
+        dots[i].className = dots[i].className.replace(' active', '');
     }
-  document.getElementById('currentTime').innerHTML =     hour+':'+min+':'+sec +' '+mid ;
-    setTimeout(clock, 1000);
-    }
+    
+    dots[slideIndex - 1].className += ' active';
+}
+
+showImage(slideIndex);
+
+function plusIndex(n) { // for Next & Prev Actions
+    
+    'use strict';
+    
+    showImage(slideIndex += n);
+}
+
+function currentSlide(n) { // for Slide Bullets Selection
+    
+    'use strict';
+    
+    showImage(slideIndex = n);
 }
 
   </script> 
