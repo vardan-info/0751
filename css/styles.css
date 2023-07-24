@@ -247,8 +247,26 @@ nav li a:hover {
 .text_main{
 }
 /*text-section end*/
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 400px) {
   ul li a{
     background:red;
   }
 }
+@media screen and (max-width: 500px) {
+  ul li a{
+    background:red;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  ul li a{
+    background:red;
+  }
+}
+@media screen and (max-width: 700px) {
+  ul li a{
+    background:red;
+  }
+}
+
+
