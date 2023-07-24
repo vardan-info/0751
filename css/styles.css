@@ -247,3 +247,8 @@ nav li a:hover {
 .text_main{
 }
 /*text-section end*/
+@media screen and (max-width: 600px) {
+  ul li a.icon {
+   
+  }
+}
