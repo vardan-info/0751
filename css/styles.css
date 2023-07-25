@@ -467,7 +467,7 @@ svg {
   fill: currentColor;
 }
 
-.container {
+.container-section {
   width: min(100% - 2rem, 63em);
   margin-inline: auto;
 }
