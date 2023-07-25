@@ -10,7 +10,20 @@
   
  </head>
  <body>
-  
+  <script>
+	  const layoutControllerBtns = document.querySelectorAll("[data-control]");
+const cardsElem = document.getElementById("cards");
+
+layoutControllerBtns.forEach(btn => {
+  btn.addEventListener("click", (e) => {
+    const layoutControl = e.currentTarget.dataset.control;
+    cardsElem.setAttribute("data-layout", layoutControl);
+    
+    [...layoutControllerBtns].map(btn => btn.classList.remove("active"));
+    btn.classList.add("active");
+  });
+});
+  </script>
 <div class="container">
 
  <header>
