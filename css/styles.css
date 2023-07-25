@@ -468,8 +468,9 @@ svg {
 }
 
 .container-section {
-  width: min(100% - 2rem, 63em);
-  margin-inline: auto;
+  width: min(100% - 2rem, 68em);
+    margin-inline: auto;
+    padding: 13px;
 }
 
 .section-header {
