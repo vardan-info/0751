@@ -611,9 +611,16 @@ svg {
   color: #fff;
 }
 /*map*/
-#map-canvas {
-    width: 500px;
-    height: 400px;
-    background-color: #CCC;
-    margin: auto;
+.map {
+  border:solid 1px black;
+  width:500px;
+  height:400px;
+}
+
+.sub_map {
+  z-index:50;
+  width:75px;
+  height:75px;
+  border:solid 1px red;
+  margin-top:-75px;
 }
