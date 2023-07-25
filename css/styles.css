@@ -101,7 +101,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  z-index:99
+  z-index:99;
 }
 
 .showcase .overlay {
@@ -111,7 +111,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  z-index:999
+  z-index:999;
 }
 
 .showcase h2 {
@@ -449,8 +449,8 @@ img {
   display: block;
 }
 
-section {
-  padding-block: clamp(2rem, 5vw, 3rem);
+wrapper {
+  /* padding-block: clamp(2rem, 5vw, 3rem); */
 }
 
 button,
