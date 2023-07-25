@@ -611,16 +611,15 @@ svg {
   color: #fff;
 }
 /*map*/
-.map {
-  border:solid 1px black;
-  width:500px;
-  height:400px;
+.google-map {
+  padding-bottom: 50%;
+  position: relative;
 }
 
-.sub_map {
-  z-index:50;
-  width:75px;
-  height:75px;
-  border:solid 1px red;
-  margin-top:-75px;
+.google-map iframe {
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  position: absolute;
 }
