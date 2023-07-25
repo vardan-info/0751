@@ -612,8 +612,10 @@ svg {
 }
 /*map*/
 .google-map {
-  padding-bottom: 50%;
+  padding-bottom: 15%;
   position: relative;
+  width: 24%;
+  /* height: 14px; */
 }
 
 .google-map iframe {
