@@ -370,6 +370,8 @@ background-color: #000000;
   color: white;
   position: relative;
   background-color: white;
+	-webkit-transition: background-color 0.3s ease;
+
 }
 
 .caption {
@@ -378,6 +380,8 @@ background-color: #000000;
   left: 20px;
   opacity: 0.0;
   transition: transform 0.3s ease, opacity 0.3s ease;
+	-webkit-transition: background-color 0.3s ease;
+
 }
 
 .transparent-box {
@@ -388,6 +392,7 @@ background-color: #000000;
   top: 0;
   left: 0;
   transition: background-color 0.3s ease;
+  -webkit-transition: background-color 0.3s ease;
 }
 
 .img-box:hover img { 
@@ -401,6 +406,8 @@ background-color: #000000;
 .img-box:hover .caption {
   transform: translateY(-20px);
   opacity: 1.0;
+	-webkit-transition: background-color 0.3s ease;
+
 }
 
 .img-box:hover {
