@@ -285,12 +285,12 @@ layoutControllerBtns.forEach(btn => {
   </head>
   <body>
     <div id="map-canvas"></div>
-	  <script>
-		  function initialize() {
+	 <script src="https://maps.googleapis.com/maps/api/js">
+		function initialize() {
   var mapCanvas = document.getElementById('map-canvas');
   var mapOptions = {
       center: new google.maps.LatLng(28.5450, 77.1922),
-      zoom: 17 /*0 - 22*/,
+      zoom: 15 /*0 - 22*/,
       mapTypeId: google.maps.MapTypeId.ROADMAP
   };
   var map = new google.maps.Map(mapCanvas, mapOptions);
