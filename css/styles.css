@@ -357,121 +357,12 @@ nav li a {
   
 }
 }
-@media (max-width: 900px) {
-nav li a {
-  display: block;
-  color: #333;
-  text-decoration: none;
-  text-transform: uppercase;
-  font-weight: bold;
-  padding: 10px;
-  transition: all 0.3s ease-in-out;
-font-size:25px;
-  background:red;
-}
-}
 
-@media (max-width: 800px) {
-nav li a {
-  display: block;
-  color: #333;
-  text-decoration: none;
-  text-transform: uppercase;
-  font-weight: bold;
-  padding: 10px;
-  transition: all 0.3s ease-in-out;
-	font-size:25px;
-	background:red;
-  
-}
-}
 
-@media (max-width: 700px) {
-nav li a {
-  display: block;
-  color: #333;
-  text-decoration: none;
-  text-transform: uppercase;
-  font-weight: bold;
-  padding: 10px;
-  transition: all 0.3s ease-in-out;
-	font-size:25px;
-	background:red;
-  
-}
-}
 
-@media (max-width: 600px) {
-nav li a {
-  display: block;
-  color: #333;
-  text-decoration: none;
-  text-transform: uppercase;
-  font-weight: bold;
-  padding: 10px;
-  transition: all 0.3s ease-in-out;
-	font-size:25px;
-	background:red;
-  
-}
-}
-@media (max-width: 500px) {
-nav li a {
-  display: block;
-  color: #333;
-  text-decoration: none;
-  text-transform: uppercase;
-  font-weight: bold;
-  padding: 10px;
-  transition: all 0.3s ease-in-out;
-	font-size:25px;
-	background:red;
-  
-}
-}
-@media (max-width: 500px) {
-nav li a {
-  display: block;
-  color: #333;
-  text-decoration: none;
-  text-transform: uppercase;
-  font-weight: bold;
-  padding: 10px;
-  transition: all 0.3s ease-in-out;
-	font-size:25px;
-	background:red;
-  
-}
-}
-@media (max-width: 400px) {
-nav li a {
-  display: block;
-  color: #333;
-  text-decoration: none;
-  text-transform: uppercase;
-  font-weight: bold;
-  padding: 10px;
-  transition: all 0.3s ease-in-out;
-	font-size:25px;
-	background:red;
-  
-}
-}
 
-@media (max-width: 300px) {
-nav li a {
-  display: block;
-  color: #333;
-  text-decoration: none;
-  text-transform: uppercase;
-  font-weight: bold;
-  padding: 10px;
-  transition: all 0.3s ease-in-out;
-	font-size:25px;
-	
-  
-}
-}
+
+
 @media (max-width: 1000px) {
 nav li a:hover {
   background-color: #333;
