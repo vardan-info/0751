@@ -247,54 +247,11 @@ nav li a:hover {
 .text_main{
 }
 /*text-section end*/
-@media screen and (max-width: 400px) {
-  ul li a{
-    background:red;
-  }
-}
-@media screen and (max-width: 500px) {
-  ul li a{
-    background:red;
-  }
-}
-
-@media screen and (max-width: 600px) {
-  ul li a{
-    background:red;
-  }
-}
-@media screen and (max-width: 700px) {
-  ul li a{
-    background:red;
-  }
-}
-
-@media screen and (max-width: 250px) {
-  ul li a{
-    background:red;
-  }
-}
-
-@media screen and (max-width: 300px) {
-  ul li a{
-    background:red;
-  }
-}
-
-@media screen and (max-width: 350px) {
-  ul li a{
-    background:red;
-  }
-}
 
 
-@media screen and (max-width: 400px) {
-  ul li a{
-    background:red;
-  }
-}
 
-}
+
+
 
 
 @media (max-width: 1200px) {
@@ -307,10 +264,10 @@ nav li a {
   padding: 10px;
   transition: all 0.3s ease-in-out;
 	font-size:25px;
-	background:red;
+	
   
 }
-}
+
 
 @media (max-width: 1000px) {
 nav li a {
@@ -322,7 +279,7 @@ nav li a {
   padding: 10px;
   transition: all 0.3s ease-in-out;
 	font-size:25px;
-	background:red;
+	
   
 }
 }
