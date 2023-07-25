@@ -610,8 +610,9 @@ svg {
   color: #fff;
 }
 /*map*/
-#mapa {
-  margin: 10px;
-  height: 300px;
-  background-color: #babaca;
+#map-canvas {
+    width: 500px;
+    height: 400px;
+    background-color: #CCC;
+    margin: auto;
 }
