@@ -293,6 +293,31 @@ nav li a:hover {
     background:red;
   }
 }
+@media screen and (max-width: 700px) {
+  body{
+    background:red;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  body{
+    background:red;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  body{
+    background:red;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  body{
+    background:red;
+  }
+}
+
+
 
 
 
