@@ -612,10 +612,10 @@ svg {
 }
 /*map*/
 .google-map {
-  padding-bottom: 15%;
+  padding-bottom: 16%;
   position: relative;
-  width: 24%;
-  /* height: 14px; */
+  width: 25%;
+  /* margin: 0 auto; */
 }
 
 .google-map iframe {
@@ -626,7 +626,9 @@ svg {
   position: absolute;
 }
 
-/*footer*/
 footer{
+	display:flex;
+	border:1px solid red;
+	padding:5px
 	
 }
