@@ -612,9 +612,9 @@ svg {
 }
 /*map*/
 .google-map {
-  padding-bottom: 16%;
+  padding-bottom: 34%;
   position: relative;
-  width: 25%;
+  width: 50%;
   /* margin: 0 auto; */
 }
 
@@ -636,7 +636,7 @@ footer{
 /*footer--------------*/
 .footer {
   background-color: #414141;
-  width: 100%;
+  /* width: 100%; */
   text-align: left;
   font-family: sans-serif;
   font-weight: bold;
