@@ -326,6 +326,8 @@ layoutControllerBtns.forEach(btn => {
     </p>
     <p class="name"> Company Name &copy; 2016</p>
 	   <a href="#" class="cd-top text-replace js-cd-top">Top</a>
+	  <div id = "clock" onload="currentTime()"></div>
+
   </div>
 </footer>
 	<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
@@ -334,79 +336,34 @@ layoutControllerBtns.forEach(btn => {
   offsetOpacity = 1200, //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
   scrollDuration = 700;
 	 </script>
-	
+	<script>
+		function currentTime() {
+  let date = new Date(); 
+  let hh = date.getHours();
+  let mm = date.getMinutes();
+  let ss = date.getSeconds();
+  let session = "AM";
 
-  <main>
-   <section class="d-flex flex-column align-items-center justify-content-center vh-100">
-      <h1 id="date"></h1>
-      <div class="container">
-        <div class="row col-12 m-0">
-          <div class="col-md-6 text-center text-sm-end">
-            <span id="time" class="display-1"></span>
-          </div>
-          <div class="col-md-6 d-flex align-items-center justify-content-center justify-content-sm-start">
-            <span id="time-cycle" class="display-1"></span>
-            <div class="btn-group d-flex flex-column align-item-start ps-3">
-              <div>
-                <input id="24-hours" name='format' type="radio">
-                <label for="24-hours">24 Hour</label>
-              </div>
-              <div>
-                <input id="12-hours" name='format' type="radio" checked>
-                <label for="12-hours">12 hour</label>
-              </div>            
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-	 <script>
-		 const dateElement = document.getElementById('date')
-const timeElement = document.getElementById('time')
-const timeCycleElement = document.getElementById('time-cycle')
-const timeFormat = document.querySelectorAll('input')
-let hours, minutes, seconds, ampm
+    
+  if(hh > 12){
+      session = "PM";
+   }
 
-function run() {
-  const dateObj = new Date()
-  ampm = dateObj.getHours() >= 12 ? 'PM' : 'AM'
+   hh = (hh < 10) ? "0" + hh : hh;
+   mm = (mm < 10) ? "0" + mm : mm;
+   ss = (ss < 10) ? "0" + ss : ss;
+    
+   let time = hh + ":" + mm + ":" + ss + " " + session;
 
-  hours = twelveHourFormat(String(dateObj.getHours()))
-  hours = formatSingleDigits(hours)  
+  document.getElementById("clock").innerText = time; 
+  let t = setTimeout(function(){ currentTime() }, 1000); 
 
-  minutes = formatSingleDigits(String(dateObj.getMinutes()))
-  seconds = formatSingleDigits(String(dateObj.getSeconds()))
-
-  dateElement.innerHTML = `${dateObj.getMonth()}/${dateObj.getDate()}/${dateObj.getFullYear()}`
-  timeElement.innerHTML = `${hours}:${minutes}:${seconds}`
-
-  timeCycleElement.innerHTML = ampm
-  setTimeout(run, 1000)
 }
 
-function twelveHourFormat(hour) {
-  if (timeFormat[1].checked) {
-    if (hour > 12) {
-      hour -= 12
-    }
-  }
-  return hour
-}
+currentTime();
+	</script>
 
-function formatSingleDigits(digits) {
-  if (digits < 10) {
-    digits = '0' + digits
-  }
-  return digits
-}
 
-timeFormat.forEach(btn => {
-  btn.addEventListener('click', run)
-})
-
-run()
-	 </script>
  </body>
 </html>
 
