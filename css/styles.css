@@ -8,6 +8,13 @@
   margin: auto;
 }
 
+#clock{
+  color:white;
+  border:1px solid red;
+  padding:2px;
+  font-size:19px;
+}
+
 .img_1{
   width: 47%;
   border-radius: 50%;
@@ -281,10 +288,6 @@ nav li a {
   transition: all 0.3s ease-in-out;
   font-size:25px;
 }
-  .logo{
-    border:11px solid red;
-    padding: 6px 4px 5px 75px;
-  }
 }
 
 
@@ -441,6 +444,15 @@ background-color: #000000;
 a {
   text-decoration: none;
   color: unset;
+}
+
+.cd-top {
+  color:#f6f1f1;
+  font-size:19px;
+  padding:9px;
+  display: flex;
+  flex-direction: row-reverse;
+  border: 1px solid red;
 }
 
 .review-star {
