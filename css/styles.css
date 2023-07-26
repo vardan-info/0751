@@ -281,6 +281,10 @@ nav li a {
   transition: all 0.3s ease-in-out;
   font-size:25px;
 }
+  .logo{
+    border:11px solid red;
+    padding: 6px 4px 5px 75px;
+  }
 }
 
 
