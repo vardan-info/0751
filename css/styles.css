@@ -193,12 +193,12 @@ nav li a:hover {
 }
 
 .typewriter {
-	width: 21.5ch;
 	white-space: nowrap;
-	overflow: hidden;
+	/* overflow: hidden; */
 	border-right: 4px solid #212121;
 	animation: cursor 1s step-start infinite, 
     text 5s steps(18) alternate infinite;
+	color: red;
 }
 
 @keyframes cursor {
