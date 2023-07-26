@@ -335,53 +335,78 @@ layoutControllerBtns.forEach(btn => {
   scrollDuration = 700;
 	 </script>
 	
-<form>
-  <div class="input-field">
-    <label>Custom Field</label>
-    <input id="custom-input-date" class="calendar" type="text" name="upload-release" placeholder="dd/mm/yyyy">
-    <p class="label-error"></p>
-  </div>
-</form>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js">
-		$("#custom-input-date").datepicker({ dateFormat:'dd/mm/yy'});
 
-// ACTIONS
-$("input").on("change", function(e) {
-  $(this).siblings(".label-error").text("");
-  $(this).removeClass("error");
-})
+  <main>
+   <section class="d-flex flex-column align-items-center justify-content-center vh-100">
+      <h1 id="date"></h1>
+      <div class="container">
+        <div class="row col-12 m-0">
+          <div class="col-md-6 text-center text-sm-end">
+            <span id="time" class="display-1"></span>
+          </div>
+          <div class="col-md-6 d-flex align-items-center justify-content-center justify-content-sm-start">
+            <span id="time-cycle" class="display-1"></span>
+            <div class="btn-group d-flex flex-column align-item-start ps-3">
+              <div>
+                <input id="24-hours" name='format' type="radio">
+                <label for="24-hours">24 Hour</label>
+              </div>
+              <div>
+                <input id="12-hours" name='format' type="radio" checked>
+                <label for="12-hours">12 hour</label>
+              </div>            
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+	 <script>
+		 const dateElement = document.getElementById('date')
+const timeElement = document.getElementById('time')
+const timeCycleElement = document.getElementById('time-cycle')
+const timeFormat = document.querySelectorAll('input')
+let hours, minutes, seconds, ampm
 
-$("#custom-input-date").on("focusout", function(e) {
-  if($(this).val() != '') {
-    dateValidation($(this));
-  }
-})
+function run() {
+  const dateObj = new Date()
+  ampm = dateObj.getHours() >= 12 ? 'PM' : 'AM'
 
-// CHECK
-function dateValidation(input) {
-  var errorLabel = input.siblings(".label-error");
-  var date = input.val();
+  hours = twelveHourFormat(String(dateObj.getHours()))
+  hours = formatSingleDigits(hours)  
 
-  input.removeClass("error");
-  errorLabel.text("");
+  minutes = formatSingleDigits(String(dateObj.getMinutes()))
+  seconds = formatSingleDigits(String(dateObj.getSeconds()))
 
-  var matches = /^(\d{1,2})[/\/](\d{1,2})[/\/](\d{4})$/.exec(date);
-  if (matches == null) {
-    input.addClass("error");
-    errorLabel.text("Date not valid.");
-  };
+  dateElement.innerHTML = `${dateObj.getMonth()}/${dateObj.getDate()}/${dateObj.getFullYear()}`
+  timeElement.innerHTML = `${hours}:${minutes}:${seconds}`
 
-  var d = matches[1];
-  var m = matches[2] - 1;
-  var y = matches[3];
-  var composedDate = new Date(y, m, d);
-
-  if(composedDate.getDate() == d && composedDate.getMonth() == m && composedDate.getFullYear() == y) {} else {
-    input.addClass("error");
-    errorLabel.text("Date not valid.");
-  }
+  timeCycleElement.innerHTML = ampm
+  setTimeout(run, 1000)
 }
-	</script>
+
+function twelveHourFormat(hour) {
+  if (timeFormat[1].checked) {
+    if (hour > 12) {
+      hour -= 12
+    }
+  }
+  return hour
+}
+
+function formatSingleDigits(digits) {
+  if (digits < 10) {
+    digits = '0' + digits
+  }
+  return digits
+}
+
+timeFormat.forEach(btn => {
+  btn.addEventListener('click', run)
+})
+
+run()
+	 </script>
  </body>
 </html>
 
