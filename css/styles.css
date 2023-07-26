@@ -273,15 +273,13 @@ nav li a {
 @media (max-width: 1000px) {
 nav li a {
   display: block;
-  color: #333;
+  color: #fff;
   text-decoration: none;
   text-transform: uppercase;
   font-weight: bold;
   padding: 10px;
   transition: all 0.3s ease-in-out;
-	font-size:25px;
-	
-  
+  font-size:25px;
 }
 }
 
