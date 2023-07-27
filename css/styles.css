@@ -1,4 +1,13 @@
-
+.text-footer{
+  color: white;
+  line-height: 1.6;
+  font-size: 70%;
+  font-family: monospace;
+  padding: 9px;
+  margin: 9px;
+  list-style-type: circle;
+  letter-spacing: 2px;
+}
 * {
   margin: 0;
   padding: 0;
