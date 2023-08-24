@@ -10,6 +10,18 @@
   
  </head>
  <body>
+	 <script>
+		 function showLoc() {
+   var x = window.location;
+   var t = ['Property - Typeof - Value',
+            'window.location - ' + (typeof x) + ' - ' + x ];
+   for (var prop in x){
+     t.push(prop + ' - ' + (typeof x[prop]) + ' - ' +  (x[prop] || 'n/a'));
+   }
+   alert(t.join('\n'));
+}
+
+	 </script>
   <script>
 	  const layoutControllerBtns = document.querySelectorAll("[data-control]");
 const cardsElem = document.getElementById("cards");
