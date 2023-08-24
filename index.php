@@ -377,7 +377,7 @@ layoutControllerBtns.forEach(btn => {
 
 currentTime();
 	</script>
-<form id="ajax-contact" method="post" action="mailer.php">
+<form id="ajax-contact" method="post" action="index.php">
 <div class="field">
 <label for="name">Name:</label>
 <input type="text" id="name" name="name" required>
@@ -399,7 +399,7 @@ currentTime();
 </form>
 	 <?php
 
-    // Обработка только запросов POST.
+  
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Получаем данные полей формы и удаляем пробелы.
         $name = strip_tags(trim($_POST["name"]));
@@ -415,34 +415,34 @@ echo "Oops! Therewas a problem with your submission. Pleasecomplete the form and
 exit;
         }
 
-        // Устанавливаем email адрес получателя.
-        // FIXME: Изменяем егона нужный email-адрес.
+      
+	
         $recipient = "hello@example.com";
 
-        // Задаем тему письма.
+      
         $subject = "New contactfrom $name";
 
-        // Создаем содержимое письма.
+        
         $email_content = "Name: $namen";
         $email_content .= "Email: $emailnn";
         $email_content .= "Message:n$messagen";
 
-        // Создаем заголовок письма.
+        
         $email_headers = "From: $name <$email>";
 
-        // Отправляем письмо.
+        
 if (mail($recipient, $subject, $email_content, $email_headers)) {
-            // Устанавливаем код ответа 200 (okay).
+         
 http_response_code(200);
 echo "Thank You! Your message hasbeensent.";
         } else {
-            // Устанавливаем код ответа 500 (internal server error).
+            
 http_response_code(500);
 echo "Oops! Somethingwentwrong and wecouldn'tsend your message.";
         }
 
     } else {
-        // Не POST запрос, устанавливаемкод ответа 403 (forbidden).
+    
 http_response_code(403);
 echo "Therewas a problem with your submission, pleasetryagain.";
     }
