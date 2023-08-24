@@ -397,7 +397,7 @@ currentTime();
 <button type="submit">Send</button>
 </div>
 </form>
-	 <?php
+<!-- <!-- 	 <?php
 
   
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -413,7 +413,7 @@ if( empty($name) OR empty($message) OR !filter_var($email, FILTER_VALIDATE_EMAIL
 http_response_code(400);
 echo "Oops! Therewas a problem with your submission. Pleasecomplete the form and tryagain.";
 exit;
-        }
+        } -->
 
       
 	
@@ -447,7 +447,7 @@ http_response_code(403);
 echo "Therewas a problem with your submission, pleasetryagain.";
     }
 
-?>
+?> -->
 
  </body>
 </html>
