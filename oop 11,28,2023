@@ -1,0 +1,40 @@
+// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
+// then press Enter. You can now see whitespace characters in your code.
+public class Main {
+    public static void main(String[] args) {
+   Gnacq Gnacq1=new Gnacq();
+     Gnacq1.aragutyun="KM";
+     Gnacq1.speed="Matro";
+     Gnacq1.length="300";
+     Gnacq1.km="100km";
+     System.out.println(Gnacq1.length);
+
+     Gnacq Gnacq2=new Gnacq();
+       Gnacq2.aragutyun="start";
+     Gnacq2.speed="time";
+     Gnacq2.length="speed";
+     Gnacq2.km="speed";
+
+     Gnacq Gnacq3=new Gnacq();
+       Gnacq3.aragutyun="KM";
+     Gnacq3.speed="Matro";
+     Gnacq3.length="300";
+     Gnacq3.km="100km";
+
+     Gnacq Gnacq4=new Gnacq();
+       Gnacq4.aragutyun="KM";
+     Gnacq4.speed="Matro";
+     Gnacq4.length="300";
+     Gnacq4.km="100km";
+     int km=100;
+     km+=10;
+        System.out.println(km);
+    }
+}
+
+class Gnacq{
+    String aragutyun;
+    String speed;
+    String length;
+   String km;
+}
