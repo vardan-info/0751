@@ -1,17 +1,80 @@
-<!DOCTYPE HTML>
-<html>
- <head>
-   <title>!DOCTYPE</title>
-   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Հտմլ ցսս յավասքրիպտ Խաղ</title>
+</head>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
 
-     <link rel="stylesheet" href="css/styles.css">
-  <link src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
- </head>
+.container {
+    text-align: center;
+}
 
- 
- <body>
+h1 {
+    color: #333;
+}
 
+button {
+    font-size: 16px;
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
 
- 
-  </body>
-  </html>
+</style>
+<body>
+    <div class="container">
+        <h1>Հտմլ ցսս յավասքրիպտ Խաղ</h1>
+        <p id="output"></p>
+        <button id="startButton">Սկսել Խաղը</button>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+    const startButton = document.getElementById("startButton");
+    const output = document.getElementById("output");
+
+    startButton.addEventListener("click", function() {
+        startGame();
+    });
+
+    function startGame() {
+        const randomNumber = Math.floor(Math.random() * 100) + 1;
+        const userGuess = prompt("Գուշակիր 1-100 միջակայքում թիվը:");
+
+        if (userGuess !== null) {
+            const parsedGuess = parseInt(userGuess, 10);
+
+            if (!isNaN(parsedGuess)) {
+                checkGuess(parsedGuess, randomNumber);
+            } else {
+                alert("Մուտքագրեք թիվ:");
+            }
+        }
+    }
+
+    function checkGuess(guess, target) {
+        if (guess === target) {
+            output.innerHTML = "Շնորհավորում եմ, դուք ճիշտ գուշակեցիք!";
+        } else {
+            output.innerHTML = `Գուշակեք կրկին։ Ճիշտ թիվը՝ ${target}`;
+        }
+    }
+});
+
+    </script>
+</body>
+</html>
