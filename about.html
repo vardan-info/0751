@@ -1,43 +1,87 @@
-<?php $to = 'user@example.com'; 
-$from = 'sender@example.com'; 
-$fromName = 'SenderName'; 
- 
-$subject = "Send HTML Email in PHP by CodexWorld"; 
- 
-$htmlContent = ' 
-    <html> 
-    <head> 
-        <title>Welcome to CodexWorld</title> 
-    </head> 
-    <body> 
-        <h1>Thanks you for joining with us!</h1> 
-        <table cellspacing="0" style="border: 2px dashed #FB4314; width: 100%;"> 
-            <tr> 
-                <th>Name:</th><td>CodexWorld</td> 
-            </tr> 
-            <tr style="background-color: #e0e0e0;"> 
-                <th>Email:</th><td>contact@codexworld.com</td> 
-            </tr> 
-            <tr> 
-                <th>Website:</th><td><a href="http://www.codexworld.com">www.codexworld.com</a></td> 
-            </tr> 
-        </table> 
-    </body> 
-    </html>'; 
- 
-// Set content-type header for sending HTML email 
-$headers = "MIME-Version: 1.0" . "\r\n"; 
-$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n"; 
- 
-// Additional headers 
-$headers .= 'From: '.$fromName.'<'.$from.'>' . "\r\n"; 
-$headers .= 'Cc: welcome@example.com' . "\r\n"; 
-$headers .= 'Bcc: welcome2@example.com' . "\r\n"; 
- 
-// Send email 
-if(mail($to, $subject, $htmlContent, $headers)){ 
-    echo 'Email has sent successfully.'; 
-}else{ 
-   echo 'Email sending failed.'; 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Խաղ Գուշակիր</title>
+</head>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
 }
-    ?>
+
+.container {
+    text-align: center;
+}
+
+h1 {
+    color: #333;
+}
+
+button {
+    font-size: 16px;
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+#result {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+</style>
+<body>
+    <div class="container">
+        <h1>Խաղ Գուշակիր</h1>
+        <button onclick="playGame()">Սկսել Խաղը</button>
+        <p id="result"></p>
+    </div>
+
+    <script>function playGame() {
+    const options = ['Քար', 'Փարունք', 'Ութ', 'Գլխարկ'];
+    const userChoice = prompt('Ընտրեք Քար, Փարունք, Ութ, Գլխարկ:');
+    if (!options.includes(userChoice)) {
+        alert('Ծրագրավորված գրություն: Խնդրում եմ ընտրեք միայն Քար, Փարունք, Ութ, Գլխարկից:');
+        return;
+    }
+
+    const computerChoice = options[Math.floor(Math.random() * options.length)];
+    const result = determineWinner(userChoice, computerChoice);
+
+    const resultElement = document.getElementById('result');
+    resultElement.textContent = `Դուք ընտրեցիք ${userChoice}, համախառնաբար համախառն է ${computerChoice}: ${result}`;
+}
+
+function determineWinner(userChoice, computerChoice) {
+    if (userChoice === computerChoice) {
+        return 'Ուշադրություն, համախառնություն, դուք ու համախառնված եք: Բայց դուք չունեք վերջավորություն:';
+    }
+
+    if (
+        (userChoice === 'Քար' && computerChoice === 'Ութ') ||
+        (userChoice === 'Փարունք' && computerChoice === 'Քար') ||
+        (userChoice === 'Ութ' && computerChoice === 'Փարունք') ||
+        (userChoice === 'Գլխարկ' && computerChoice === 'Ութ')
+    ) {
+        return 'Դուք հաղթեցիք!';
+    } else {
+        return 'Դուք պարտվեցիք:';
+    }
+}
+</script>
+</body>
+</html>
