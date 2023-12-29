@@ -1,151 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Խաղալու խաղ</title>
-</head>
-<style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Աշխատավարձի Հաշվարկ</title>
+  <style>
     body {
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-}
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
 
-.container {
-    text-align: center;
-}
-
-h1 {
-    color: #333;
-}
-
-button {
-    font-size: 16px;
-    padding: 10px 20px;
-    cursor: pointer;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    margin-top: 20px;
-}
-
-#gameBoard {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-.square {
-    width: 50px;
-    height: 50px;
-    margin: 5px;
-    cursor: pointer;
-    background-color: #ddd;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    font-weight: bold;
-}
-
-.square:hover {
-    background-color: #ccc;
-}
-
-</style>
+    #result {
+      max-width: 400px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
 <body>
-    <div class="container">
-        <h1>Խաղալու խաղ</h1>
-        <p id="message"></p>
-        <button id="startButton" onclick="startGame()">Սկսել Խաղը</button>
-        <div id="gameBoard"></div>
-    </div>
+  <div id="result">
+    <h1>Աշխատավարձի Հաշվարկ</h1>
+    <label for="salary">Աշխատավարձը՝</label>
+    <input type="number" id="salary" placeholder="Գումարը" />
+    <button onclick="calculateTax()">Հաշվարկել</button>
+    <p id="resultText"></p>
+  </div>
 
-    <script>
-        const boardSize = 3;
-let currentPlayer = 'X';
-let gameBoard = [];
+  <script>
+    function calculateTax() {
+      var salary = document.getElementById("salary").value;
+      var resultElement = document.getElementById("resultText");
+      var taxRate = 0.15; // 15% եկամտային հարկ
 
-function startGame() {
-    currentPlayer = 'X';
-    gameBoard = Array.from({ length: boardSize }, () => Array(boardSize).fill(''));
-    renderBoard();
-    setMessage(`Հաջողությամբ խաղացեք, հիմա ${currentPlayer}-ին`);
-}
+      if (!salary || isNaN(salary)) {
+        resultElement.textContent = "Խնդրում ենք մուտքագրել ճշտության ամսաթիվ։";
+      } else {
+        var tax = salary * taxRate;
+        var netSalary = salary - tax;
 
-function renderBoard() {
-    const gameBoardElement = document.getElementById('gameBoard');
-    gameBoardElement.innerHTML = '';
-
-    for (let i = 0; i < boardSize; i++) {
-        for (let j = 0; j < boardSize; j++) {
-            const square = document.createElement('div');
-            square.classList.add('square');
-            square.dataset.row = i;
-            square.dataset.col = j;
-            square.innerText = gameBoard[i][j];
-            square.addEventListener('click', handleSquareClick);
-            gameBoardElement.appendChild(square);
-        }
+        resultElement.textContent = "Դուք կվճարեք " + tax.toFixed(2) + " դրամ եկամտային հարկ։ Հաշվարկված մարդկանց սահմանափակման համար, աշխատավարձը դուք կստանաք " + netSalary.toFixed(2) + " դրամ։";
+      }
     }
-}
-
-function handleSquareClick(event) {
-    const row = event.target.dataset.row;
-    const col = event.target.dataset.col;
-
-    if (gameBoard[row][col] === '' && !isGameOver()) {
-        gameBoard[row][col] = currentPlayer;
-        renderBoard();
-
-        if (isWinner()) {
-            setMessage(`${currentPlayer}-ը հաղթեց!`);
-        } else if (isBoardFull()) {
-            setMessage('Խաղը հավաքարարված է։ Հաղթում չկա։');
-        } else {
-            currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
-            setMessage(`Հաջողությամբ խաղացեք, հիմա ${currentPlayer}-ին`);
-        }
-    }
-}
-
-function setMessage(message) {
-    document.getElementById('message').innerText = message;
-}
-
-function isWinner() {
-    for (let i = 0; i < boardSize; i++) {
-        if (gameBoard[i].every(cell => cell === currentPlayer) || gameBoard.every(row => row[i] === currentPlayer)) {
-            return true;
-        }
-    }
-
-    if (gameBoard.every((row, index) => row[index] === currentPlayer) || gameBoard.every((row, index) => row[boardSize - 1 - index] === currentPlayer)) {
-        return true;
-    }
-
-    return false;
-}
-
-function isBoardFull() {
-    return gameBoard.every(row => row.every(cell => cell !== ''));
-}
-
-function isGameOver() {
-    return isWinner() || isBoardFull();
-}
-
-// Խաղը սկսելու համար
-startGame();
-
-    </script>
+  </script>
 </body>
 </html>
