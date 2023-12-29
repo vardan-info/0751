@@ -1,412 +1,89 @@
-1....Basic Laravel Auth: ability to log in as administrator
-'mysql' => [
-    ...
-    'charset' => 'utf8',
-    'collation' => 'utf8_unicode_ci',
-    ...
-]
-
-public function up()
-{
-    Schema::create('users', function (Blueprint $table) {
-      $table->id();
-      $table->string('name');
-      $table->string('phone');
-      $table->string('gender');
-      $table->string('dob');
-      $table->string('user_type')->nullable(); 
-      $table->string('email')->unique();
-      $table->timestamp('email_verified_at')->nullable();
-      $table->string('password');
-      $table->rememberToken();
-      $table->timestamps();
-    });
-}
-Goto the app>Http>Controllers>Auth>RegisterController.php, add in the new fields for validation, and…
-------------------------------------------------------------------------------------------------------
-2..........Use database seeds to create first user with email
-ADMIN\_NAME="NAME
-ADMIN\_EMAIL=admin@example.com
-ADMIN\_PASSWORD=secure\_pa55word
-
-<?php
-return [
-
-  
-    |
-    | Default admin user
-    |
-    | Default user will be created at project installation/deployment
-
-
-    'admin_name' => env('ADMIN_NAME', ''),
-    'admin_email' => env('ADMIN_EMAIL', ''),
-    'admin_password' =>env('ADMIN_PASSWORD', '')
-    ];
-
-
-<?php
-use Illuminate\Database\Seeder;
-use App\User;
-
-class UserTableSeeder extends Seeder
-{
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
-    public function run()
-    {
-        if(config('admin.admin_name')) {
-            User::firstOrCreate(
-                ['email' => config('admin.admin_email')], [
-                    'name' => config('admin.admin_name'),
-                    'password' => bcrypt(config('admin.admin_password')),
-                ]
-            );
-        }
-    }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Հաշվարկել Կենստաթոշակ Աշխատավարձ</title>
+</head>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
 }
 
-------------------------------------------------------------------------------
-
-
-______________________________________________________________________________
-3___________CRUD functionality (Create / Read / Update / Delete) for two menu
-items: Companies and Employees.
-
-
-SELECT * FROM Companies
-SELECT * FROM Employees
-SELECT * FROM Title
-SELECT * FROM Gender
-SELECT * FROM LeaveTypes
-SELECT * FROM Leave
-SELECT * FROM Addresses
-
-SELECT Companies.CompanyName
-      ,Employees.EmployeeName
-      ,Employees.ContactNo
-      ,Employees.Email
-      ,Employees.CompID
-FROM Companies 
-JOIN Employees ON Employees.CompID = Companies.id
-
-SELECT co.CompanyName
-      ,emp.EmployeeName
-      ,emp.ContactNo
-      ,emp.Email
-FROM Companies co
-JOIN Employees emp ON emp.CompID = co.id
-WHERE co.id = 1
-______________________________________________
-5________________________________________Use database migrations to create those schemas above
-'default' => env('DB_CONNECTION', 'mysql'),
- 
-'connections' => [
- 
-    'sqlite' => [
-        'driver' => 'sqlite',
-        'url' => env('DATABASE_URL'),
-        'database' => env('DB_DATABASE', database_path('database.sqlite')),
-        'prefix' => '',
-        'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
-    ],
- 
-    'mysql' => [
-        'driver' => 'mysql',
-        'url' => env('DATABASE_URL'),
-        'host' => env('DB_HOST', '127.0.0.1'),
-        'port' => env('DB_PORT', '3306'),
-        'database' => env('DB_DATABASE', 'forge'),
-        'username' => env('DB_USERNAME', 'forge'),
-        'password' => env('DB_PASSWORD', ''),
-        'unix_socket' => env('DB_SOCKET', ''),
-        'charset' => 'utf8mb4',
-        'collation' => 'utf8mb4_unicode_ci',
-        'prefix' => '',
-        'prefix_indexes' => true,
-        'strict' => true,
-        'engine' => null,
-        'options' => extension_loaded('pdo_mysql') ? array_filter([
-            PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
-        ]) : [],
-    ],
- 
-    'pgsql' => [
-        'driver' => 'pgsql',
-        'url' => env('DATABASE_URL'),
-        'host' => env('DB_HOST', '127.0.0.1'),
-        'port' => env('DB_PORT', '5432'),
-        'database' => env('DB_DATABASE', 'forge'),
-        'username' => env('DB_USERNAME', 'forge'),
-        'password' => env('DB_PASSWORD', ''),
-        'charset' => 'utf8',
-        'prefix' => '',
-        'prefix_indexes' => true,
-        'schema' => 'public',
-        'sslmode' => 'prefer',
-    ],
- 
-    'sqlsrv' => [
-        'driver' => 'sqlsrv',
-        'url' => env('DATABASE_URL'),
-        'host' => env('DB_HOST', 'localhost'),
-        'port' => env('DB_PORT', '1433'),
-        'database' => env('DB_DATABASE', 'forge'),
-        'username' => env('DB_USERNAME', 'forge'),
-        'password' => env('DB_PASSWORD', ''),
-        'charset' => 'utf8',
-        'prefix' => '',
-        'prefix_indexes' => true,
-    ],
- 
-],
-
-
-________________________________________________________________________________________
-____________________________________________________________________________________
-6____________________________
-'sftp' => [
-    'driver' => 'sftp',
-    'host' => env('SFTP_HOST'),
- 
-    // Settings for basic authentication...
-    'username' => env('SFTP_USERNAME'),
-    'password' => env('SFTP_PASSWORD'),
- 
-    // Settings for SSH key based authentication with encryption password...
-    'privateKey' => env('SFTP_PRIVATE_KEY'),
-    'passphrase' => env('SFTP_PASSPHRASE'),
- 
-    // Settings for file / directory permissions...
-    'visibility' => 'private', // `private` = 0600, `public` = 0644
-    'directory_visibility' => 'private'
-
-'s3-videos' => [
-    'driver' => 'scoped',
-    'disk' => 's3',
-    'prefix' => 'path/to/videos',
-],
-
-<?php
- 
-namespace App\Providers;
- 
-use DateTime;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\URL;
-use Illuminate\Support\ServiceProvider;
- 
-class AppServiceProvider extends ServiceProvider
-{
-    /**
-     * Bootstrap any application services.
-     */
-    public function boot(): void
-    {
-        Storage::disk('local')->buildTemporaryUrlsUsing(
-            function (string $path, DateTime $expiration, array $options) {
-                return URL::temporarySignedRoute(
-                    'files.download',
-                    $expiration,
-                    array_merge($options, ['path' => $path])
-                );
-            }
-        );
-    }
+.container {
+    text-align: center;
 }
-____________________________________________________________________________________________________
-_____________________________________________________________________________________________________
-7________________________________________
-?php  
-namespace App\Http\Controllers;  
-use Illuminate\Http\Request;  
-class PostController extends Controller  
-{ 
-public function index()  
-{  
-          
-//  
-      
-}  
 
-       
- public function create()  
-{  
-           
-      
-}  
+h1 {
+    color: #333;
+}
 
-public function store(Request $request)  
-{  
-          
-//  
-      
-}  
- 
-public function show($id)  
-{  
-  
-  //  
-}  
- 
- public function edit($id)  
-      
-{  
-          
-      
-}  
- 
- public function update(Request $request, $id)  
-{  
-          
+form {
+    margin-top: 20px;
+}
 
-      
-}  
+label, input {
+    display: block;
+    margin-bottom: 10px;
+}
 
- public function destroy($id)  
- {  
-          
-//}}  
-Step 2: Now, we need to register the resourceful route to the Controller, and which can be done as follows:
+button {
+    font-size: 16px;
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-top: 10px;
+}
 
-Route::resource('posts','PostController');
+#result {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #333;
+}
 
+</style>
+<body>
+    <div class="container">
+        <h1>Հաշվարկել Կենստաթոշակ Աշխատավարձ</h1>
+        <form onsubmit="calculateSalary(); return false;">
+            <label for="hoursWorked">Աշխատաժամերը (շաբաթվա համար):</label>
+            <input type="number" id="hoursWorked" required>
 
------------------------------------------------------------
----------______________________________________________________________________________________________
-8--------------------------------------------------------------------------------------------
- <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    Laravelia
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+            <label for="hourlyRate">Ժամավարձակալի հաշվարկային վարժությունը:</label>
+            <input type="number" id="hourlyRate" required>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
+            <button type="submit">Հաշվել</button>
+        </form>
 
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-        <main class="py-4" style="background-color: rgb(245, 245, 245);">
-            @yield('content')
-        </main>
+        <p id="result"></p>
     </div>
-    @stack('script')
 
+    <script>function calculateSalary() {
+    const hoursWorked = parseFloat(document.getElementById('hoursWorked').value);
+    const hourlyRate = parseFloat(document.getElementById('hourlyRate').value);
 
+    if (isNaN(hoursWorked) || isNaN(hourlyRate) || hoursWorked < 0 || hourlyRate < 0) {
+        alert('Ներեցրեք ճիշտ թիվեր։');
+        return;
+    }
 
+    const weeklySalary = hoursWorked * hourlyRate;
+    const monthlySalary = weeklySalary * 4;  // Մասնակի համարվում է 4 շաբաթների վրա
 
-@extends('layouts.app')
-
-@push('style')
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header" style="background: gray; color:#f1f7fa; font-weight:bold;">
-                    Create New User
-                    <a href="{{ route('user.index') }}" class="btn btn-success btn-xs py-0 float-end">Back</a>
-                </div>
-                @if($errors->any())
-                    {!! implode('', $errors->all('<div class="text-red">:message</div>')) !!}
-                @endif
-                 <div class="card-body">                    
-                    <form class="w-px-500 p-3 p-md-3" action="{{ route('user.store') }}" method="post" enctype="multipart/form-data">
-                        @csrf
-                        <div class="row mb-3">
-                            <label class="col-sm-3 col-form-label">Name</label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control  @error('name') is-invalid @enderror" name="name" placeholder="Name">
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-                
-                        <div class="row mb-3">
-                            <label class="col-sm-3 col-form-label">Email</label>
-                            <div class="col-sm-9">
-                                <input type="email" class="form-control  @error('email') is-invalid @enderror" name="email" placeholder="Email">
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label class="col-sm-3 col-form-label">Password</label>
-                            <div class="col-sm-9">
-                                <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Password">
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label class="col-sm-3 col-form-label"></label>
-                            <div class="col-sm-9">
-                                <button type="submit" class="btn btn-success btn-block text-white">Submit</button>
-                            </div>
-                        </div>
-                      </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-@endsection
--------------------------------------------------------------------------------------------------------------------
+    const resultElement = document.getElementById('result');
+    resultElement.textContent = `Շաբաթվա աշխատավարձ՝ ${weeklySalary.toFixed(2)} դրամ։
+                                 Ամսվա աշխատավարձ՝ ${monthlySalary.toFixed(2)} դրամ։`;
+}
+</script>
+</body>
+</html>
