@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Խաղ Գուշակիր</title>
+    <title>Խաղալու խաղ</title>
 </head>
 <style>
     body {
@@ -36,52 +36,116 @@ button {
     margin-top: 20px;
 }
 
-#result {
+#gameBoard {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     margin-top: 20px;
+}
+
+.square {
+    width: 50px;
+    height: 50px;
+    margin: 5px;
+    cursor: pointer;
+    background-color: #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 18px;
     font-weight: bold;
-    color: #333;
+}
+
+.square:hover {
+    background-color: #ccc;
 }
 
 </style>
 <body>
     <div class="container">
-        <h1>Խաղ Գուշակիր</h1>
-        <button onclick="playGame()">Սկսել Խաղը</button>
-        <p id="result"></p>
+        <h1>Խաղալու խաղ</h1>
+        <p id="message"></p>
+        <button id="startButton" onclick="startGame()">Սկսել Խաղը</button>
+        <div id="gameBoard"></div>
     </div>
 
-    <script>function playGame() {
-    const options = ['Քար', 'Փարունք', 'Ութ', 'Գլխարկ'];
-    const userChoice = prompt('Ընտրեք Քար, Փարունք, Ութ, Գլխարկ:');
-    if (!options.includes(userChoice)) {
-        alert('Ծրագրավորված գրություն: Խնդրում եմ ընտրեք միայն Քար, Փարունք, Ութ, Գլխարկից:');
-        return;
-    }
+    <script>
+        const boardSize = 3;
+let currentPlayer = 'X';
+let gameBoard = [];
 
-    const computerChoice = options[Math.floor(Math.random() * options.length)];
-    const result = determineWinner(userChoice, computerChoice);
-
-    const resultElement = document.getElementById('result');
-    resultElement.textContent = `Դուք ընտրեցիք ${userChoice}, համախառնաբար համախառն է ${computerChoice}: ${result}`;
+function startGame() {
+    currentPlayer = 'X';
+    gameBoard = Array.from({ length: boardSize }, () => Array(boardSize).fill(''));
+    renderBoard();
+    setMessage(`Հաջողությամբ խաղացեք, հիմա ${currentPlayer}-ին`);
 }
 
-function determineWinner(userChoice, computerChoice) {
-    if (userChoice === computerChoice) {
-        return 'Ուշադրություն, համախառնություն, դուք ու համախառնված եք: Բայց դուք չունեք վերջավորություն:';
-    }
+function renderBoard() {
+    const gameBoardElement = document.getElementById('gameBoard');
+    gameBoardElement.innerHTML = '';
 
-    if (
-        (userChoice === 'Քար' && computerChoice === 'Ութ') ||
-        (userChoice === 'Փարունք' && computerChoice === 'Քար') ||
-        (userChoice === 'Ութ' && computerChoice === 'Փարունք') ||
-        (userChoice === 'Գլխարկ' && computerChoice === 'Ութ')
-    ) {
-        return 'Դուք հաղթեցիք!';
-    } else {
-        return 'Դուք պարտվեցիք:';
+    for (let i = 0; i < boardSize; i++) {
+        for (let j = 0; j < boardSize; j++) {
+            const square = document.createElement('div');
+            square.classList.add('square');
+            square.dataset.row = i;
+            square.dataset.col = j;
+            square.innerText = gameBoard[i][j];
+            square.addEventListener('click', handleSquareClick);
+            gameBoardElement.appendChild(square);
+        }
     }
 }
-</script>
+
+function handleSquareClick(event) {
+    const row = event.target.dataset.row;
+    const col = event.target.dataset.col;
+
+    if (gameBoard[row][col] === '' && !isGameOver()) {
+        gameBoard[row][col] = currentPlayer;
+        renderBoard();
+
+        if (isWinner()) {
+            setMessage(`${currentPlayer}-ը հաղթեց!`);
+        } else if (isBoardFull()) {
+            setMessage('Խաղը հավաքարարված է։ Հաղթում չկա։');
+        } else {
+            currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+            setMessage(`Հաջողությամբ խաղացեք, հիմա ${currentPlayer}-ին`);
+        }
+    }
+}
+
+function setMessage(message) {
+    document.getElementById('message').innerText = message;
+}
+
+function isWinner() {
+    for (let i = 0; i < boardSize; i++) {
+        if (gameBoard[i].every(cell => cell === currentPlayer) || gameBoard.every(row => row[i] === currentPlayer)) {
+            return true;
+        }
+    }
+
+    if (gameBoard.every((row, index) => row[index] === currentPlayer) || gameBoard.every((row, index) => row[boardSize - 1 - index] === currentPlayer)) {
+        return true;
+    }
+
+    return false;
+}
+
+function isBoardFull() {
+    return gameBoard.every(row => row.every(cell => cell !== ''));
+}
+
+function isGameOver() {
+    return isWinner() || isBoardFull();
+}
+
+// Խաղը սկսելու համար
+startGame();
+
+    </script>
 </body>
 </html>
