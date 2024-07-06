@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Описание вашей веб-страницы">
+    <meta name="keywords" content="ключевые слова, через, запятую">
+  <link rel="icon" href="image/Face_ID_logo.svg.PNG" type="image/x-icon" />
+
+    <meta name="author" content="Автор страницы">
+    <title>Menu Example</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+</head>
+<body>
+    <nav id="menu">
+        <ul>
+             <li><a href="#Home" onclick="loadContent('home.html')">Главная</a></li>
+          <li><a href="#Gallery" onclick="loadContent('gallery.html')">Галерея</a></li>
+            <li><a href="#Services" onclick="loadContent('Services.html')">Services</a></li>
+            <li><a href="#Contact" onclick="loadContent('footer.html')">Contact</a></li>
+        </ul>
+    </nav>
+<main>
+      <div class="content">
+        <h1>Туризм в Армении</h1>
+        <p>
+         Согласно стратегии, в сфере туризма в 2030 году будет занято 130 тыс. 647 человек. В рейтинге Всемирной Туристической Организации Армения заняла 12-е место в списке наиболее бысто развивающихся туристических направлений опередив страны Закавказья, Турцию и страны ЕАЭС.
+        </p>
+        <button class="btn">Explore More</button>
+      </div>
+
+      <div class="stack">
+        <div class="card">
+          <img
+            src="image/free-photo-of-saint-gayane-church-in-armenia.JPEG " alt="" />
+        </div>
+        <div class="card">
+          <img
+            src="image/free-photo-of-view-of-the-village-of-hayravank-by-the-lake-sevan-in-armenia.JPEG">
+            
+        </div>
+        <div class="card">
+          <img
+            src="image/pexels-photo-11885413.JPEG">
+            
+        </div>
+        <div class="card">
+          <img
+            src="image/garni-temple.JPEG">
+            
+        </div>
+        <div class="card">
+          <img
+            src="image/pexels-photo-9585095.JPEG">
+            
+        </div>
+        <div class="card">
+          <img
+            src="image/pexels-photo-11885413.JPEG">
+           
+        </div>
+      </div>
+    </main>
+    <script>
+        // JavaScript for menu functionality (optional)
+// Example: Add active class on click
+
+const menuItems = document.querySelectorAll('#menu ul li a');
+
+menuItems.forEach(item => {
+    item.addEventListener('click', function() {
+        // Remove active class from all items
+        menuItems.forEach(item => {
+            item.classList.remove('active');
+        });
+
+        // Add active class to the clicked item
+        this.classList.add('active');
+    });
+});
+
+    </script>
+    <script>
+        const stack = document.querySelector(".stack");
+const cards = Array.from(stack.children)
+  .reverse()
+  .filter((child) => child.classList.contains("card"));
+
+cards.forEach((card) => stack.appendChild(card));
+
+function moveCard() {
+  const lastCard = stack.lastElementChild;
+  if (lastCard.classList.contains("card")) {
+    lastCard.classList.add("swap");
+
+    setTimeout(() => {
+      lastCard.classList.remove("swap");
+      stack.insertBefore(lastCard, stack.firstElementChild);
+    }, 1200);
+  }
+}
+
+let autoplayInterval = setInterval(moveCard, 4000);
+
+stack.addEventListener("click", function (e) {
+  const card = e.target.closest(".card");
+  if (card && card === stack.lastElementChild) {
+    card.classList.add("swap");
+
+    setTimeout(() => {
+      card.classList.remove("swap");
+      stack.insertBefore(card, stack.firstElementChild);
+    }, 1200);
+  }
+});
+
+    </script>
+    <!--paragrafh-->
+    <div class="Services">
+        <section id="Services">
+        <h6>Туризм в Армении</h6>
+    </div>
+     <div class="contents">
+  <div class="wrapper">
+    <div class="box">
+
+      <h5>Enim aute irure elit, eiusmod nulla aliquip et non proident, ipsum mollit laboris reprehenderit consectetur cupidatat nostrud tempor dolor amet, proident, aliqua. Tempor in quis irure eu qui do ipsum exercitation eiusmod elit, voluptate ut aute dolore amet, ut culpa labore aliqua. Exercitation in proident, reprehenderit sed sit dolor consequat. Sit occaecat quis excepteur est minim non enim consectetur ex velit eiusmod sed amet, non in sunt dolor sit do velit deserunt deserunt in eu aute enim officia consectetur ut sed cillum est labore id pariatur. Ea in dolor officia incididunt. In ea in duis mollit incididunt. Esse sit officia in ullamco pariatur. Ea nostrud eiusmod dolor occaecat magna tempor lorem minim elit, elit, cupidatat consectetur velit id aliqua. Exercitation do occaecat reprehenderit ipsum duis aliquip deserunt incididunt. Et eiusmod excepteur in aliquip dolore dolore ullamco occaecat et irure duis et excepteur excepteur cillum irure ut dolor magna ut aut.</h5>
+      </div>
+      <div class="box">
+      <h5>Enim aute irure elit, eiusmod nulla aliquip et non proident, ipsum mollit laboris reprehenderit consectetur cupidatat nostrud tempor dolor amet, proident, aliqua. Tempor in quis irure eu qui do ipsum exercitation eiusmod elit, voluptate ut aute dolore amet, ut culpa labore aliqua. Exercitation in proident, reprehenderit sed sit dolor consequat. Sit occaecat quis excepteur est minim non enim consectetur ex velit eiusmod sed amet, non in sunt dolor sit do velit deserunt deserunt in eu aute enim officia consectetur ut sed cillum est labore id pariatur. Ea in dolor officia incididunt. In ea in duis mollit incididunt. Esse sit officia in ullamco pariatur. Ea nostrud eiusmod dolor occaecat magna tempor lorem minim elit, elit, cupidatat consectetur velit id aliqua. Exercitation do occaecat reprehenderit ipsum duis aliquip deserunt incididunt. Et eiusmod excepteur in aliquip dolore dolore ullamco occaecat et irure duis et excepteur excepteur cillum irure ut dolor magna ut aut.</h5>
+      </div>
+        <div class="box">
+      <h5>Enim aute irure elit, eiusmod nulla aliquip et non proident, ipsum mollit laboris reprehenderit consectetur cupidatat nostrud tempor dolor amet, proident, aliqua. Tempor in quis irure eu qui do ipsum exercitation eiusmod elit, voluptate ut aute dolore amet, ut culpa labore aliqua. Exercitation in proident, reprehenderit sed sit dolor consequat. Sit occaecat quis excepteur est minim non enim consectetur ex velit eiusmod sed amet, non in sunt dolor sit do velit deserunt deserunt in eu aute enim officia consectetur ut sed cillum est labore id pariatur. Ea in dolor officia incididunt. In ea in duis mollit incididunt. Esse sit officia in ullamco pariatur. Ea nostrud eiusmod dolor occaecat magna tempor lorem minim elit, elit, cupidatat consectetur velit id aliqua. Exercitation do occaecat reprehenderit ipsum duis aliquip deserunt incididunt. Et eiusmod excepteur in aliquip dolore dolore ullamco occaecat et irure duis et excepteur excepteur cillum irure ut dolor magna ut aut.</h5>
+          </div>
+    </div>
+  </div>
+</div>
+
+    <!--paragraf end-->
+ <!-- Write your comments here  slider-->
+ <div class="text-gallery">
+     <p>Image Gallery</p>
+     <a href="#Gallery">
+        <section id="Gallery">
+ </div>
+ 
+<main class="gallery gallery__content--flow"  href="#gallery gallery__content--flow">
+        <figure>
+            <img src="image/garni-2.jpg" alt="Garni "
+                title="Garni">
+            <figcaption class="header__caption" role="presentation">
+                <h1 class="title title--primary">Garni</h1>
+                <h2 class="title title--secondary">Гарни (храм)</h2>
+            </figcaption>
+        </figure>
+
+        <figure>
+            <img src="image/gexard-2.jpg">
+            <figcaption class="header__caption" role="presentation">
+                <h1 class="title title--primary">Гегард</h1>
+                <h2 class="title title--secondary">Гегард, Армения</h2>
+            </figcaption>
+        </figure>
+
+        <figure>
+            <img src="image/noravanq-2.jpg">
+            <figcaption class="header__caption" role="presentation">
+                <h1 class="title title--primary">Монастырь Нораванк</h1>
+                <h2 class="title title--secondary">Նորավանք</h2>
+            </figcaption>
+        </figure>
+        <figure>
+            <img src="image/sevan.jpg">
+
+            <figcaption class="header__caption" role="presentation">
+                <h1 class="title title--primary">Севан</h1>
+                <h2 class="title title--secondary">Площадь: 1 242 км²
+Ширина: 32 км</h2>
+            </figcaption>
+        </figure>
+
+        <figure>
+            <img src="image/Ararat.jpeg">
+              
+            <figcaption class="header__caption" role="presentation">
+                <h1 class="title title--primary">Арарат</h1>
+                <h2 class="title title--secondary">Высота над уровнем моря: 5 137 м</h2>
+            </figcaption>
+        </figure>
+        <figure>
+            <img src="image/byurakan.webp">
+
+            <figcaption class="header__caption" role="presentation">
+                <h1 class="title title--primary">Бюракан</h1>
+                <h2 class="title title--secondary">Высота над уровнем моря: 1 460 м</h2>
+            </figcaption>
+        </figure>
+    </main>
+    <section id="footer">
+         <section id="Contact">
+  <div class="main-footer">
+    <div class="logoinfo" data-aos="fade-up">
+      <h2>Responsive Footer</h2>
+      <p>By Tumanyan</p>
+
+      <div class="contact-details">
+        <h1>Contact </h1>
+        <li>
+          <div class="fa fa-phone"></div><a href="tel:+919326048690">+374-55-76-65-54</a></li>
+        <li>
+          <div class="fa fa-envelope"></div><a href="mailto:yourmail@gmail.com">Yurinalbandyan41@gmail.com</a></li>
+        </li>
+    </div>
+  </div>
+  <div class="com " data-aos="fade-up">
+    <h1>About</h1>
+    <ul>
+     <li><a href="#Home" onclick="loadContent('home.html')">Главная</a></li>
+     <li><a href="#Gallery" onclick="loadContent('gallery.html')">Галерея</a></li>
+      <li><a href="https://vardan-info.github.io/0751/">Projects</a></li>
+      <li><a href="#Contact" onclick="loadContent('footer.html')">Contact</a></li>
+    </ul>
+  </div>
+  <div class="info" data-aos="fade-up">
+    <h1>Social Media</h1>
+    <section class="social">
+            <a href="https://www.google.com/intl/ru/gmail/about/#inbox">
+                <i class="fas fa-at"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/vardan-tumanyan-24b448168/">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="">
+                <i class="fab fa-instagram"></i>
+            </a>
+
+            <a href="">
+                <i class="fab fa-telegram-plane"></i>
+            </a>
+        </section>
+</section>
+
+<footer>©The website was created 07.06.2024 Tumanyan Vardan +374-96-777-193</footer>
+
+</body>
+</html>
