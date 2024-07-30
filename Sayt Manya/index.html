@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Описание вашей веб-страницы">
+    <meta name="keywords" content="ключевые слова, через, запятую">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="icon" href="image/Face_ID_logo.svg.PNG" type="image/x-icon" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+    <meta name="author" content="Автор страницы">
+    <title>Menu Example</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    
+    <div class="navbar">
+        <a href="#home" class="logo">Լոգո</a>
+        <button class="menu-button" onclick="toggleMenu()">≡ Մենյու</button>
+        <ul class="menu" id="menu">
+            <li><a href="index.htm">Գլխավոր</a></li>
+            <li><a href="about.html" target="_self">  ՄԵՐ ՄԱՍԻՆ</a></li>
+            <li><a href="#about">ԾԱՌԱՅՈՒԹՅՈՒՆՆԵՐԸ</a></li>
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropdown-button">Լրացուցիչ</a>
+                <div class="dropdown-content">
+                    <a href="#option1">Տարբերակ 1</a>
+                    <a href="#option2">Տարբերակ 2</a>
+                    <a href="#option3">Տարբերակ 3</a>
+                </div>
+            </li>
+        </ul>
+        <div class="navbar">
+        
+            <div class="language-selector">
+    
+                <select id="language">
+                    <option value="en">English</option>
+                    <option value="ru">Russian</option>
+                    <option value="hy">Armenian</option>
+                </select>
+            </div>
+        </div>
+       </div>
+       
+    <script>
+        function toggleMenu() {
+            var menu = document.getElementById("menu");
+            menu.classList.toggle("show");
+        }
+        
+     
+        </script>
+        <script>
+           const messages = {
+    en: "Hello! You have selected English.",
+    ru: "Здравствуйте! Вы выбрали Русский.",
+    hy: "Բարև! Դուք ընտրել եք Հայերեն:"
+};
+
+document.getElementById('language').addEventListener('change', function() {
+    const selectedLanguage = this.value;
+    const message = messages[selectedLanguage] || "Please select a language.";
+    document.getElementById('message').textContent = message;
+});
+
+        </script>
+        <!--slider-->
+        <div class="slider-container">
+            <div class="slides">
+                <div class="slide">
+                    <img src="https://via.placeholder.com/1200x400?text=Slide+1" alt="Slide 1">
+                </div>
+                <div class="slide">
+                    <img src="https://via.placeholder.com/1200x400?text=Slide+2" alt="Slide 2">
+                </div>
+                <div class="slide">
+                    <img src="https://via.placeholder.com/1200x400?text=Slide+3" alt="Slide 3">
+                </div>
+                <div class="slide">
+                    <img src="https://via.placeholder.com/1200x400?text=Slide+4" alt="Slide 4">
+                </div>
+            </div>
+        
+            <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+            <a class="next" onclick="changeSlide(1)">&#10095;</a>
+        
+            <div class="dots-container">
+                <span class="dot" onclick="currentSlide(0)"></span>
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+                <span class="dot" onclick="currentSlide(3)"></span>
+            </div>
+        </div>
+        
+        <script>
+            let slideIndex = 0;
+            const slides = document.querySelectorAll('.slide');
+            const dots = document.querySelectorAll('.dot');
+            let autoSlideTimer;
+        
+            function showSlide(index) {
+                if (index >= slides.length) { slideIndex = 0; }
+                if (index < 0) { slideIndex = slides.length - 1; }
+                
+                slides.forEach((slide, i) => {
+                    slide.style.display = 'none';
+                    dots[i].classList.remove('active');
+                });
+        
+                slides[slideIndex].style.display = 'block';
+                dots[slideIndex].classList.add('active');
+            }
+        
+            function changeSlide(n) {
+                clearTimeout(autoSlideTimer);
+                slideIndex += n;
+                showSlide(slideIndex);
+                autoSlideTimer = setTimeout(() => changeSlide(1), 5000); // Auto slide every 5 seconds
+            }
+        
+            function currentSlide(n) {
+                clearTimeout(autoSlideTimer);
+                slideIndex = n;
+                showSlide(slideIndex);
+                autoSlideTimer = setTimeout(() => changeSlide(1), 5000); // Auto slide every 5 seconds
+            }
+        
+            // Initialize the slider
+            showSlide(slideIndex);
+            autoSlideTimer = setTimeout(() => changeSlide(1), 5000); // Auto slide every 5 seconds
+        </script>
+            <!--image galery and text container-->
+            <div class="tex-container">
+            <p>ՄԵՐ ԾԱՌԱՅՈՒԹՅՈՒՆՆԵՐԸ</p>
+        </div>
+            <div class="image-block-container">
+        
+                <div class="image-block">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmEGo6FanQDV4xJtBd4zZyjxEKFAGtbi_sAQ&s" alt="Image 1">
+                    <div class="text-overlay">ՀԱՇՎԱՊԱՀՈՒԹՅՈՒՆ ՖԻՆԱՆՍՆԵՐ
+                    </div>
+                </div>
+                <div class="image-block">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmEGo6FanQDV4xJtBd4zZyjxEKFAGtbi_sAQ&s" alt="Image 2">
+                    <div class="text-overlay">ՀԱՐԿԵՐԻ ՕՊՏԻՄԱԼԱՑՈՒՄ
+                    </div>
+                </div>
+                <div class="image-block">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmEGo6FanQDV4xJtBd4zZyjxEKFAGtbi_sAQ&s" alt="Image 3">
+                    <div class="text-overlay">ՀԱՐԿԵՐԻ ՕՊՏԻՄԱԼԱՑՈՒՄ
+                    </div>
+                </div>
+                <div class="image-block">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmEGo6FanQDV4xJtBd4zZyjxEKFAGtbi_sAQ&s" alt="Image 4">
+                    <div class="text-overlay">ՌԻՍԿԵՐԻ ԳՆԱՀԱՏՈՒՄ
+                    </div>
+                </div>
+           
+            <div class="image-block">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmEGo6FanQDV4xJtBd4zZyjxEKFAGtbi_sAQ&s" alt="Image 4">
+                <div class="text-overlay">ՍՏԱՐԹԱՓ ԽՈՐՀՐԴԱՏՎՈՒԹՅՈՒՆ</div>
+            </div>
+        <div class="image-block">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmEGo6FanQDV4xJtBd4zZyjxEKFAGtbi_sAQ&s" alt="Image 4">
+            <div class="text-overlay">ՍՏԱՐԹԱՓ ԽՈՐՀՐԴԱՏՎՈՒԹՅՈՒՆ</div>
+        </div>
+   
+    <div class="image-block">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmEGo6FanQDV4xJtBd4zZyjxEKFAGtbi_sAQ&s" alt="Image 4">
+        <div class="text-overlay">ԴԱՏԱԿԱՆ ՆԵՐԿԱՅԱՑՈՒՑՉՈՒԹՅՈՒՆ</div>
+    </div>
+<div class="image-block">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmEGo6FanQDV4xJtBd4zZyjxEKFAGtbi_sAQ&s" alt="Image 4">
+    <div class="text-overlay">ԿԱՌԱՎԱՐՉԱԿԱՆ ԽՈՐՀՐԴԱՏՎՈՒԹՅՈՒՆ
+    </div>
+</div>
+</div>
+</div>
+<!--image gallery end-->
+<!--section text main-->
+<div class="section-container" role="banner">
+    <div class="text_main">
+            <p class="text2">ՄԵՐ ՄԱՍԻՆ</p>
+            <p class="text3">Ֆինլեքսը կազմակերպություն է, որտեղ ստեղծարար պրոֆեսիոնալները
+               <p class="text4"> հոգ են տանում Ձեր բիզնեսի մասին</p>
+
+        </p>
+    </div>
+</div>
+<!--div class section top------- image text-->
+<div class="text-image-top">
+    <div class="top-text-baner">
+        
+        <div class="flex-container">
+            <div>
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwfmVNyQhPdGNfkd9LxmsX28fIMXJAWvuNJg&s" width="59px" padding="2px 3px 4px 4px" class="img7">
+                <br>
+                <p class="textss">  Մեր առաքելությունը</p>
+                   <p class="textss">Մենք ձգտում ենք պարզեցնել Ձե բիզնեսը<br>
+                    <p class="textss">մեր լուծումներով։</p>
+                </span><br>
+                <p class="textss">  Մեր տեսլականը</p>
+                   <p class="textss">Մենք ձգտում ենք պարզեցնել Ձե բիզնեսը<br>
+                    <p class="textss">մեր լուծումներով։</p>
+                </span>
+            </span><br>
+            <p class="textss">  Մեր ռազմավարությունը
+            </p>
+               <p class="textss">Մենք ձգտում ենք պարզեցնել Ձե բիզնեսը<br>
+                <p class="textss">մեր լուծումներով։</p>
+            </span>
+            </div>
+            <div>
+                <img src="image/image-banner.webp" class="img5">
+            </div>
+          </div>
+    <div class="textmain">
+        Իմանալ ավելին
+    </div>
+    </div>
+    </div>
+</div>
+<!--top-text-footer-------start-->
+<div class="top-text-footer">
+    <div class="main-top">
+        <h5 class="top1">ՄԵՆՔ ԱՇԽԱՏՈՒՄ ԵՆՔ ՑԱՆԿԱՑԱԾ
+            ԲԻԶՆԵՍ ՈԼՈՐՏՈՒՄ</h5>
+    </div>
+    <div class="image-block-container">
+        
+        <div class="image-block">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmEGo6FanQDV4xJtBd4zZyjxEKFAGtbi_sAQ&s" alt="Image 1">
+            <div class="text-overlay">ՀՅՈՒՐԸՆԿԱԼՈՒԹՅՈՒՆ
+                ԶԲՈՍԱՇՐՋՈՒԹՅՈՒՆ
+            </div>
+        </div>
+        <div class="image-block">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmEGo6FanQDV4xJtBd4zZyjxEKFAGtbi_sAQ&s" alt="Image 2">
+            <div class="text-overlay">ՄԱՆՐԱԾԱԽ ԵՎ ՄԵԾԱԾԱԽ
+                ԱՌԵՎՏՈՒՐ
+                ՄԱՏԱԿԱՐԱՐՈՒՄ
+            </div>
+        </div>
+        <div class="image-block">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmEGo6FanQDV4xJtBd4zZyjxEKFAGtbi_sAQ&s" alt="Image 3">
+            <div class="text-overlay">ՏՏ
+                ՀԵՌԱՀԱՂՈՐԴԱԿՑՈՒԹՅՈՒՆ
+            </div>
+        </div>
+        <div class="image-block">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmEGo6FanQDV4xJtBd4zZyjxEKFAGtbi_sAQ&s" alt="Image 4">
+            <div class="text-overlay">ՄՇԱԿՈՒՅԹ
+                ԿՐԹՈՒԹՅՈՒՆ
+            </div>
+        </div>
+   
+    <div class="image-block">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmEGo6FanQDV4xJtBd4zZyjxEKFAGtbi_sAQ&s" alt="Image 4">
+        <div class="text-overlay">ԳՅՈՒՂԱՏՆՏԵՍՈՒԹՅՈՒՆ
+            ԱՐՏԱԴՐՈՒԹՅՈՒՆ</div>
+    </div>
+<div class="image-block">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmEGo6FanQDV4xJtBd4zZyjxEKFAGtbi_sAQ&s" alt="Image 4">
+    <div class="text-overlay">ՇԻՆԱՐԱՐՈՒԹՅՈՒՆ
+    </div>
+</div>
+
+<div class="image-block">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmEGo6FanQDV4xJtBd4zZyjxEKFAGtbi_sAQ&s" alt="Image 4">
+<div class="text-overlay">ԲԵՌՆԱՓՈԽԱԴՐՈՒՄ
+</div>
+</div>
+<div class="image-block">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmEGo6FanQDV4xJtBd4zZyjxEKFAGtbi_sAQ&s" alt="Image 4">
+<div class="text-overlay">ՀԱՆՐԱՅԻՆ ՀԱՏՎԱԾ
+
+</div>
+</div>
+</div>
+</div>
+</div>
+<!--slider footer-->
+<div class="logos">
+    <p class="logos1">ՄԵՐ ԳՈՐԾԸՆԿԵՐՆԵՐԸ
+    </p>
+    <div class="logo_items">
+    <img src="https://navneetdwivedi.github.io/Logo_Slider/logo.png">
+    <img src="https://navneetdwivedi.github.io/Logo_Slider/logo.png">
+    <img src="https://navneetdwivedi.github.io/Logo_Slider/logo.png">
+    <img src="https://navneetdwivedi.github.io/Logo_Slider/logo.png">
+    <img src="https://navneetdwivedi.github.io/Logo_Slider/logo.png">
+    <img src="https://navneetdwivedi.github.io/Logo_Slider/logo.png">
+    <img src="https://navneetdwivedi.github.io/Logo_Slider/logo.png">
+    <img src="https://navneetdwivedi.github.io/Logo_Slider/logo.png">
+    <img src="https://navneetdwivedi.github.io/Logo_Slider/logo.png">
+    <img src="https://navneetdwivedi.github.io/Logo_Slider/logo.png">
+    <img src="https://navneetdwivedi.github.io/Logo_Slider/logo.png">
+    <img src="https://navneetdwivedi.github.io/Logo_Slider/logo.png">
+    <img src="https://navneetdwivedi.github.io/Logo_Slider/logo.png">
+    <img src="https://navneetdwivedi.github.io/Logo_Slider/logo.png">
+    <img src="https://navneetdwivedi.github.io/Logo_Slider/logo.png">
+    <img src="https://navneetdwivedi.github.io/Logo_Slider/logo.png">
+    <img src="https://navneetdwivedi.github.io/Logo_Slider/logo.png">
+    <img src="https://navneetdwivedi.github.io/Logo_Slider/logo.png">
+    <img src="https://navneetdwivedi.github.io/Logo_Slider/logo.png">
+    <img src="https://navneetdwivedi.github.io/Logo_Slider/logo.png">
+    <img src="https://navneetdwivedi.github.io/Logo_Slider/logo.png">
+    <img src="https://navneetdwivedi.github.io/Logo_Slider/logo.png">
+    <img src="https://navneetdwivedi.github.io/Logo_Slider/logo.png">
+    <img src="https://navneetdwivedi.github.io/Logo_Slider/logo.png">
+    <img src="https://navneetdwivedi.github.io/Logo_Slider/logo.png">
+    
+    </div>
+      <div class="logo_items">
+    <img src="https://navneetdwivedi.github.io/Logo_Slider/logo.png">
+    <img src="https://navneetdwivedi.github.io/Logo_Slider/logo.png">
+    <img src="https://navneetdwivedi.github.io/Logo_Slider/logo.png">
+    <img src="https://navneetdwivedi.github.io/Logo_Slider/logo.png">
+    <img src="https://navneetdwivedi.github.io/Logo_Slider/logo.png">
+    <img src="https://navneetdwivedi.github.io/Logo_Slider/logo.png">
+    <img src="https://navneetdwivedi.github.io/Logo_Slider/logo.png">
+    <img src="https://navneetdwivedi.github.io/Logo_Slider/logo.png">
+    <img src="https://navneetdwivedi.github.io/Logo_Slider/logo.png">
+    <img src="https://navneetdwivedi.github.io/Logo_Slider/logo.png">
+    <img src="https://navneetdwivedi.github.io/Logo_Slider/logo.png">
+    <img src="https://navneetdwivedi.github.io/Logo_Slider/logo.png">
+    <img src="https://navneetdwivedi.github.io/Logo_Slider/logo.png">
+    <img src="https://navneetdwivedi.github.io/Logo_Slider/logo.png">
+    <img src="https://navneetdwivedi.github.io/Logo_Slider/logo.png">
+    <img src="https://navneetdwivedi.github.io/Logo_Slider/logo.png">
+    <img src="https://navneetdwivedi.github.io/Logo_Slider/logo.png">
+    <img src="https://navneetdwivedi.github.io/Logo_Slider/logo.png">
+    <img src="https://navneetdwivedi.github.io/Logo_Slider/logo.png">
+    <img src="https://navneetdwivedi.github.io/Logo_Slider/logo.png">
+    <img src="https://navneetdwivedi.github.io/Logo_Slider/logo.png">
+    <img src="https://navneetdwivedi.github.io/Logo_Slider/logo.png">
+    <img src="https://navneetdwivedi.github.io/Logo_Slider/logo.png">
+    <img src="https://navneetdwivedi.github.io/Logo_Slider/logo.png">
+    <img src="https://navneetdwivedi.github.io/Logo_Slider/logo.png">
+    
+    </div>
+    </div>
+    <!--image gallery top start-->
+    <div class="row">
+        <div class="column">
+          <img src="https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="" />
+      
+          <img src="https://images.pexels.com/photos/38867/pexels-photo-38867.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="" />
+      
+          <img src="https://images.pexels.com/photos/406014/pexels-photo-406014.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="" />
+      
+          <img src="https://images.pexels.com/photos/1378849/pexels-photo-1378849.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="" />
+        </div>
+        <div class="column">
+          <img src="https://images.pexels.com/photos/1389994/pexels-photo-1389994.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="" />
+      
+          <img src="https://images.pexels.com/photos/1254140/pexels-photo-1254140.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="" />
+      
+          <img src="https://images.pexels.com/photos/320014/pexels-photo-320014.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="" />
+        </div>
+        <div class="column">
+          <img src="https://images.pexels.com/photos/39317/chihuahua-dog-puppy-cute-39317.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="" />
+      
+          <img src="https://images.pexels.com/photos/1805164/pexels-photo-1805164.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="" />
+      
+          <img src="https://images.pexels.com/photos/1452717/pexels-photo-1452717.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="" />
+      
+          <img src="https://images.pexels.com/photos/129634/pexels-photo-129634.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="" />
+        </div>
+      </div>    
+   <!--image gallery end-->
+   <div class="container-footer">
+    <div class="colFooter">
+        <p id="rowf">ՄԵՆՔ ՄՇՏԱՊԵՍ ՀԱՄԱԼՐՈՒՄ ԵՆՔ ՄԵՐ ԹԻՄԸ</p>
+        <div class="round">
+            <span class="button" href="#">Դիմիր հիմա</span>
+        <div class="contact-blok">
+            <p id="cnt">ԿԱՊՎԵԼ ՄԵԶ ՀԵՏ
+            </p>
+            
+        </div>
+        <!--social media fa fa-->
+        <div class="social-media">
+            <!-- Add font awesome icons -->
+<a href="#" class="fa fa-facebook"></a>
+<a href="#" class="fa fa-google"></a>
+<a href="#" class="fa fa-linkedin"></a>
+<a href="#" class="fa fa-instagram"></a>
+<a></a>
+</div>
+</div>
+</div>
+
+
+</div>
+
+</div>
+</div>
+<!--map-->
+<div class="map">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d24343.77337022675!2d44.351487999999996!3d40.298587950000005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sru!2sam!4v1722369686345!5m2!1sru!2sam" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+</div>
+<footer>
+    <section class="footer-container">
+    <div class="left-area">
+    <h3>FOLLOW US</h3>
+      <ul>
+        <li><a href="">
+          <i class="fa-brands fa-square-instagram fa-2x"></i>
+        </a></li>
+        <li><a href="">
+          <i class="fa-brands fa-square-facebook fa-2x"></i>
+        </a></li>
+        <li><a href="">
+          <i class="fa-brands fa-linkedin fa-2x"></i>
+        </a></li>
+        <li><a href="">
+          <i class="fa-brands fa-x-twitter fa-2x"></i>
+        </a></li>
+      </ul>
+    </div>
+    <div class="center-area">
+    <h3>LINK</h3>
+      <ul>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms</a></li>
+      </ul>
+    </div>
+    <div class="right-area">
+    <h3>CONTACT</h3>
+      <ul>
+          <li>Հակոբ Հակոբյան փող., 3 շենք,
+            2-րդ մասնաշենք,
+            5-րդ հարկ («Մերգելյան ինստիտուտ»)</li>
+          <li><a href="mailto:info@example.com<">info@finlex.am</a></li>
+          <li><a href="tel:05555555555">Phone:+374 10 222 111</a></li>
+      </ul>
+    </div>
+      </section>
+    <div class="text">
+    &copy; Site Tumanyan Vardan
+  </div>
+  </footer>
+<script>
+fetch('scripts/part1.js')
+  .then(response => response.text())
+  .then(code => eval(code));
+
+</script>
+   <script type="text/javascript" src="Javascript/maps.js"></script>
+    </body>
+    </html>
