@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Описание вашей веб-страницы">
+    <meta name="keywords" content="ключевые слова, через, запятую">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="icon" href="image/Face_ID_logo.svg.PNG" type="image/x-icon" />
+  <!-- <script src="/js/slider.js" type="text/javascript"></script>
+  <script src="js/slider.js"></script> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script type="text/javascript" src="/js/ScrollTop.js"></script>
+
+    <meta name="author" content="Автор страницы">
+    <title>Menu Example</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  
+    <header>
+        <a href="#" class="logo">Logo</a>
+        <div class="menu-toggle" id="menu-toggle">&#9776;</div>
+        <ul id="menu">
+            <li><a href="index.html">Գլխավոր</a></li>
+            <li><a href="about.html" target="_self">  ՄԵՐ ՄԱՍԻՆ</a></li>
+            <li><a href="service.html" target="_self">ծառայություն</a></li>
+                <!-- <li><a href="More.html">ԱՎԵԼԻ</a><li> -->
+                    <!-- <a href="OurTeam.html"target="_self">ՄԵՐ ԹԻՄԸ</a> -->
+                    <li><a href="job.html" target="_self">Աշխատանք</a></li>
+                    <li><a href="trainings.html" target="_self">ԴԱՍԸՆԹԱՑՆԵՐ</a></li>
+                    <li><a href="" target="_self">Կապ</a></li>
+        </ul>
+    </header>
+       
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const menu = document.getElementById('menu');
+
+        menuToggle.addEventListener('click', () => {
+            menu.classList.toggle('active');
+        });
+
+        window.addEventListener('scroll', function() {
+            let header = document.querySelector('header');
+            header.classList.toggle('sticky', window.scrollY > 0);
+        });
+    </script>
+       
+            <!--image galery and text container-->
+            <div class="text-container">
+                <div class="text-header-fluid">
+                    <span aria-colspan="rel" class="round">ԸՆԹԱՑԻԿ ԴԱՍԸՆԹԱՑՆԵՐ 
+            ՄԵՆՔ ՁԵԶ ՀԵՏ ՄԻԱՍԻՆ ՍՊԱՍՈՒՄ ԵՆՔ
+                ԱՐՏԱԿԱՐԳ ԴՐՈՒԹՅԱՆ ԱՎԱՐՏԻՆ</span>
+           </div>
+           </div>
+           <div class="footer">
+            <div class="inner-footer">
+          
+          <!--  for company name and description -->
+              <div class="footer-items">
+                <h1>Company Name</h1>
+                <a href="/" class="logotype1">                        
+                    <div><b>KHACHATRYAN</b>CONSULTING</div>
+                    <span></span>
+                </a>
+              </div>
+          
+       
+              <div class="footer-items">
+                <h3>Կոնտակտ</h3>
+           
+        
+                  <ul>
+                    <li><i class="fa fa-map-marker" aria-hidden="true"></i>XYZ, abc</li>
+                    <li><i class="fa fa-phone" aria-hidden="true"></i>123456789</li>
+                    <li><i class="fa fa-envelope" aria-hidden="true"></i>xyz@gmail.com</li>
+                  </ul> 
+                
+          <!--   for social links -->
+                  <div class="social-media">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-google-plus-square"></i></a>
+                  </div> 
+              </div>
+            </div>
+            <button onclick="topFunction()" id="myBtn" title="Go to top">Back to top ^ </button>
+          <!--   Footer Bottom start  -->
+            <div class="footer-bottom">
+                Բոլոր հեղինակային իրավունքները պաշտպանված են
+                
+            </div>
+          </div>
+          <div id="map"></div>
+          <div id="details"></div>
+          
+          <script src="https://maps.googleapis.com/maps/api/js?callback=initMap&amp;language=it&amp;libraries=places" async defer></script>
+          <script>
+            
+function initMap() {
+	var map = new google.maps.Map(document.getElementById('map'), {
+		center: {
+			lat: 41.9030632,
+			lng: 12.466275999999993
+		},
+		zoom: 13
+	});
+
+	var input = document.getElementById('pac-input');
+
+	var autocomplete = new google.maps.places.Autocomplete(input);
+	autocomplete.bindTo('bounds', map);
+
+	map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+	var infowindow = new google.maps.InfoWindow();
+	var marker = new google.maps.Marker({
+		map: map
+	});
+	marker.addListener('click', function() {
+		infowindow.open(map, marker);
+	});
+
+	autocomplete.addListener('place_changed', function() {
+		infowindow.close();
+		var place = autocomplete.getPlace();
+		if (!place.geometry) {
+			return;
+		}
+
+		if (place.geometry.viewport) {
+			map.fitBounds(place.geometry.viewport);
+		} else {
+			map.setCenter(place.geometry.location);
+			map.setZoom(17);
+		}
+
+		// Set the position of the marker using the place ID and location.
+		marker.setPlace({
+			placeId: place.place_id,
+			location: place.geometry.location
+		});
+		marker.setVisible(true);
+
+		infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
+			'Place ID: ' + place.place_id + '<br>' +
+			place.formatted_address);
+		infowindow.open(map, marker);
+
+		var service = new google.maps.places.PlacesService(map);
+		
+		var details_container = document.getElementById('details');
+		
+		service.getDetails({
+			placeId: place.place_id
+		}, function(place, status) {
+			details_container.innerHTML = '<p><strong>Status:</strong> <code>' + status + '</code></p>' +
+				'<p><strong>Place ID:</strong> <code>' + place.place_id + '</code></p>' +
+				'<p><strong>Location:</strong> <code>' + place.geometry.location.lat() + ', ' + place.geometry.location.lng() + '</code></p>' +
+
+				'<p><strong>Formatted address:</strong> <code>' + place.formatted_address + '</code></p>' +
+				'<p><strong>GMap Url:</strong> <code>' + place.url + '</code></p>' +
+				'<p><strong>Place details:</strong></p>' +
+				'<pre>' + JSON.stringify(place, null, " ") + '</pre>';
+
+		});
+
+	}); // end autocomplete addListener
+}
+          </script>
+         
+        </body>
+        </html>
