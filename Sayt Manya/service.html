@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Описание вашей веб-страницы">
+    <meta name="keywords" content="ключевые слова, через, запятую">
+    <meta name="author" content="Автор страницы">
+    <title>Menu Example</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="icon" href="image/Face_ID_logo.svg.PNG" type="image/x-icon" />
+ <!-- <script src="/js/slider.js" type="text/javascript"></script>  -->
+  <script src="js/Lang.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="container-header" role="header">
+        <div class="header-top">
+            <div class="language-selector">
+                <input type="time" id="ctime" name="ctime">
+                </select>
+            </div>
+        
+            <div id="selected-language">
+                <!-- Display selected language here -->
+            </div>
+    <span class="text-header">Որակավորված Հաշվապահական և Խորհրդատվական Գրասենյակ</span>
+</div>
+  
+</div>
+    <header>
+        <img src="image/logo-header-1.png" class="img-headers" aria-roledescription="header">
+        <div class="menu-toggle" id="menu-toggle">&#9776;</div>
+        <ul id="menu">
+            <li><a href="index.html">Գլխավոր</a></li>
+            <li><a href="about.html" target="_self">  ՄԵՐ ՄԱՍԻՆ</a></li>
+            <li><a href="service.html" target="_self">ծառայություն</a></li>
+                <!-- <li><a href="More.html">ԱՎԵԼԻ</a><li> -->
+                    <!-- <a href="OurTeam.html"target="_self">ՄԵՐ ԹԻՄԸ</a> -->
+                    <li><a href="job.html" target="_self">Աշխատանք</a></li>
+                    <li><a href="trainings.html" target="_self">ԴԱՍԸՆԹԱՑՆԵՐ</a></li>
+                    <li><a href="Contact.html" target="_self">Կապ</a></li>
+        </ul>
+    </header>
+
+       <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const menu = document.getElementById('menu');
+
+        menuToggle.addEventListener('click', () => {
+            menu.classList.toggle('active');
+        });
+
+        window.addEventListener('scroll', function() {
+            let header = document.querySelector('header');
+            header.classList.toggle('sticky', window.scrollY > 0);
+        });
+    </script>
+      
+        <!--slider-->
+        <div class="carousel-frame">
+            <div class="carousel-slide">
+              <img src="image/acc.webp" />
+              <img src="image/accountant 1.jpeg" />
+              <img src="image/accountant-2.jpg" />
+              <img src="image/accountant-3.jpeg" />
+              <img src="image/Accountant-Hero-1.jpg " />
+              <img src="image/accountant2.jpeg" />
+            </div>
+            <i class="carousel-prev fas fa-chevron-left"></i>
+            <i class="carousel-next fas fa-chevron-right"></i>
+            <ol class="carousel-dots">
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+            </ol>
+          </div>
+          
+          <script
+                src="https://kit.fontawesome.com/42e3e833b9.js"   crossorigin="anonymous" ></script>
+                <!--slider new -->
+                <script>
+                    const carouselFrames = Array.from(document.querySelectorAll('.carousel-frame'));
+
+function makeCarousel(frame) {
+  const carouselSlide = frame.querySelector('.carousel-slide');
+  const carouselImages = getImagesPlusClones();
+  const prevBtn = frame.querySelector('.carousel-prev');
+  const nextBtn = frame.querySelector('.carousel-next');
+  const navDots = Array.from(frame.querySelectorAll('.carousel-dots li'));
+
+  let imageCounter = 1;
+
+  function getImagesPlusClones() {
+    let images = frame.querySelectorAll('.carousel-slide img');
+
+    const firstClone = images[0].cloneNode();
+    const lastClone = images[images.length - 1].cloneNode();
+
+    firstClone.className = 'first-clone';
+    lastClone.className = 'last-clone';
+
+    // we need clones to make an infinite loop effect
+    carouselSlide.append(firstClone);
+    carouselSlide.prepend(lastClone);
+
+    // must reassign images to include the newly cloned images
+    images = frame.querySelectorAll('.carousel-slide img');
+
+    return images;
+  }
+
+  function initializeNavDots() {
+    if (navDots.length) navDots[0].classList.add('active-dot');
+  }
+
+  function initializeCarousel() {
+    carouselSlide.style.transform = 'translateX(-100%)';
+  }
+
+  function slideForward() {
+    // first limit counter to prevent fast-change bugs
+    if (imageCounter >= carouselImages.length - 1) return;
+    carouselSlide.style.transition = 'transform 400ms';
+    imageCounter++;
+    carouselSlide.style.transform = `translateX(-${100 * imageCounter}%)`;
+  }
+
+  function slideBack() {
+    // first limit counter to prevent fast-change bugs
+    if (imageCounter <= 0) return;
+    carouselSlide.style.transition = 'transform 400ms';
+    imageCounter--;
+    carouselSlide.style.transform = `translateX(-${100 * imageCounter}%)`;
+  }
+
+  function makeLoop() {
+    // instantly move from clones to originals to produce 'infinite-loop' effect
+    if (carouselImages[imageCounter].classList.contains('last-clone')) {
+      carouselSlide.style.transition = 'none';
+      imageCounter = carouselImages.length - 2;
+      carouselSlide.style.transform = `translateX(-${100 * imageCounter}%)`;
+    }
+
+    if (carouselImages[imageCounter].classList.contains('first-clone')) {
+      carouselSlide.style.transition = 'none';
+      imageCounter = carouselImages.length - imageCounter;
+      carouselSlide.style.transform = `translateX(-${100 * imageCounter}%)`;
+    }
+  }
+
+  function goToImage(e) {
+    carouselSlide.style.transition = 'transform 400ms';
+    imageCounter = 1 + navDots.indexOf(e.target);
+    carouselSlide.style.transform = `translateX(-${100 * imageCounter}%)`;
+  }
+
+  function highlightCurrentDot() {
+    navDots.forEach((dot) => {
+      if (navDots.indexOf(dot) === imageCounter - 1) {
+        dot.classList.add('active-dot');
+      } else {
+        dot.classList.remove('active-dot');
+      }
+    });
+  }
+
+  function addBtnListeners() {
+    nextBtn.addEventListener('click', slideForward);
+    prevBtn.addEventListener('click', slideBack);
+  }
+
+  function addNavDotListeners() {
+    navDots.forEach((dot) => {
+      dot.addEventListener('click', goToImage);
+    });
+  }
+
+  function addTransitionListener() {
+    carouselSlide.addEventListener('transitionend', () => {
+      makeLoop();
+      highlightCurrentDot();
+    });
+  }
+
+  function autoAdvance() {
+    let play = setInterval(slideForward, 5000);
+
+    frame.addEventListener('mouseover', () => {
+      clearInterval(play); // pause when mouse enters carousel
+    });
+
+    frame.addEventListener('mouseout', () => {
+      play = setInterval(slideForward, 5000); // resume when mouse leaves carousel
+    });
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        clearInterval(play); // pause when user leaves page
+      } else {
+        play = setInterval(slideForward, 5000); // resume when user returns to page
+      }
+    });
+  }
+
+  function buildCarousel() {
+    initializeCarousel();
+    initializeNavDots();
+    addNavDotListeners();
+    addBtnListeners();
+    addTransitionListener();
+    autoAdvance();
+  }
+
+  buildCarousel();
+}
+
+carouselFrames.forEach(frame => makeCarousel(frame));
+                </script>
+          <script>
+            const stack = document.querySelector(".stack");
+const cards = Array.from(stack.children)
+  .reverse()
+  .filter((child) => child.classList.contains("card"));
+
+cards.forEach((card) => stack.appendChild(card));
+
+function moveCard() {
+  const lastCard = stack.lastElementChild;
+  if (lastCard.classList.contains("card")) {
+    lastCard.classList.add("swap");
+
+    setTimeout(() => {
+      lastCard.classList.remove("swap");
+      stack.insertBefore(lastCard, stack.firstElementChild);
+    }, 1200);
+  }
+}
+
+let autoplayInterval = setInterval(moveCard, 4000);
+
+stack.addEventListener("click", function (e) {
+  const card = e.target.closest(".card");
+  if (card && card === stack.lastElementChild) {
+    card.classList.add("swap");
+
+    setTimeout(() => {
+      card.classList.remove("swap");
+      stack.insertBefore(card, stack.firstElementChild);
+    }, 1200);
+  }
+});
+
+          </script>
+         <!--slider-->
+         
+        <!--image card services start-->
+        <div class="image-card-container" aria-roledescription="card">
+            <section class="container">
+                <section class="card__container">
+                  <div class="card__bx" style="--clr: #89ec5b">
+                    <div class="card__data">
+                      <div class="card__icon">
+                      <img src="image/image_1.webp">
+                      </div>
+                      <div class="card__content">
+                        <h3>Designing</h3>
+                        <p>Հարկային և ֆինանսական հաշվառում
+                        </p>
+                        <a href="#">Read More</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card__bx" style="--clr: #eb5ae5">
+                    <div class="card__data">
+                      <div class="card__icon">
+                        <img src="image/image_2.webp">
+                      </div>
+                      <div class="card__content">
+                        <h3>Develoment</h3>
+                        <p>Կառավարչական հաշվառում
+                        </p>
+                        <a href="#">Read More</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card__bx" style="--clr: #5b98eb">
+                    <div class="card__data">
+                      <div class="card__icon">
+                        <img src="image/image_3.webp">
+                      </div>
+                      <div class="card__content">
+                        <h3>SEO</h3>
+                        <p>Ռիսկերի գնահատում
+
+                            Հարկերի օպտիմալացում</p>
+                        <a href="#">Read More</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card__bx" style="--clr: #5b98eb">
+                    <div class="card__data">
+                      <div class="card__icon">
+                        <img src="image/image_5.webp">
+                      </div>
+                      <div class="card__content">
+                        <h3>SEO</h3>
+                        <p>Հաշվապահության վերականգնում</p>
+                        <a href="#">Read More</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card__bx" style="--clr: #5b98eb">
+                    <div class="card__data">
+                      <div class="card__icon">
+                        <img src="image/image_6_6.webp">
+                      </div>
+                      <div class="card__content">
+                        <h3>SEO</h3>
+                        <p>Հանրային ոլորտի հաշվապահություն 
+                        </p>
+                        <a href="#">Read More</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card__bx" style="--clr: #5b98eb">
+                    <div class="card__data">
+                      <div class="card__icon">
+                        <img src="image/image_7.webp">
+                      </div>
+                      <div class="card__content">
+                        <h3>SEO</h3>
+                        <p>«Due diligence» ուսումնասիրություն
+                        </p>
+                        <a href="#">Read More</a>
+                      </div>
+                    </div>
+                  </div><div class="card__bx" style="--clr: #5b98eb">
+                    <div class="card__data">
+                      <div class="card__icon">
+                        <img src="image/image_7.webp">
+                      </div>
+                      <div class="card__content">
+                        <h3>SEO</h3>
+                        <p>                                                          ՄՌ կառավարում
+                        </p>
+                        <a href="#">Read More</a>
+                      </div>
+                    </div>
+                  </div><div class="card__bx" style="--clr: #5b98eb">
+                    <div class="card__data">
+                      <div class="card__icon">
+                        <img src="image/image_8.webp">
+                      </div>
+                      <div class="card__content">
+                        <h3>SEO</h3>
+                        <p>Կորպորատիվ իրավաբանական
+                            ծառայություններ</p>
+                        <a href="#">Read More</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card__bx" style="--clr: #5b98eb">
+                    <div class="card__data">
+                      <div class="card__icon">
+                        <img src="image/image_9.webp">
+                      </div>
+                      <div class="card__content">
+                        <h3>SEO</h3>
+                        <p>Մտավոր սեփականություն
+                        </p>
+                        <a href="#">Read More</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card__bx" style="--clr: #5b98eb">
+                    <div class="card__data">
+                      <div class="card__icon">
+                        <img src="image/image_12.webp">
+                      </div>
+                      <div class="card__content">
+                        <h3>SEO</h3>
+                        <p>Հարկային օրենսդրություն
+                        </p>
+                        <a href="#">Read More</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card__bx" style="--clr: #5b98eb">
+                    <div class="card__data">
+                      <div class="card__icon">
+                        <img src="image/image_13.webp">
+                      </div>
+                      <div class="card__content">
+                        <h3>SEO</h3>
+                        <p>
+                            Լիցենզավորում և թույլտվությունների
+                            ձեռքբերում
+                            </p>
+                        <a href="#">Read More</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card__bx" style="--clr: #5b98eb">
+                    <div class="card__data">
+                      <div class="card__icon">
+                        <img src="image/image_14.webp">
+                      </div>
+                      <div class="card__content">
+                        <h3>SEO</h3>
+                        <p>Աշխատանքային օրենսդրություն
+                        </p>
+                        <a href="#">Read More</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card__bx" style="--clr: #5b98eb">
+                    <div class="card__data">
+                      <div class="card__icon">
+                        <img src="image/image_15_15.webp">
+                      </div>
+                      <div class="card__content">
+                        <h3>SEO</h3>
+                        <p>Դատական ներկայացուցչություն 
+                        </p>
+                        <a href="#">Read More</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card__bx" style="--clr: #5b98eb">
+                    <div class="card__data">
+                      <div class="card__icon">
+                        <img src="image/image_15.webp">
+                      </div>
+                      <div class="card__content">
+                        <h3>SEO</h3>
+                        <p> Իրավական ռիսկերի գնահատում
+                        </p>
+                        <a href="#">Read More</a>
+                      </div>
+                    </div>
+                  </div>
+              
+                </section>
+              
+              </section>
+
+        <!--image card end---->
+        <!--footer----start-->
+        <div class="footer">
+          <div class="inner-footer">
+        
+        <!--  for company name and description -->
+            <div class="footer-items">
+              <h1>Company Name</h1>
+              <a href="/" class="logotype1">                        
+                  <div><b>KHACHATRYAN</b>CONSULTING</div>
+                  <span></span>
+              </a>
+            </div>
+        
+     
+            <div class="footer-items">
+              <h3>Կոնտակտ</h3>
+         
+      
+                <ul>
+                  <li><i class="fa fa-map-marker" aria-hidden="true"></i>XYZ, abc</li>
+                  <li><i class="fa fa-phone" aria-hidden="true"></i>123456789</li>
+                  <li><i class="fa fa-envelope" aria-hidden="true"></i>xyz@gmail.com</li>
+                </ul> 
+              
+        <!--   for social links -->
+                <div class="social-media">
+                  <a href="#"><i class="fab fa-instagram"></i></a>
+                  <a href="#"><i class="fab fa-facebook"></i></a>
+                  <a href="#"><i class="fab fa-google-plus-square"></i></a>
+                </div> 
+            </div>
+          </div>
+          <button onclick="topFunction()" id="myBtn" title="Go to top">Back to top ^ </button>
+        <!--   Footer Bottom start  -->
+          <div class="footer-bottom">
+              Բոլոր հեղինակային իրավունքները պաշտպանված են
+              
+          </div>
+        </div>
+          
+        <!--footer end-->
+        </body>
+        </html>
