@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Example</title>
+    <link rel="stylesheet" href="css/Styles.css">
+</head>
+<style>
+   
+</style>
+<body>
+    <div id="book">
+        <div class="page" id="page1">
+             <a href="About.html" class="bx1">Index</a>
+            <h1>Page 1 hourse ժամ</h1>
+            <h1>What is time--Ոատ իս թայմ--Ժամը քանիսն է</h1>
+            <p>1:00 is one clock-իս ուան քլոք</p>
+            <p>2:00 is two clock-իս թու քլոք</p>
+            <p>3:00 is tree clock-իս թրի քլոք</p>
+            <p>4:00 is four clock -իս ֆոր քլոք</p>
+            <p>5:00 is five clock-իս ֆայֆ քլոք</p>
+             <p>6:00 is six clock-իս սիքս քլոք</p>
+            <p>7:00 is seva clock-իս սեվըն քլոք</p>
+             <p>8:00 is eight clock--իս էյթ քլոք</p>
+            <p>9:00 is nine clock-իս նայն քլոք</p>
+             <p>10:00 is teen clock-իս թեն քլոք</p>
+            <p>11:00 is eleven clock-իս իլեվըն քլոք</p>
+            <p>12:00 is twelve clock-իս թուելվ քլոք</p>
+
+
+
+        </div>
+        <div class="page" id="page2">
+             <a href="About.html" class="bx1">Index</a>
+            <h1>Page 2  Անց կես</h1>
+                <p><span class="time">1:30</span> -- <span class="transliteration">one thirty</span> --- <span class="armenian">ուան ֆրթե</span></p>
+    <p><span class="time">2:30</span> -- <span class="transliteration">two thirty</span> --- <span class="armenian">թու ֆրթե</span></p>
+    <p><span class="time">3:30</span> -- <span class="transliteration">three thirty</span> --- <span class="armenian">թրի ֆրթե</span></p>
+    <p><span class="time">4:30</span> -- <span class="transliteration">four thirty</span> --- <span class="armenian">ֆոր ֆրթե</span></p>
+    <p><span class="time">5:30</span> -- <span class="transliteration">five thirty</span> --- <span class="armenian">ֆայֆ ֆրթե</span></p>
+    <p><span class="time">6:30</span> -- <span class="transliteration">six thirty</span> --- <span class="armenian">սիքս ֆրթե</span></p>
+    <p><span class="time">7:30</span> -- <span class="transliteration">seven thirty</span> --- <span class="armenian">սեվըն ֆրթե</span></p>
+    <p><span class="time">8:30</span> -- <span class="transliteration">eight thirty</span> --- <span class="armenian">էյթ ֆրթե</span></p>
+    <p><span class="time">9:30</span> -- <span class="transliteration">nine thirty</span> --- <span class="armenian">նայն ֆրթե</span></p>
+    <p><span class="time">10:30</span> -- <span class="transliteration">ten thirty</span> --- <span class="armenian">թեն ֆրթե</span></p>
+    <p><span class="time">11:30</span> -- <span class="transliteration">eleven thirty</span> --- <span class="armenian">իլեվըն ֆրթե</span></p>
+    <p><span class="time">12:30</span> -- <span class="transliteration">twelve thirty</span> --- <span class="armenian">թուելվ ֆրթե</span></p>
+
+        </div>
+        <div class="page" id="page3">
+            <h1>Page 3</h1>
+            <p>This is the third page of the book.</p>
+
+        </div>
+    </div>
+    <div class="controls">
+        <button onclick="prevPage()">Previous</button>
+        <button onclick="nextPage()">Next</button>
+    </div>
+
+    <script>
+        let currentPage = 0;
+const pages = document.querySelectorAll('.page');
+
+function showPage(index) {
+    pages.forEach((page, i) => {
+        page.classList.remove('active', 'previous');
+        if (i === index) {
+            page.classList.add('active');
+        } else if (i === index - 1) {
+            page.classList.add('previous');
+        }
+    });
+    currentPage = index;
+}
+
+function nextPage() {
+    if (currentPage < pages.length - 1) {
+        showPage(currentPage + 1);
+    }
+}
+
+function prevPage() {
+    if (currentPage > 0) {
+        showPage(currentPage - 1);
+    }
+}
+
+// Initialize the first page
+showPage(currentPage);
+
+    </script>
+     <footer>
+    <div class="main-footer">
+    Հարցերի համար զանգեք 096777193 կամ գրեք էլ հասցեին
+    Tumanyanvardan63@gmail.com
+
+</div>
+</footer>
+
+</body>
+</html>
